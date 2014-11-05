@@ -1,0 +1,31 @@
+# =============== #
+# Unity generated #
+# =============== #
+grid2d/Temp/
+grid2d/Library/
+ 
+# ===================================== #
+# Visual Studio / MonoDevelop generated #
+# ===================================== #
+grid2d/ExportedObj/
+grid2d/obj/
+grid2d/*.svd
+grid2d/*.userprefs
+grid2d//*.csproj
+grid2d/*.pidb
+grid2d/*.suo
+grid2d/*.sln
+grid2d/*.user
+grid2d/*.unityproj
+grid2d/*.booproj
+ 
+# ============ #
+# OS generated #
+# ============ #
+grid2d/.DS_Store
+grid2d/.DS_Store?
+grid2d/._*
+grid2d/.Spotlight-V100
+grid2d/.Trashes
+grid2d/ehthumbs.db
+grid2d/Thumbs.db
