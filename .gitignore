@@ -11,7 +11,7 @@ grid2d/ExportedObj/
 grid2d/obj/
 grid2d/*.svd
 grid2d/*.userprefs
-grid2d//*.csproj
+grid2d/*.csproj
 grid2d/*.pidb
 grid2d/*.suo
 grid2d/*.sln
