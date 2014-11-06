@@ -6,6 +6,7 @@ public class GameController : MonoBehaviour {
 
 	public GameObject tilePrefab;
 	public GameObject userPlayerPrefab;
+	public GameObject AIPlayerPrefab;
 	public int mapSize = 4;
 
 	private List<List<Tile>> map = new List<List<Tile>>();
@@ -46,7 +47,13 @@ public class GameController : MonoBehaviour {
 
 	private void generatePlayers ()
 	{
+		UserPlayer humanPlayer;
+		humanPlayer = ((GameObject) Instantiate (userPlayerPrefab, new Vector2 (0f, 0f), Quaternion.identity)).GetComponent<UserPlayer>();
+		players.Add (humanPlayer);
 
+		AIPlayer compPlayer;
+		compPlayer = ((GameObject) Instantiate (AIPlayerPrefab, new Vector2 (2f, 2f), Quaternion.identity)).GetComponent<AIPlayer>();
+		players.Add (compPlayer);
 	}
 
 
