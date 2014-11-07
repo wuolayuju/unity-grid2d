@@ -6,6 +6,7 @@ using System.Collections.Generic;
 public class GameController : MonoBehaviour {
 
 	public GameObject tilePrefab;
+	public GameObject boundariePrefab;
 	public GameObject userPlayerPrefab;
 	public GameObject AIPlayerPrefab;
 	public int mapSize = 4;
@@ -25,7 +26,36 @@ public class GameController : MonoBehaviour {
 
 	private void generateMap ()
 	{
-		for (int r = 0; r < mapSize ; r++){
+		for (int r = 0; r < mapSize; r++) {
+			List<Tile> row = new List<Tile> ();
+
+			// First and last rows are boundaries
+			if ((r == 0) || (r == mapSize - 1)) {
+				for (int c = 0; c < mapSize; c++)
+				{
+					Vector3 pos = new Vector3(r, c);
+					Tile t = new Tile (pos, true);
+					row.Add(t);
+				}
+			}
+			else {
+				for (int c = 0; c < mapSize; c++) {
+					Vector3 pos = new Vector3(r, c);
+					bool isBoundary = false;
+
+					// First and last columns are boundaries in each row
+					if ((c == 0) || (c == mapSize - 1))
+						isBoundary = true;
+
+					Tile t = new Tile (pos, isBoundary);
+					row.Add(t);
+				}
+			}
+
+			map.Add(row);
+		}
+
+	/*	for (int r = 0; r < mapSize ; r++){
 			List<Tile> row = new List<Tile>();
 			for (int c = 0; c < mapSize ; c++){
 				Vector3 pos = new Vector3(r, c);
@@ -34,7 +64,7 @@ public class GameController : MonoBehaviour {
 				row.Add(tile);
 			}
 			map.Add(row);
-		}
+		}*/
 	}
 
 	private void renderMap ()
@@ -43,14 +73,17 @@ public class GameController : MonoBehaviour {
 			List<Tile> row = map[r];
 			for (int c = 0; c < mapSize ; c++){
 				Tile t = row[c];
-				Instantiate(tilePrefab, t.position, Quaternion.identity);
+				if (t.isBoundary)
+					Instantiate(boundariePrefab, t.position, Quaternion.identity);
+				else
+					Instantiate(tilePrefab, t.position, Quaternion.identity);
 			}
 		}
 	}
 
 	private void generatePlayers ()
 	{
-		Vector2 pos = new Vector2(3f,3f);
+		Vector2 pos = new Vector2(4f,4f);
 
 		UserPlayer humanPlayer;
 		humanPlayer = ((GameObject) Instantiate (userPlayerPrefab, pos, Quaternion.identity)).GetComponent<UserPlayer>();
@@ -69,10 +102,13 @@ public class GameController : MonoBehaviour {
 		DIRECTION dir =  checkForInput();
 		if (dir != DIRECTION.NONE)
 		{
-			if (!isMovePossible(dir))
+			if (!isMovePossible(dir)){
 				Debug.Log("**** NOT A POSSIBLE MOVE ****");
-			else
+			}
+			else {
 				Debug.Log("**** POSSIBLE MOVE ****");
+				players[0].MoveToDestPosition();
+			}
 		}
 
 	}
@@ -96,38 +132,27 @@ public class GameController : MonoBehaviour {
 		Vector2 pos = players[0].gridPosition;
 		Debug.Log("*** Player position is (" + pos.x + "," + pos.y + ")");
 		Tile t = map[(int)pos.x][(int)pos.y];
-		Debug.Log("### Tile in that position (" + t.position.x + "," + t.position.y + ")");
 
-		try {
-			if (dir == DIRECTION.DOWN)
-			{
-				t = map[(int)pos.x][(int)pos.y - 1];
-				Debug.Log("### Tile in destination position (" + t.position.x + "," + t.position.y + ")");
-			}
+		if (dir == DIRECTION.DOWN)
+			t = map[(int)pos.x][(int)pos.y - 1];
 
-			if (dir == DIRECTION.UP)
-			{
-				t = map[(int)pos.x][(int)pos.y + 1];
-				Debug.Log("### Tile in destination position (" + t.position.x + "," + t.position.y + ")");
-			}
+		else if (dir == DIRECTION.UP)
+			t = map[(int)pos.x][(int)pos.y + 1];
 
-			if (dir == DIRECTION.RIGHT)
-			{
-				t = map[(int)pos.x + 1][(int)pos.y];
-				Debug.Log("### Tile in destination position (" + t.position.x + "," + t.position.y + ")");
-			}
+		else if (dir == DIRECTION.RIGHT)
+			t = map[(int)pos.x + 1][(int)pos.y];
 
-			if (dir == DIRECTION.LEFT)
-			{
-				t = map[(int)pos.x - 1][(int)pos.y];
-				Debug.Log("### Tile in destination position (" + t.position.x + "," + t.position.y + ")");
-			}
-		}
-		catch (ArgumentOutOfRangeException e)
-		{
+		else if (dir == DIRECTION.LEFT)
+			t = map[(int)pos.x - 1][(int)pos.y];
+
+		Debug.Log("### Tile in destination position (" + t.position.x + "," + t.position.y + ")");
+
+		if (t.isBoundary) {
 			return false;
 		}
-		
-		return true;
+		else {
+			players[0].destPosition = new Vector2(t.position.x, t.position.y);
+			return true;
+		}
 	}
 }
