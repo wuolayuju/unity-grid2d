@@ -12,8 +12,8 @@ TagManager:
   Builtin Layer 5: UI
   Builtin Layer 6: 
   Builtin Layer 7: 
-  User Layer 8: 
-  User Layer 9: 
+  User Layer 8: NPCs
+  User Layer 9: Player
   User Layer 10: 
   User Layer 11: 
   User Layer 12: 
@@ -48,4 +48,8 @@ TagManager:
   - name: NPCs
     userID: 2
     uniqueID: 1870419847
+    locked: 0
+  - name: Player
+    userID: 3
+    uniqueID: 1984498941
     locked: 0
