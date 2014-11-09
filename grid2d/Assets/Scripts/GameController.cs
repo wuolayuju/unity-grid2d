@@ -11,10 +11,10 @@ public class GameController : MonoBehaviour {
 	public GameObject AIPlayerPrefab;
 	public int mapSize = 4;
 
-	private List<List<Tile>> map = new List<List<Tile>>();
+	public static List<List<Tile>> map = new List<List<Tile>>();
 	private List<Player> players = new List<Player>();
 
-	private enum DIRECTION { UP, DOWN, LEFT, RIGHT, NONE };
+	public enum DIRECTION { UP, DOWN, LEFT, RIGHT, NONE };
 
 	// Use this for initialization
 	void Start ()
@@ -102,7 +102,7 @@ public class GameController : MonoBehaviour {
 		DIRECTION dir =  checkForInput();
 		if (dir != DIRECTION.NONE)
 		{
-			if (!isMovePossible(dir)){
+			if (!players[0].isMovePossible(dir)){
 				Debug.Log("**** NOT A POSSIBLE MOVE ****");
 			}
 			else {
@@ -126,7 +126,7 @@ public class GameController : MonoBehaviour {
 		else
 			return DIRECTION.NONE;
 	}
-
+	/*
 	bool isMovePossible(DIRECTION dir)
 	{
 		Vector2 pos = players[0].gridPosition;
@@ -154,5 +154,5 @@ public class GameController : MonoBehaviour {
 			players[0].destPosition = new Vector2(t.position.x, t.position.y);
 			return true;
 		}
-	}
+	}*/
 }

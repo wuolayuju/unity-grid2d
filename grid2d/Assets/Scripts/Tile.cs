@@ -5,6 +5,7 @@ public class Tile{
 
 	private Vector2 _position;
 	private bool _isBoundary;
+	private bool _isOccupied;
 
 	public Tile (Vector2 position, bool isBoundary)
 	{
@@ -22,5 +23,11 @@ public class Tile{
 	{
 		get { return _isBoundary; }
 		set { _isBoundary = value; }
+	}
+
+	public bool isOccupied
+	{
+		get { return _isOccupied; }
+		set { _isOccupied = value; }
 	}
 }
