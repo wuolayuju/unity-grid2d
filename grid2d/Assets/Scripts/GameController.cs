@@ -27,7 +27,7 @@ public class GameController : MonoBehaviour {
 	// Use this for initialization
 	void Start ()
 	{
-		generateMap();
+		generateMap2();
 		renderMap();
 		generatePlayers();
 	}
@@ -75,6 +75,54 @@ public class GameController : MonoBehaviour {
 		for (int i = Math.Min(y1, y2); i < Math.Max(y1, y2); i++){
 			map[x][i].isBoundary = false;
 		}
+	}
+
+	private void generateMap2 ()
+	{
+		for (int r = 0; r < mapWidth; r++) {
+			List<Tile> row = new List<Tile> ();
+			for (int c = 0; c < mapHeight; c++)
+			{
+				Vector3 pos = new Vector3(r, c);
+				Tile t = new Tile (pos, true);
+				row.Add(t);
+			}
+			map.Add(row);
+		}
+
+		int max_cells = 60;
+		int x = UnityEngine.Random.Range (1, mapWidth);
+		int y = UnityEngine.Random.Range (1, mapHeight);
+		map [x] [y].isBoundary = false;
+		int num_cells = 0;
+		while (num_cells < max_cells)
+		{
+			int dir = UnityEngine.Random.Range (1, 4);
+
+			switch(dir)
+			{
+			case 1:
+				y++;
+				break;
+			case 2:
+				x++;
+				break;
+			case 3:
+				y--;
+				break;
+			case 4:
+				x--;
+				break;
+			}
+
+			Debug.Log("("+x+","+y+")");
+
+			if ((x < mapWidth && x >= 1) || (y < mapHeight || y >= 1)) {
+				map[x][y].isBoundary = false;
+				num_cells++;
+			}
+		}
+
 	}
 
 	private void generateMap ()
