@@ -20,7 +20,8 @@ public class GameController : MonoBehaviour {
 	// Use this for initialization
 	void Start ()
 	{
-		MapManager.generateMap();//generateMap();
+		MapManager.generateMap2();
+		//MapManager.generateMapBSP();
 		renderMap();
 		generatePlayers();
 	}
@@ -63,10 +64,10 @@ public class GameController : MonoBehaviour {
 		if (dir != DIRECTION.NONE)
 		{
 			if (!players[0].isMovePossible(dir)){
-				Debug.Log("**** NOT A POSSIBLE MOVE ****");
+				//Debug.Log("**** NOT A POSSIBLE MOVE ****");
 			}
 			else {
-				Debug.Log("**** POSSIBLE MOVE ****");
+				//Debug.Log("**** POSSIBLE MOVE ****");
 				players[0].MoveToDestPosition();
 			}
 		}
