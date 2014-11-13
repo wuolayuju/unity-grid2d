@@ -5,12 +5,12 @@ using System.Collections.Generic;
 
 public class MapManager : MonoBehaviour {
 
-	public static int mapWidth = 40;
-	public static int mapHeight = 40;
+	public static int mapWidth = 60;
+	public static int mapHeight = 60;
 	
 	public static int ROOM_MAX_SIZE = 7;
-	public static int ROOM_MIN_SIZE = 2;
-	public static int MAX_ROOMS = 10;
+	public static int ROOM_MIN_SIZE = 3;
+	public static int MAX_ROOMS = 20;
 
 	void Start()
 	{

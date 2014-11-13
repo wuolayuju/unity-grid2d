@@ -20,7 +20,7 @@ public class GameController : MonoBehaviour {
 	// Use this for initialization
 	void Start ()
 	{
-		MapManager.generateMap2();
+		MapManager.generateMap();
 		//MapManager.generateMapBSP();
 		renderMap();
 		generatePlayers();
@@ -33,9 +33,23 @@ public class GameController : MonoBehaviour {
 			for (int c = 0; c < MapManager.mapHeight ; c++){
 				Tile t = row[c];
 				if (t.isBoundary)
-					Instantiate(boundariePrefab, t.position, Quaternion.identity);
+				{
+					bool hasTileNeighbours = false;
+					for (int br = Math.Max (0, r-1) ; br <= Math.Min(MapManager.mapHeight - 1, r+1) ; br++)
+					{
+						for (int bc = Math.Max(0, c-1) ; bc <= Math.Min(MapManager.mapWidth -1, c+1) ; bc++)
+						{
+							if (!map[br][bc].isBoundary)
+								hasTileNeighbours = true;
+						}
+					}
+					if (hasTileNeighbours)
+						Instantiate(boundariePrefab, t.position, Quaternion.identity);
+				}
 				else
+				{
 					Instantiate(tilePrefab, t.position, Quaternion.identity);
+				}
 			}
 		}
 	}
