@@ -210,7 +210,9 @@ public class GameController : MonoBehaviour {
 		Vector2 pos = playerStartPosition;
 
 		UserPlayer humanPlayer;
-		humanPlayer = ((GameObject) Instantiate (userPlayerPrefab, pos, Quaternion.identity)).GetComponent<UserPlayer>();
+		humanPlayer = GameObject.Find ("userPlayer").GetComponent<UserPlayer>();
+		humanPlayer.transform.position = pos;
+		//humanPlayer = ((GameObject) Instantiate (userPlayerPrefab, pos, Quaternion.identity)).GetComponent<UserPlayer>();
 		humanPlayer.gridPosition = pos;
 		players.Add (humanPlayer);
 
