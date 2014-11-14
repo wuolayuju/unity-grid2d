@@ -12,31 +12,11 @@ public class MapManager : MonoBehaviour {
 	public static int ROOM_MIN_SIZE = 3;
 	public static int MAX_ROOMS = 20;
 
+	public static List<Rectangle> rooms = new List<Rectangle>();
+
 	void Start()
 	{
 
-	}
-
-	private class Rectangle {
-		public int x1, y1, x2, y2;
-		
-		public Rectangle(int x, int y, int w, int h) {
-			this.x1 = x;
-			this.y1 = y;
-			this.x2 = x + w;
-			this.y2 = y + h;
-		}
-		
-		public Vector2 getCenter()
-		{
-			Vector2 cent = new Vector2 ((x1 + x2) / 2, (y1 + y2) / 2);
-			return cent;
-		}
-		
-		public bool intersects(Rectangle other)
-		{
-			return (x1 <= other.x2 && x2 >= other.x1 && y1 <= other.y2 && y2 >= other.y1);
-		}
 	}
 
 	private static void createRoom (Rectangle room)
@@ -80,8 +60,7 @@ public class MapManager : MonoBehaviour {
 	public static void generateMap ()
 	{
 		fillMap();
-		
-		List<Rectangle> rooms = new List<Rectangle>();
+
 		int num_rooms = 0;
 		
 		for (int r = 0; r < MAX_ROOMS; r++)

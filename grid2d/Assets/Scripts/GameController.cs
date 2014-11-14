@@ -116,13 +116,18 @@ public class GameController : MonoBehaviour {
 		UserPlayer humanPlayer;
 		humanPlayer = GameObject.Find ("userPlayer").GetComponent<UserPlayer>();
 		humanPlayer.transform.position = pos;
-		//humanPlayer = ((GameObject) Instantiate (userPlayerPrefab, pos, Quaternion.identity)).GetComponent<UserPlayer>();
 		humanPlayer.gridPosition = pos;
 		players.Add (humanPlayer);
 
-		/*AIPlayer compPlayer;
-		compPlayer = ((GameObject) Instantiate (AIPlayerPrefab, new Vector2 (2f, 2f), Quaternion.identity)).GetComponent<AIPlayer>();
-		players.Add (compPlayer);*/
+		AIPlayer compPlayer;
+		for (int nr = 0; nr < MapManager.rooms.Count ; nr++)
+		{
+			Rectangle room = MapManager.rooms[nr];
+			pos = new Vector2 (UnityEngine.Random.Range (room.x1, room.x2),
+			                   UnityEngine.Random.Range (room.y1, room.y2));
+			compPlayer = ((GameObject) Instantiate (AIPlayerPrefab, pos, Quaternion.identity)).GetComponent<AIPlayer>();
+			players.Add (compPlayer);
+		}
 	}
 
 
