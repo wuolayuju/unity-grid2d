@@ -40,7 +40,27 @@ public class GameController : MonoBehaviour {
 
 	private void renderMap ()
 	{
+		MapManager.markTilesVisible();
+
 		for (int r = 0; r < MapManager.mapWidth ; r++){
+			List<Tile> row = map[r];
+			for (int c = 0; c < MapManager.mapHeight ; c++){
+				Tile t = row[c];
+				if (t.isVisible)
+				{
+					if (t.isBoundary)
+					{
+						GameObject whichPrefab = determinePrefab(r, c);
+						Instantiate(whichPrefab, t.position, Quaternion.identity);
+					}
+					else
+					{
+						Instantiate(TilePrefabsHolder.instance.BLANK_FLOOR, t.position, Quaternion.identity);
+					}
+				}
+			}
+		}
+		/*for (int r = 0; r < MapManager.mapWidth ; r++){
 			List<Tile> row = map[r];
 			for (int c = 0; c < MapManager.mapHeight ; c++){
 				Tile t = row[c];
@@ -57,9 +77,9 @@ public class GameController : MonoBehaviour {
 					}
 					if (hasTileNeighbours)
 					{
-						/*GameObject whichPrefab = determinePrefab(r, c);
-						Instantiate(whichPrefab, t.position, Quaternion.identity);*/
-						Instantiate(TilePrefabsHolder.instance.DEFAULT_TILE, t.position, Quaternion.identity);
+						GameObject whichPrefab = determinePrefab(r, c);
+						Instantiate(whichPrefab, t.position, Quaternion.identity);
+						//Instantiate(TilePrefabsHolder.instance.DEFAULT_TILE, t.position, Quaternion.identity);
 					}
 				}
 				else
@@ -67,46 +87,49 @@ public class GameController : MonoBehaviour {
 					Instantiate(TilePrefabsHolder.instance.BLANK_FLOOR, t.position, Quaternion.identity);
 				}
 			}
-		}
+		}*/
 	}
 
 	private GameObject determinePrefab (int x, int y)
 	{
+		int score = 0;
 
-		if (map [x] [y + 1].isBoundary) //NORTH
+		if (map [x][y+1].isBoundary && map [x][y+1].isVisible)
+			score += 8;
+		if (map [x-1][y].isBoundary && map [x-1][y].isVisible)
+			score += 4;
+		if (map [x+1][y].isBoundary && map [x+1][y].isVisible)
+			score += 2;
+		if (map[x][y-1].isBoundary && map[x][y-1].isVisible)
+			score += 1;
+
+		switch(score)
 		{
-			if (map [x + 1] [y].isBoundary)
-				return TilePrefabsHolder.instance.NE_WALL;
-			else if (map [x] [y - 1].isBoundary)
+		case 1:
+			return TilePrefabsHolder.instance.S_WALL;
+		case 2:
+			return TilePrefabsHolder.instance.WE_WALL;
+		case 3:
+			return TilePrefabsHolder.instance.SE_WALL;
+		case 4:
+			return TilePrefabsHolder.instance.WE_WALL;
+		case 5:
+			return TilePrefabsHolder.instance.SW_WALL;
+		case 8:
+			return TilePrefabsHolder.instance.N_WALL;
+		case 10:
+			return TilePrefabsHolder.instance.NE_WALL;
+		case 12:
+			return TilePrefabsHolder.instance.NW_WALL;
+		default:
+			if (score == 9 || score == 11 || score == 13)
 				return TilePrefabsHolder.instance.NS_WALL;
-			else if (map [x - 1] [y].isBoundary)
-				return TilePrefabsHolder.instance.NW_WALL;
-			else 
-				return TilePrefabsHolder.instance.N_WALL;
-		}
-		else if (map [x + 1] [y].isBoundary) // EAST
-		{
-			if (map [x - 1] [y].isBoundary)
+			else if (score == 6 || score == 7 || score == 14)
 				return TilePrefabsHolder.instance.WE_WALL;
-			else if (map [x] [y - 1].isBoundary)
-				return TilePrefabsHolder.instance.SE_WALL;
-			else
-				return TilePrefabsHolder.instance.E_WALL;
-		}
-		else if (map [x] [y - 1].isBoundary) // SOUTH
-		{
-			if (map [x - 1] [y].isBoundary)
-				return TilePrefabsHolder.instance.SW_WALL;
-			else
-				return TilePrefabsHolder.instance.S_WALL;
-		}
-		else if (map [x - 1] [y].isBoundary) //WEST
-		{
-			return TilePrefabsHolder.instance.W_WALL;
+			break;
 		}
 
-		else
-			return TilePrefabsHolder.instance.DEFAULT_TILE;
+		return TilePrefabsHolder.instance.DEFAULT_TILE;
 	}
 
 	private void generatePlayers ()

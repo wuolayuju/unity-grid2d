@@ -50,10 +50,38 @@ public class MapManager : MonoBehaviour {
 			for (int c = 0; c < mapHeight; c++)
 			{
 				Vector3 pos = new Vector3(r, c);
-				Tile t = new Tile (pos, true);
+				Tile t = new Tile (pos, true, false);
 				row.Add(t);
 			}
 			GameController.map.Add(row);
+		}
+	}
+
+	public static void markTilesVisible ()
+	{
+		for (int r = 0; r < mapWidth ; r++){
+			List<Tile> row = GameController.map[r];
+			for (int c = 0; c < mapHeight ; c++){
+				Tile t = row[c];
+				if (t.isBoundary)
+				{
+					bool hasTileNeighbours = false;
+					for (int br = Math.Max (0, r-1) ; br <= Math.Min(mapHeight - 1, r+1) ; br++)
+					{
+						for (int bc = Math.Max(0, c-1) ; bc <= Math.Min(mapWidth -1, c+1) ; bc++)
+						{
+							if (!GameController.map[br][bc].isBoundary)
+								hasTileNeighbours = true;
+						}
+					}
+					if (hasTileNeighbours)
+						GameController.map[r][c].isVisible = true;
+				}
+				else
+				{
+					GameController.map[r][c].isVisible = true;
+				}
+			}
 		}
 	}
 
@@ -68,8 +96,8 @@ public class MapManager : MonoBehaviour {
 			// random width and height
 			int w = UnityEngine.Random.Range(ROOM_MIN_SIZE, ROOM_MAX_SIZE);
 			int h = UnityEngine.Random.Range(ROOM_MIN_SIZE, ROOM_MAX_SIZE);
-			int x = UnityEngine.Random.Range(0, mapWidth - w - 1);
-			int y = UnityEngine.Random.Range(0, mapHeight - h - 1);
+			int x = UnityEngine.Random.Range(1, mapWidth - w - 2);
+			int y = UnityEngine.Random.Range(1, mapHeight - h - 2);
 			
 			Rectangle new_room = new Rectangle(x, y, w, h);
 			
