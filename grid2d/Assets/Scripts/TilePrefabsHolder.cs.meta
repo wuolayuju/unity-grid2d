@@ -1,0 +1,19 @@
+fileFormatVersion: 2
+guid: 3138cd5ab40694a43be1280a0fc9e17c
+MonoImporter:
+  serializedVersion: 2
+  defaultReferences:
+  - BLANK_FLOOR: {fileID: 100000, guid: 1145bec7efbfb6748817f80488d4585a, type: 2}
+  - N_WALL: {fileID: 100000, guid: f4a073e417f8ee74388fb5c6230121e6, type: 2}
+  - NW_WALL: {fileID: 100000, guid: 14ca0f6da3b61ec408b092201674334f, type: 2}
+  - NE_WALL: {fileID: 100000, guid: 71b7a6ddb6ee34f40ba45d4c27e35679, type: 2}
+  - NS_WALL: {fileID: 100000, guid: 4d961a638b5a58f41bf49228fc9a405c, type: 2}
+  - W_WALL: {fileID: 100000, guid: 1e7877b3aa853cf478ccec8a3fdea879, type: 2}
+  - WE_WALL: {fileID: 100000, guid: b23c0f8f127ebd14884c931d0ef4401f, type: 2}
+  - SW_WALL: {fileID: 100000, guid: 5cbff5dcd4dcaa3409f63b7c07b5ddd2, type: 2}
+  - E_WALL: {fileID: 100000, guid: 5a5b1e49ee4455745badb13612f1aad0, type: 2}
+  - SE_WALL: {fileID: 100000, guid: 7413c9cc55b72704399e5d431970b8f5, type: 2}
+  - S_WALL: {fileID: 100000, guid: 89426ba4934f4844eb40e691863e17ae, type: 2}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 

@@ -17,9 +17,21 @@ public class GameController : MonoBehaviour {
 
 	public enum DIRECTION { UP, DOWN, LEFT, RIGHT, NONE };
 
+	public int mapWidth = 60;
+	public int mapHeight = 60;
+	
+	public int ROOM_MAX_SIZE = 7;
+	public int ROOM_MIN_SIZE = 3;
+	public int MAX_ROOMS = 20;
+
 	// Use this for initialization
 	void Start ()
 	{
+		MapManager.mapWidth = mapWidth;
+		MapManager.mapHeight = mapHeight;
+		MapManager.ROOM_MAX_SIZE = ROOM_MAX_SIZE;
+		MapManager.ROOM_MIN_SIZE = ROOM_MIN_SIZE;
+		MapManager.MAX_ROOMS = MAX_ROOMS;
 		MapManager.generateMap();
 		//MapManager.generateMapBSP();
 		renderMap();
@@ -44,7 +56,11 @@ public class GameController : MonoBehaviour {
 						}
 					}
 					if (hasTileNeighbours)
+					{
+						/*GameObject whichPrefab = determinePrefab(r, c);
+						Instantiate(whichPrefab, t.position, Quaternion.identity);*/
 						Instantiate(boundariePrefab, t.position, Quaternion.identity);
+					}
 				}
 				else
 				{
@@ -52,6 +68,46 @@ public class GameController : MonoBehaviour {
 				}
 			}
 		}
+	}
+
+	private GameObject determinePrefab (int x, int y)
+	{
+		/*if (map [x] [y + 1].isBoundary) //NORTH
+		{
+			if (map [x + 1] [y].isBoundary)
+				return TilePrefabsHolder.instance.NE_WALL;
+			else if (map [x] [y - 1].isBoundary)
+				return TilePrefabsHolder.instance.NS_WALL;
+			else if (map [x - 1] [y].isBoundary)
+				return TilePrefabsHolder.instance.NW_WALL;
+			else 
+				return TilePrefabsHolder.instance.N_WALL;
+		}
+		else if (map [x + 1] [y].isBoundary) // EAST
+		{
+			if (map [x - 1] [y].isBoundary)
+				return TilePrefabsHolder.instance.WE_WALL;
+			else if (map [x] [y - 1].isBoundary)
+				return TilePrefabsHolder.instance.SE_WALL;
+			else
+				return TilePrefabsHolder.instance.E_WALL;
+		}
+		else if (map [x] [y - 1].isBoundary) // SOUTH
+		{
+			if (map [x - 1] [y].isBoundary)
+				return TilePrefabsHolder.instance.SW_WALL;
+			else
+				return TilePrefabsHolder.instance.S_WALL;
+		}
+		else if (map [x - 1] [y].isBoundary) //WEST
+		{
+			return TilePrefabsHolder.instance.W_WALL;
+		}
+
+		else
+			return TilePrefabsHolder.instance.DEFAULT_TILE;*/
+
+		return null;
 	}
 
 	private void generatePlayers ()
