@@ -59,12 +59,12 @@ public class GameController : MonoBehaviour {
 					{
 						/*GameObject whichPrefab = determinePrefab(r, c);
 						Instantiate(whichPrefab, t.position, Quaternion.identity);*/
-						Instantiate(boundariePrefab, t.position, Quaternion.identity);
+						Instantiate(TilePrefabsHolder.instance.DEFAULT_TILE, t.position, Quaternion.identity);
 					}
 				}
 				else
 				{
-					Instantiate(tilePrefab, t.position, Quaternion.identity);
+					Instantiate(TilePrefabsHolder.instance.BLANK_FLOOR, t.position, Quaternion.identity);
 				}
 			}
 		}
@@ -72,7 +72,8 @@ public class GameController : MonoBehaviour {
 
 	private GameObject determinePrefab (int x, int y)
 	{
-		/*if (map [x] [y + 1].isBoundary) //NORTH
+
+		if (map [x] [y + 1].isBoundary) //NORTH
 		{
 			if (map [x + 1] [y].isBoundary)
 				return TilePrefabsHolder.instance.NE_WALL;
@@ -105,9 +106,7 @@ public class GameController : MonoBehaviour {
 		}
 
 		else
-			return TilePrefabsHolder.instance.DEFAULT_TILE;*/
-
-		return null;
+			return TilePrefabsHolder.instance.DEFAULT_TILE;
 	}
 
 	private void generatePlayers ()
