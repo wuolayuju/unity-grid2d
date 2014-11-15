@@ -5,6 +5,8 @@ using System.Collections.Generic;
 
 public class GameController : MonoBehaviour {
 
+	public TilePrefabsHolder prefabsHolder;
+
 	public GameObject tilePrefab;
 	public GameObject boundariePrefab;
 	public GameObject userPlayerPrefab;
@@ -33,6 +35,9 @@ public class GameController : MonoBehaviour {
 		MapManager.ROOM_MIN_SIZE = ROOM_MIN_SIZE;
 		MapManager.MAX_ROOMS = MAX_ROOMS;
 		MapManager.generateMap();
+
+		prefabsHolder = GameObject.Find("PrefabHolder").GetComponent<TilePrefabsHolder>();
+
 		//MapManager.generateMapBSP();
 		renderMap();
 		generatePlayers();
@@ -55,7 +60,7 @@ public class GameController : MonoBehaviour {
 					}
 					else
 					{
-						Instantiate(TilePrefabsHolder.instance.BLANK_FLOOR, t.position, Quaternion.identity);
+						Instantiate(prefabsHolder.BLANK_FLOOR, t.position, Quaternion.identity);
 					}
 				}
 			}
@@ -106,30 +111,38 @@ public class GameController : MonoBehaviour {
 		switch(score)
 		{
 		case 1:
-			return TilePrefabsHolder.instance.S_WALL;
+			return prefabsHolder.S_WALL;
 		case 2:
-			return TilePrefabsHolder.instance.WE_WALL;
+			return prefabsHolder.WE_WALL;
 		case 3:
-			return TilePrefabsHolder.instance.SE_WALL;
+			return prefabsHolder.SE_WALL;
 		case 4:
-			return TilePrefabsHolder.instance.WE_WALL;
+			return prefabsHolder.WE_WALL;
 		case 5:
-			return TilePrefabsHolder.instance.SW_WALL;
+			return prefabsHolder.SW_WALL;
+		case 6:
+			return prefabsHolder.WE_WALL;
+		case 7:
+			return prefabsHolder.EWS_WALL;
 		case 8:
-			return TilePrefabsHolder.instance.N_WALL;
+			return prefabsHolder.N_WALL;
+		case 9:
+			return prefabsHolder.NS_WALL;
 		case 10:
-			return TilePrefabsHolder.instance.NE_WALL;
+			return prefabsHolder.NE_WALL;
+		case 11:
+			return prefabsHolder.NES_WALL;
 		case 12:
-			return TilePrefabsHolder.instance.NW_WALL;
+			return prefabsHolder.NW_WALL;
+		case 13:
+			return prefabsHolder.NWS_WALL;
+		case 14:
+			return prefabsHolder.NEW_WALL;
+		case 15:
+			return prefabsHolder.NESW_WALL;
 		default:
-			if (score == 9 || score == 11 || score == 13)
-				return TilePrefabsHolder.instance.NS_WALL;
-			else if (score == 6 || score == 7 || score == 14)
-				return TilePrefabsHolder.instance.WE_WALL;
-			break;
+			return prefabsHolder.DEFAULT_TILE;
 		}
-
-		return TilePrefabsHolder.instance.DEFAULT_TILE;
 	}
 
 	private void generatePlayers ()
