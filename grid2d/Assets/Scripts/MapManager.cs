@@ -96,8 +96,8 @@ public class MapManager : MonoBehaviour {
 			// random width and height
 			int w = UnityEngine.Random.Range(ROOM_MIN_SIZE, ROOM_MAX_SIZE);
 			int h = UnityEngine.Random.Range(ROOM_MIN_SIZE, ROOM_MAX_SIZE);
-			int x = UnityEngine.Random.Range(1, mapWidth - w - 2);
-			int y = UnityEngine.Random.Range(1, mapHeight - h - 2);
+			int x = UnityEngine.Random.Range(2, mapWidth - w - 2);
+			int y = UnityEngine.Random.Range(2, mapHeight - h - 2);
 			
 			Rectangle new_room = new Rectangle(x, y, w, h);
 			
