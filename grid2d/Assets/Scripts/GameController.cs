@@ -55,61 +55,47 @@ public class GameController : MonoBehaviour {
 				{
 					if (t.isBoundary)
 					{
-						GameObject whichPrefab = determinePrefab(r, c);
-						Instantiate(whichPrefab, t.position, Quaternion.identity);
+						GameObject whichPrefabWall = determinePrefabWall(r, c);
+						Instantiate(whichPrefabWall, t.position, Quaternion.identity);
 					}
 					else
 					{
-						Instantiate(prefabsHolder.BLANK_FLOOR, t.position, Quaternion.identity);
+						GameObject whichPrefabFloor = determinePrefabFloor(r, c);
+						Instantiate(whichPrefabFloor, t.position, Quaternion.identity);
 					}
 				}
+//				else
+//				{
+//					Instantiate(prefabsHolder.DEFAULT_TILE, t.position, Quaternion.identity);
+//				}
 			}
 		}
-		/*for (int r = 0; r < MapManager.mapWidth ; r++){
-			List<Tile> row = map[r];
-			for (int c = 0; c < MapManager.mapHeight ; c++){
-				Tile t = row[c];
-				if (t.isBoundary)
-				{
-					bool hasTileNeighbours = false;
-					for (int br = Math.Max (0, r-1) ; br <= Math.Min(MapManager.mapHeight - 1, r+1) ; br++)
-					{
-						for (int bc = Math.Max(0, c-1) ; bc <= Math.Min(MapManager.mapWidth -1, c+1) ; bc++)
-						{
-							if (!map[br][bc].isBoundary)
-								hasTileNeighbours = true;
-						}
-					}
-					if (hasTileNeighbours)
-					{
-						GameObject whichPrefab = determinePrefab(r, c);
-						Instantiate(whichPrefab, t.position, Quaternion.identity);
-						//Instantiate(TilePrefabsHolder.instance.DEFAULT_TILE, t.position, Quaternion.identity);
-					}
-				}
-				else
-				{
-					Instantiate(TilePrefabsHolder.instance.BLANK_FLOOR, t.position, Quaternion.identity);
-				}
-			}
-		}*/
 	}
 
-	private GameObject determinePrefab (int x, int y)
+	private GameObject determinePrefabWall (int x, int y)
 	{
 		int score = 0;
 
-		if (map [x][y+1].isBoundary && map [x][y+1].isVisible)
-			score += 8;
-		if (map [x-1][y].isBoundary && map [x-1][y].isVisible)
-			score += 4;
-		if (map [x+1][y].isBoundary && map [x+1][y].isVisible)
-			score += 2;
-		if (map[x][y-1].isBoundary && map[x][y-1].isVisible)
-			score += 1;
+		try
+		{
+			if (map [x][y+1].isBoundary && map [x][y+1].isVisible)
+				score += 8;
+			if (map [x-1][y].isBoundary && map [x-1][y].isVisible)
+				score += 4;
+			if (map [x+1][y].isBoundary && map [x+1][y].isVisible)
+				score += 2;
+			if (map[x][y-1].isBoundary && map[x][y-1].isVisible)
+				score += 1;
+		}
+		catch (ArgumentOutOfRangeException e)
+		{
+			Debug.LogError("Tile ("+x+","+y+")");
+		}
 
 		switch(score)
 		{
+		case 0:
+			return prefabsHolder.COL_WALL;
 		case 1:
 			return prefabsHolder.S_WALL;
 		case 2:
@@ -123,7 +109,10 @@ public class GameController : MonoBehaviour {
 		case 6:
 			return prefabsHolder.WE_WALL;
 		case 7:
-			return prefabsHolder.EWS_WALL;
+			if (!map[x-1][y-1].isBoundary || !map[x+1][y-1].isBoundary)
+				return prefabsHolder.EWS_WALL;
+			else
+				return prefabsHolder.WE_WALL;
 		case 8:
 			return prefabsHolder.N_WALL;
 		case 9:
@@ -131,17 +120,85 @@ public class GameController : MonoBehaviour {
 		case 10:
 			return prefabsHolder.NE_WALL;
 		case 11:
-			return prefabsHolder.NES_WALL;
+			if (!map[x+1][y+1].isBoundary || !map[x+1][y-1].isBoundary)
+				return prefabsHolder.NES_WALL;
+			else
+				return prefabsHolder.NS_WALL;
 		case 12:
 			return prefabsHolder.NW_WALL;
 		case 13:
-			return prefabsHolder.NWS_WALL;
+			if (!map[x-1][y+1].isBoundary || !map[x-1][y-1].isBoundary)
+				return prefabsHolder.NWS_WALL;
+			else
+				return prefabsHolder.NS_WALL;
 		case 14:
-			return prefabsHolder.NEW_WALL;
+			if (!map[x-1][y+1].isBoundary || !map[x+1][y+1].isBoundary)
+				return prefabsHolder.NEW_WALL;
+			else
+				return prefabsHolder.WE_WALL;
 		case 15:
 			return prefabsHolder.NESW_WALL;
 		default:
 			return prefabsHolder.DEFAULT_TILE;
+		}
+	}
+
+	private GameObject determinePrefabFloor (int x, int y)
+	{
+		int score = 0;
+		
+		try
+		{
+			if (!map [x][y+1].isBoundary)
+				score += 8;
+			if (!map [x-1][y].isBoundary)
+				score += 4;
+			if (!map [x+1][y].isBoundary)
+				score += 2;
+			if (!map[x][y-1].isBoundary)
+				score += 1;
+		}
+		catch (ArgumentOutOfRangeException e)
+		{
+			Debug.LogError("Tile ("+x+","+y+")");
+		}
+
+		switch(score)
+		{
+		case 0:
+			return prefabsHolder.BLANK_FLOOR;
+		case 1:
+			return prefabsHolder.S_FLOOR;
+		case 2:
+			return prefabsHolder.E_FLOOR;
+		case 3:
+			return prefabsHolder.SE_FLOOR;
+		case 4:
+			return prefabsHolder.W_FLOOR;
+		case 5:
+			return prefabsHolder.SW_FLOOR;
+		case 6:
+			return prefabsHolder.WE_FLOOR;
+		case 7:
+			return prefabsHolder.EWS_FLOOR;
+		case 8:
+			return prefabsHolder.N_FLOOR;
+		case 9:
+			return prefabsHolder.NS_FLOOR;
+		case 10:
+			return prefabsHolder.NE_FLOOR;
+		case 11:
+			return prefabsHolder.NES_FLOOR;
+		case 12:
+			return prefabsHolder.NW_FLOOR;
+		case 13:
+			return prefabsHolder.NWS_FLOOR;
+		case 14:
+			return prefabsHolder.NEW_FLOOR;
+		case 15:
+			return prefabsHolder.NESW_FLOOR;
+		default:
+			return prefabsHolder.NESW_FLOOR;
 		}
 	}
 
