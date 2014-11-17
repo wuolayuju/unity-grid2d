@@ -24,6 +24,7 @@ public class MapManager : MonoBehaviour {
 		for (int r = room.x1; r < room.x2; r++) {
 			for (int c = room.y1; c < room.y2 ; c++){
 				GameController.map[r][c].isBoundary = false;
+				GameController.map[r][c].blocksLight = false;
 			}
 		}
 	}
@@ -32,6 +33,7 @@ public class MapManager : MonoBehaviour {
 	{
 		for (int i = Math.Min(x1, x2); i < Math.Max(x1, x2); i++){
 			GameController.map[i][y].isBoundary = false;
+			GameController.map[i][y].blocksLight = false;
 		}
 	}
 	
@@ -39,6 +41,7 @@ public class MapManager : MonoBehaviour {
 	{
 		for (int i = Math.Min(y1, y2); i < Math.Max(y1, y2); i++){
 			GameController.map[x][i].isBoundary = false;
+			GameController.map[x][i].blocksLight = false;
 		}
 	}
 
@@ -50,7 +53,7 @@ public class MapManager : MonoBehaviour {
 			for (int c = 0; c < mapHeight; c++)
 			{
 				Vector3 pos = new Vector3(r, c);
-				Tile t = new Tile (pos, true, false);
+				Tile t = new Tile (pos, true, false, true, false);
 				row.Add(t);
 			}
 			GameController.map.Add(row);

@@ -41,6 +41,7 @@ public class GameController : MonoBehaviour {
 		//MapManager.generateMapBSP();
 		renderMap();
 		generatePlayers();
+		FOV ();
 	}
 
 	private void renderMap ()
@@ -56,19 +57,46 @@ public class GameController : MonoBehaviour {
 					if (t.isBoundary)
 					{
 						GameObject whichPrefabWall = determinePrefabWall(r, c);
-						Instantiate(whichPrefabWall, t.position, Quaternion.identity);
+						t.gamePrefab = (GameObject) Instantiate(whichPrefabWall, t.position, Quaternion.identity);
 					}
 					else
 					{
 						GameObject whichPrefabFloor = determinePrefabFloor(r, c);
-						Instantiate(whichPrefabFloor, t.position, Quaternion.identity);
+						t.gamePrefab = (GameObject)	Instantiate(whichPrefabFloor, t.position, Quaternion.identity);
 					}
+					t.markTileAsUnexplored();
 				}
 //				else
 //				{
 //					Instantiate(prefabsHolder.DEFAULT_TILE, t.position, Quaternion.identity);
 //				}
 			}
+		}
+	}
+
+	void FOV()
+	{
+		for (int i=0; i<360; i+=2)
+		{
+			float x = Mathf.Cos((float)i*0.01745f);
+			float y = Mathf.Sin((float)i*0.01745f);
+			DoFOV(x,y);
+		}
+	}
+
+	void DoFOV(float x, float y)
+	{
+		float ox,oy;
+		ox = (float)players[0].gridPosition.x+1f;
+		oy = (float)players[0].gridPosition.y+1f;
+		for(int i=0;i<5;i++)
+		{
+			map[(int)ox][(int)oy].markTileAsLit();
+			//map[(int)ox][(int)oy].gamePrefab.GetComponent<SpriteRenderer>().color = Color.white;
+			if(map[(int)ox][(int)oy].blocksLight==true)
+				return;
+			ox+=x;
+			oy+=y;
 		}
 	}
 
@@ -109,8 +137,10 @@ public class GameController : MonoBehaviour {
 		case 6:
 			return prefabsHolder.WE_WALL;
 		case 7:
-			if (!map[x-1][y-1].isBoundary || !map[x+1][y-1].isBoundary)
+			if (!map[x-1][y-1].isBoundary && !map[x+1][y-1].isBoundary)
 				return prefabsHolder.EWS_WALL;
+			else if (!map[x-1][y-1].isBoundary)
+				return prefabsHolder.SW_WALL;
 			else
 				return prefabsHolder.WE_WALL;
 		case 8:
@@ -120,19 +150,19 @@ public class GameController : MonoBehaviour {
 		case 10:
 			return prefabsHolder.NE_WALL;
 		case 11:
-			if (!map[x+1][y+1].isBoundary || !map[x+1][y-1].isBoundary)
+			if (!map[x+1][y+1].isBoundary && !map[x+1][y-1].isBoundary)
 				return prefabsHolder.NES_WALL;
 			else
 				return prefabsHolder.NS_WALL;
 		case 12:
 			return prefabsHolder.NW_WALL;
 		case 13:
-			if (!map[x-1][y+1].isBoundary || !map[x-1][y-1].isBoundary)
+			if (!map[x-1][y+1].isBoundary && !map[x-1][y-1].isBoundary)
 				return prefabsHolder.NWS_WALL;
 			else
 				return prefabsHolder.NS_WALL;
 		case 14:
-			if (!map[x-1][y+1].isBoundary || !map[x+1][y+1].isBoundary)
+			if (!map[x-1][y+1].isBoundary && !map[x+1][y+1].isBoundary)
 				return prefabsHolder.NEW_WALL;
 			else
 				return prefabsHolder.WE_WALL;
@@ -236,6 +266,7 @@ public class GameController : MonoBehaviour {
 			else {
 				//Debug.Log("**** POSSIBLE MOVE ****");
 				players[0].MoveToDestPosition();
+				FOV();
 			}
 		}
 
