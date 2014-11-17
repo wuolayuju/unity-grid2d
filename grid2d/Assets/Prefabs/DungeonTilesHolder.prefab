@@ -1,0 +1,87 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &100000
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 400000}
+  - 114: {fileID: 11400000}
+  m_Layer: 0
+  m_Name: DungeonTilesHolder
+  m_TagString: Untagged
+  m_Icon: {fileID: -2065832391, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &400000
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100000}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: -.371706963, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100000}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3138cd5ab40694a43be1280a0fc9e17c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spriteMaterial: {fileID: 10754, guid: 0000000000000000e000000000000000, type: 0}
+  N_WALL: {fileID: 100000, guid: f4a073e417f8ee74388fb5c6230121e6, type: 2}
+  NW_WALL: {fileID: 100000, guid: 14ca0f6da3b61ec408b092201674334f, type: 2}
+  NE_WALL: {fileID: 100000, guid: 71b7a6ddb6ee34f40ba45d4c27e35679, type: 2}
+  NS_WALL: {fileID: 100000, guid: 4d961a638b5a58f41bf49228fc9a405c, type: 2}
+  W_WALL: {fileID: 100000, guid: 1e7877b3aa853cf478ccec8a3fdea879, type: 2}
+  WE_WALL: {fileID: 100000, guid: b23c0f8f127ebd14884c931d0ef4401f, type: 2}
+  SW_WALL: {fileID: 100000, guid: 5cbff5dcd4dcaa3409f63b7c07b5ddd2, type: 2}
+  E_WALL: {fileID: 100000, guid: 5a5b1e49ee4455745badb13612f1aad0, type: 2}
+  SE_WALL: {fileID: 100000, guid: 7413c9cc55b72704399e5d431970b8f5, type: 2}
+  S_WALL: {fileID: 100000, guid: 89426ba4934f4844eb40e691863e17ae, type: 2}
+  NEW_WALL: {fileID: 100000, guid: 9fc2cb84a8c6a1947a6ad0251d5d0415, type: 2}
+  NWS_WALL: {fileID: 100000, guid: 1179467285962ab49923b575304f01bd, type: 2}
+  NES_WALL: {fileID: 100000, guid: 6a62e5048cc1319428c7fe7a6bd878ec, type: 2}
+  EWS_WALL: {fileID: 100000, guid: e6b440c9bdb78b4409d9b6f297d37c90, type: 2}
+  NESW_WALL: {fileID: 100000, guid: 84b7e9192cce12a4088e1e6b9df9c631, type: 2}
+  COL_WALL: {fileID: 100000, guid: 2d0a915b0dbb64847b14278a499c5a8c, type: 2}
+  BLANK_FLOOR: {fileID: 100000, guid: abe5e91138c08d94cbfe1932834dac65, type: 2}
+  N_FLOOR: {fileID: 100000, guid: 06e86d5e26a0f0943b1a09a74d1a1356, type: 2}
+  NW_FLOOR: {fileID: 100000, guid: 26855b87c29990245bd19fccf461ed70, type: 2}
+  NE_FLOOR: {fileID: 100000, guid: c219712029f1b3746a75def6fc2bddf6, type: 2}
+  NS_FLOOR: {fileID: 100000, guid: 3194fe92fd41b184c8e583b788bcd166, type: 2}
+  W_FLOOR: {fileID: 100000, guid: 485ec7b1da5703d42981646305c225d7, type: 2}
+  WE_FLOOR: {fileID: 100000, guid: a0b49ce0b0cd5a3448610cc4d517f8b6, type: 2}
+  SW_FLOOR: {fileID: 100000, guid: e94d4684727516d45a48267ad12c91a4, type: 2}
+  E_FLOOR: {fileID: 100000, guid: 8031eb8563ead0c4a8ccc16c8bf88ab7, type: 2}
+  SE_FLOOR: {fileID: 100000, guid: b95d9cfda110d5b47935e2f6e6384f55, type: 2}
+  S_FLOOR: {fileID: 100000, guid: e41aae077d6669f4aa0fec83d27e0a98, type: 2}
+  NEW_FLOOR: {fileID: 100000, guid: 216312cc6ff4b03428249b18f37d5162, type: 2}
+  NWS_FLOOR: {fileID: 100000, guid: 2d8ccb319a0a3eb4fb6356d0d0cd1ec2, type: 2}
+  NES_FLOOR: {fileID: 100000, guid: 45e998574421d69498592e098f2a62a3, type: 2}
+  EWS_FLOOR: {fileID: 100000, guid: df0e008752e2b9a458c288bba417c803, type: 2}
+  NESW_FLOOR: {fileID: 100000, guid: 98b827245f7251f40993e6cb80a1a53f, type: 2}
+  DEFAULT_TILE: {fileID: 100000, guid: 718da32f5006b9541b0b55a0c86777c4, type: 2}
+--- !u!1001 &100100000
+Prefab:
+  m_ObjectHideFlags: 1
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications: []
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 0}
+  m_RootGameObject: {fileID: 100000}
+  m_IsPrefabParent: 1
+  m_IsExploded: 1

@@ -11,14 +11,16 @@ public class Tile{
 	private bool _isVisible;
 	private bool _blocksLight;
 	private bool _isExplored;
+	private bool _isLit;
 
-	public Tile (Vector2 position, bool isBoundary, bool isVisible, bool blocksLight, bool isExplored)
+	public Tile (Vector2 position, bool isBoundary, bool isVisible, bool blocksLight, bool isExplored, bool isLit)
 	{
 		_position = position;
 		_isBoundary = isBoundary;
 		_isVisible = isVisible;
 		_blocksLight = blocksLight;
 		_isExplored = isExplored;
+		_isLit = isLit;
 	}
 
 	public Vector2 position
@@ -57,21 +59,29 @@ public class Tile{
 		set { _isExplored = value; }
 	}
 
+	public bool isLit
+	{
+		get { return _isLit; }
+		set { _isLit = value; }
+	}
+
 	public void markTileAsLit()
 	{
-		gamePrefab.GetComponent<SpriteRenderer> ().color = Color.white;
+		gamePrefab.GetComponent<SpriteRenderer> ().color = new Color(200f,200f,200f);
+
+		_isLit = true;
 		_isExplored = true;
 	}
 
 	public void markTileAsUnexplored()
 	{
 		gamePrefab.GetComponent<SpriteRenderer> ().color = Color.black;
+		_isLit = false;
 		_isExplored = false;
 	}
 
 	public void markTileAsExplored()
 	{
 		gamePrefab.GetComponent<SpriteRenderer> ().color = Color.gray;
-		_isExplored = true;
 	}
 }

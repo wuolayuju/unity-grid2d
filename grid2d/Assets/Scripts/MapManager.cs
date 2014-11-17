@@ -53,7 +53,7 @@ public class MapManager : MonoBehaviour {
 			for (int c = 0; c < mapHeight; c++)
 			{
 				Vector3 pos = new Vector3(r, c);
-				Tile t = new Tile (pos, true, false, true, false);
+				Tile t = new Tile (pos, true, false, true, false, false);
 				row.Add(t);
 			}
 			GameController.map.Add(row);

@@ -6,9 +6,8 @@ using System.Collections.Generic;
 public class GameController : MonoBehaviour {
 
 	public TilePrefabsHolder prefabsHolder;
-
-	public GameObject tilePrefab;
-	public GameObject boundariePrefab;
+	
+	public int playerVisionRange = 4;
 	public GameObject userPlayerPrefab;
 	public GameObject AIPlayerPrefab;
 
@@ -36,7 +35,7 @@ public class GameController : MonoBehaviour {
 		MapManager.MAX_ROOMS = MAX_ROOMS;
 		MapManager.generateMap();
 
-		prefabsHolder = GameObject.Find("PrefabHolder").GetComponent<TilePrefabsHolder>();
+		//prefabsHolder = GameObject.Find("PrefabHolder").GetComponent<TilePrefabsHolder>();
 
 		//MapManager.generateMapBSP();
 		renderMap();
@@ -76,7 +75,19 @@ public class GameController : MonoBehaviour {
 
 	void FOV()
 	{
-		for (int i=0; i<360; i+=2)
+		for (int r = 0; r < mapHeight ; r++)
+		{
+			for (int c = 0; c < mapWidth ; c++)
+			{
+				Tile t = map[r][c];
+				if (t.isLit)
+					t.isLit = false;
+				if (t.isExplored && t.isVisible){
+					t.markTileAsExplored();
+				}
+			}
+		}
+		for (int i=0; i<360; i+=1)
 		{
 			float x = Mathf.Cos((float)i*0.01745f);
 			float y = Mathf.Sin((float)i*0.01745f);
@@ -87,12 +98,11 @@ public class GameController : MonoBehaviour {
 	void DoFOV(float x, float y)
 	{
 		float ox,oy;
-		ox = (float)players[0].gridPosition.x+1f;
-		oy = (float)players[0].gridPosition.y+1f;
-		for(int i=0;i<5;i++)
+		ox = (float)players[0].gridPosition.x+0.5f;
+		oy = (float)players[0].gridPosition.y+0.5f;
+		for(int i=0;i<playerVisionRange;i++)
 		{
 			map[(int)ox][(int)oy].markTileAsLit();
-			//map[(int)ox][(int)oy].gamePrefab.GetComponent<SpriteRenderer>().color = Color.white;
 			if(map[(int)ox][(int)oy].blocksLight==true)
 				return;
 			ox+=x;
@@ -246,8 +256,9 @@ public class GameController : MonoBehaviour {
 		for (int nr = 0; nr < MapManager.rooms.Count ; nr++)
 		{
 			Rectangle room = MapManager.rooms[nr];
-			pos = new Vector2 (UnityEngine.Random.Range (room.x1, room.x2),
-			                   UnityEngine.Random.Range (room.y1, room.y2));
+			pos = new Vector3 (UnityEngine.Random.Range (room.x1, room.x2),
+			                   UnityEngine.Random.Range (room.y1, room.y2),
+			                   -1f);
 			compPlayer = ((GameObject) Instantiate (AIPlayerPrefab, pos, Quaternion.identity)).GetComponent<AIPlayer>();
 			players.Add (compPlayer);
 		}
