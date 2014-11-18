@@ -26,11 +26,16 @@ public class GameController : MonoBehaviour {
 		FOV ();
 	}
 
+	void OnGUI ()
+	{
+		GUI.Label (new Rect (20, 20, 200, 40), "Number of rooms : "+MapManager.rooms.Count);
+	}
+
 	void FOV()
 	{
-		for (int r = 0; r < mapManager.mapHeight ; r++)
+		for (int r = 0; r < mapManager.mapWidth ; r++)
 		{
-			for (int c = 0; c < mapManager.mapWidth ; c++)
+			for (int c = 0; c < mapManager.mapHeight ; c++)
 			{
 				Tile t = MapManager.map[r][c];
 				if (t.isLit)

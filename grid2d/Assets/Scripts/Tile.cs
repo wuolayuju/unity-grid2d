@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class Tile{
 
@@ -13,6 +14,8 @@ public class Tile{
 	private bool _isExplored;
 	private bool _isLit;
 
+	private List<Entity> _objects;
+
 	public Tile (Vector2 position, bool isBoundary, bool isVisible, bool blocksLight, bool isExplored, bool isLit)
 	{
 		_position = position;
@@ -21,6 +24,7 @@ public class Tile{
 		_blocksLight = blocksLight;
 		_isExplored = isExplored;
 		_isLit = isLit;
+		_objects = new List<Entity> ();
 	}
 
 	public Vector2 position
@@ -63,6 +67,16 @@ public class Tile{
 	{
 		get { return _isLit; }
 		set { _isLit = value; }
+	}
+
+	public void addEntity (Entity e)
+	{
+		_objects.Add (e);
+	}
+
+	public List<Entity> getObjects ()
+	{
+		return _objects;
 	}
 
 	public void markTileAsLit()

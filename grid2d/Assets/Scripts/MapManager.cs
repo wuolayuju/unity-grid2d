@@ -73,9 +73,9 @@ public class MapManager : MonoBehaviour {
 				if (t.isBoundary)
 				{
 					bool hasTileNeighbours = false;
-					for (int br = Math.Max (0, r-1) ; br <= Math.Min(mapHeight - 1, r+1) ; br++)
+					for (int br = Math.Max (0, r-1) ; br <= Math.Min(mapWidth - 1, r+1) ; br++)
 					{
-						for (int bc = Math.Max(0, c-1) ; bc <= Math.Min(mapWidth -1, c+1) ; bc++)
+						for (int bc = Math.Max(0, c-1) ; bc <= Math.Min(mapHeight -1, c+1) ; bc++)
 						{
 							if (!map[br][bc].isBoundary)
 								hasTileNeighbours = true;
