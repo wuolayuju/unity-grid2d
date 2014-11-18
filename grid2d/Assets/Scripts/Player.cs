@@ -16,19 +16,19 @@ public class Player : MonoBehaviour
 	{
 		Vector2 pos = gridPosition;
 		//Debug.Log("*** Player position is (" + pos.x + "," + pos.y + ")");
-		Tile t = GameController.map[(int)pos.x][(int)pos.y];
+		Tile t = MapManager.map[(int)pos.x][(int)pos.y];
 		
 		if (dir == GameController.DIRECTION.DOWN)
-			t = GameController.map[(int)pos.x][(int)pos.y - 1];
+			t = MapManager.map[(int)pos.x][(int)pos.y - 1];
 		
 		else if (dir == GameController.DIRECTION.UP)
-			t = GameController.map[(int)pos.x][(int)pos.y + 1];
+			t = MapManager.map[(int)pos.x][(int)pos.y + 1];
 		
 		else if (dir == GameController.DIRECTION.RIGHT)
-			t = GameController.map[(int)pos.x + 1][(int)pos.y];
+			t = MapManager.map[(int)pos.x + 1][(int)pos.y];
 		
 		else if (dir == GameController.DIRECTION.LEFT)
-			t = GameController.map[(int)pos.x - 1][(int)pos.y];
+			t = MapManager.map[(int)pos.x - 1][(int)pos.y];
 		
 		//Debug.Log("### Tile in destination position (" + t.position.x + "," + t.position.y + ")");
 		
