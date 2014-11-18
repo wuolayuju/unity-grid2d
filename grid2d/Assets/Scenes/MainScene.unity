@@ -237,8 +237,8 @@ Animator:
 --- !u!1 &136067234
 GameObject:
   m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
+  m_PrefabParentObject: {fileID: 100000, guid: 28dff2be493c7d141b09530645f3c4eb, type: 2}
+  m_PrefabInternal: {fileID: 245907284}
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 136067236}
@@ -253,19 +253,26 @@ GameObject:
 --- !u!114 &136067235
 MonoBehaviour:
   m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
+  m_PrefabParentObject: {fileID: 11400000, guid: 28dff2be493c7d141b09530645f3c4eb,
+    type: 2}
+  m_PrefabInternal: {fileID: 245907284}
   m_GameObject: {fileID: 136067234}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9719ece373b9d654a8c6a22c34af4451, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  prefabsHolder: {fileID: 1304063874}
+  mapWidth: 60
+  mapHeight: 60
+  ROOM_MAX_SIZE: 5
+  ROOM_MIN_SIZE: 3
+  MAX_ROOMS: 20
 --- !u!4 &136067236
 Transform:
   m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
+  m_PrefabParentObject: {fileID: 400000, guid: 28dff2be493c7d141b09530645f3c4eb, type: 2}
+  m_PrefabInternal: {fileID: 245907284}
   m_GameObject: {fileID: 136067234}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 1, z: 0}
@@ -378,6 +385,58 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   target: {fileID: 98691173}
   z_offset: -7
+--- !u!1001 &245907284
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 400000, guid: 28dff2be493c7d141b09530645f3c4eb, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 28dff2be493c7d141b09530645f3c4eb, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 28dff2be493c7d141b09530645f3c4eb, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 28dff2be493c7d141b09530645f3c4eb, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 28dff2be493c7d141b09530645f3c4eb, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 28dff2be493c7d141b09530645f3c4eb, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 28dff2be493c7d141b09530645f3c4eb, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 28dff2be493c7d141b09530645f3c4eb, type: 2}
+      propertyPath: m_RootOrder
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400000, guid: 28dff2be493c7d141b09530645f3c4eb, type: 2}
+      propertyPath: prefabsHolder
+      value: 
+      objectReference: {fileID: 1304063874}
+    - target: {fileID: 11400000, guid: 28dff2be493c7d141b09530645f3c4eb, type: 2}
+      propertyPath: ROOM_MAX_SIZE
+      value: 5
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: 28dff2be493c7d141b09530645f3c4eb, type: 2}
+  m_RootGameObject: {fileID: 136067234}
+  m_IsPrefabParent: 0
+  m_IsExploded: 1
 --- !u!1001 &649743351
 Prefab:
   m_ObjectHideFlags: 0
@@ -465,15 +524,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5fe6e94bd19bf52498e65cea40baefb4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  prefabsHolder: {fileID: 1304063874}
+  mapManager: {fileID: 136067235}
   playerVisionRange: 4
   userPlayerPrefab: {fileID: 100000, guid: f844edfeefa1dec4298973ccb94140f1, type: 2}
   AIPlayerPrefab: {fileID: 100000, guid: 6bb6568d32b83794288b8ee6273a132f, type: 2}
-  mapWidth: 60
-  mapHeight: 60
-  ROOM_MAX_SIZE: 10
-  ROOM_MIN_SIZE: 6
-  MAX_ROOMS: 40
 --- !u!4 &732359826
 Transform:
   m_ObjectHideFlags: 0

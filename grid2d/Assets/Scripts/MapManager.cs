@@ -23,7 +23,7 @@ public class MapManager : MonoBehaviour {
 
 	}
 
-	private static void createRoom (Rectangle room)
+	private void createRoom (Rectangle room)
 	{
 		for (int r = room.x1; r < room.x2; r++) {
 			for (int c = room.y1; c < room.y2 ; c++){
@@ -33,7 +33,7 @@ public class MapManager : MonoBehaviour {
 		}
 	}
 	
-	private static void createHorizontalTunnel (int x1, int x2, int y)
+	private void createHorizontalTunnel (int x1, int x2, int y)
 	{
 		for (int i = Math.Min(x1, x2); i < Math.Max(x1, x2); i++){
 			map[i][y].isBoundary = false;
@@ -41,7 +41,7 @@ public class MapManager : MonoBehaviour {
 		}
 	}
 	
-	private static void createVerticalTunnel (int y1, int y2, int x)
+	private void createVerticalTunnel (int y1, int y2, int x)
 	{
 		for (int i = Math.Min(y1, y2); i < Math.Max(y1, y2); i++){
 			map[x][i].isBoundary = false;
@@ -49,7 +49,7 @@ public class MapManager : MonoBehaviour {
 		}
 	}
 
-	private static void fillMap ()
+	private void fillMap ()
 	{
 		for (int r = 0; r < mapWidth; r++)
 		{
@@ -64,7 +64,7 @@ public class MapManager : MonoBehaviour {
 		}
 	}
 
-	public static void markTilesVisible ()
+	public void markTilesVisible ()
 	{
 		for (int r = 0; r < mapWidth ; r++){
 			List<Tile> row = map[r];
@@ -92,7 +92,7 @@ public class MapManager : MonoBehaviour {
 		}
 	}
 
-	public static void generateMap ()
+	public void generateMap ()
 	{
 		fillMap();
 
@@ -150,7 +150,7 @@ public class MapManager : MonoBehaviour {
 		}
 	}
 
-	public static void generateMap2 ()
+	public void generateMap2 ()
 	{
 		fillMap();
 		
@@ -212,14 +212,14 @@ public class MapManager : MonoBehaviour {
 		
 	}
 
-	public static void generateMapBSP ()
+	public void generateMapBSP ()
 	{
 		fillMap();
 		Rectangle room = new Rectangle(1, 1, mapWidth-1, mapHeight-1);
 		divide(room);
 	}
 
-	private static void divide (Rectangle r)
+	private void divide (Rectangle r)
 	{
 		int r_width = r.x2 - r.x1;
 		int r_height = r.y2 - r.y1;
@@ -266,7 +266,7 @@ public class MapManager : MonoBehaviour {
 		}
 	}
 
-	private static void createRandomRoomInside (Rectangle r)
+	private void createRandomRoomInside (Rectangle r)
 	{
 		int new_x = UnityEngine.Random.Range(r.x1 + 1, r.x2 -1);
 		int new_y = UnityEngine.Random.Range(r.y1 + 1, r.y2 -1);
@@ -278,13 +278,13 @@ public class MapManager : MonoBehaviour {
 		createRoom(new Rectangle(new_x, new_y, new_width, new_height));
 	}
 
-	public static void renderMap ()
+	public void renderMap ()
 	{
 		markTilesVisible();
 		
-		for (int r = 0; r < MapManager.mapWidth ; r++){
+		for (int r = 0; r < mapWidth ; r++){
 			List<Tile> row = map[r];
-			for (int c = 0; c < MapManager.mapHeight ; c++){
+			for (int c = 0; c < mapHeight ; c++){
 				Tile t = row[c];
 				if (t.isVisible)
 				{
