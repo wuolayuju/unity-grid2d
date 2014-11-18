@@ -16,6 +16,10 @@ public class Tile{
 
 	private List<Entity> _objects;
 
+	private Color COLOR_LIT = new Color32(215, 215, 215, 255);
+	private Color COLOR_EXPLORE = new Color32(80, 80, 80, 255);
+	private Color COLOR_UNEXPLORED = new Color32(0, 0, 0, 255);
+
 	public Tile (Vector2 position, bool isBoundary, bool isVisible, bool blocksLight, bool isExplored, bool isLit)
 	{
 		_position = position;
@@ -81,7 +85,7 @@ public class Tile{
 
 	public void markTileAsLit()
 	{
-		gamePrefab.GetComponent<SpriteRenderer> ().color = new Color(200f,200f,200f);
+		gamePrefab.GetComponent<SpriteRenderer> ().color = COLOR_LIT;
 
 		_isLit = true;
 		_isExplored = true;
@@ -89,13 +93,13 @@ public class Tile{
 
 	public void markTileAsUnexplored()
 	{
-		gamePrefab.GetComponent<SpriteRenderer> ().color = Color.black;
+		gamePrefab.GetComponent<SpriteRenderer> ().color = COLOR_UNEXPLORED;
 		_isLit = false;
 		_isExplored = false;
 	}
 
 	public void markTileAsExplored()
 	{
-		gamePrefab.GetComponent<SpriteRenderer> ().color = Color.gray;
+		gamePrefab.GetComponent<SpriteRenderer> ().color = COLOR_EXPLORE;
 	}
 }

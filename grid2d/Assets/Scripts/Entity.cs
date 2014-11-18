@@ -3,8 +3,10 @@ using System.Collections;
 
 public class Entity : MonoBehaviour {
 
-	public bool blocks;
 	public Vector2 gridPosition;
+	public GameObject prefab;
+	public string name;
+	public bool blocks;
 
 	// Use this for initialization
 	void Start () {
@@ -15,4 +17,6 @@ public class Entity : MonoBehaviour {
 	void Update () {
 	
 	}
+
+
 }

@@ -349,6 +349,8 @@ public class MapManager : MonoBehaviour {
 				return prefabsHolder.EWS_WALL;
 			else if (!map[x-1][y-1].isBoundary)
 				return prefabsHolder.SW_WALL;
+			else if (!map[x+1][y-1].isBoundary)
+				return prefabsHolder.SE_WALL;
 			else
 				return prefabsHolder.WE_WALL;
 		case 8:
@@ -360,6 +362,10 @@ public class MapManager : MonoBehaviour {
 		case 11:
 			if (!map[x+1][y+1].isBoundary && !map[x+1][y-1].isBoundary)
 				return prefabsHolder.NES_WALL;
+			else if (!map[x+1][y+1].isBoundary)
+				return prefabsHolder.NE_WALL;
+			else if (!map[x+1][y-1].isBoundary)
+				return prefabsHolder.SE_WALL;
 			else
 				return prefabsHolder.NS_WALL;
 		case 12:
