@@ -23,49 +23,12 @@ public class GameController : MonoBehaviour {
 		mapManager.generateMap();
 		mapManager.renderMap();
 		generatePlayers();
-		FOV ();
+		mapManager.FOV (players[0].gridPosition, playerVisionRange);
 	}
 
 	void OnGUI ()
 	{
 		GUI.Label (new Rect (20, 20, 200, 40), "Number of rooms : "+MapManager.rooms.Count);
-	}
-
-	void FOV()
-	{
-		for (int r = 0; r < mapManager.mapWidth ; r++)
-		{
-			for (int c = 0; c < mapManager.mapHeight ; c++)
-			{
-				Tile t = MapManager.map[r][c];
-				if (t.isLit)
-					t.isLit = false;
-				if (t.isExplored && t.isVisible){
-					t.markTileAsExplored();
-				}
-			}
-		}
-		for (int i=0; i<360; i+=2)
-		{
-			float x = Mathf.Cos((float)i*0.01745f);
-			float y = Mathf.Sin((float)i*0.01745f);
-			DoFOV(x,y);
-		}
-	}
-
-	void DoFOV(float x, float y)
-	{
-		float ox,oy;
-		ox = (float)players[0].gridPosition.x+0.5f;
-		oy = (float)players[0].gridPosition.y+0.5f;
-		for(int i=0;i<playerVisionRange;i++)
-		{
-			MapManager.map[(int)ox][(int)oy].markTileAsLit();
-			if(MapManager.map[(int)ox][(int)oy].blocksLight==true)
-				return;
-			ox+=x;
-			oy+=y;
-		}
 	}
 	
 	private void generatePlayers ()
@@ -103,7 +66,7 @@ public class GameController : MonoBehaviour {
 			else {
 				//Debug.Log("**** POSSIBLE MOVE ****");
 				players[0].MoveToDestPosition();
-				FOV();
+				mapManager.FOV (players[0].gridPosition, playerVisionRange);
 			}
 		}
 

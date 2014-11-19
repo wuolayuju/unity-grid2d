@@ -16,9 +16,11 @@ public class Tile{
 
 	private List<Entity> _objects;
 
-	private Color COLOR_LIT = new Color32(215, 215, 215, 255);
-	private Color COLOR_EXPLORE = new Color32(80, 80, 80, 255);
-	private Color COLOR_UNEXPLORED = new Color32(0, 0, 0, 255);
+	private Color32 COLOR_LIT = new Color32(215, 215, 215, 255);
+	private Color32 COLOR_EXPLORE = new Color32(80, 80, 80, 255);
+	private Color32 COLOR_UNEXPLORED = new Color32(0, 0, 0, 255);
+
+	private Gradient gradient = new Gradient();
 
 	public Tile (Vector2 position, bool isBoundary, bool isVisible, bool blocksLight, bool isExplored, bool isLit)
 	{
@@ -29,6 +31,14 @@ public class Tile{
 		_isExplored = isExplored;
 		_isLit = isLit;
 		_objects = new List<Entity> ();
+
+		GradientColorKey[] gck = new GradientColorKey[2];
+		gck [0].color = COLOR_LIT; gck [0].time = 0.0f;
+		gck [1].color = new Color32(100, 100, 100, 255); gck [1].time = 1.0f;
+		GradientAlphaKey[] gak = new GradientAlphaKey[2];
+		gak [0].alpha = 1.0f; gak [0].time = 0.0f;
+		gak [1].alpha = 1.0f; gak [1].time = 1.0f;
+		gradient.SetKeys (gck, gak);
 	}
 
 	public Vector2 position
@@ -83,9 +93,9 @@ public class Tile{
 		return _objects;
 	}
 
-	public void markTileAsLit()
+	public void markTileAsLit(float gradientValue)
 	{
-		gamePrefab.GetComponent<SpriteRenderer> ().color = COLOR_LIT;
+		gamePrefab.GetComponent<SpriteRenderer> ().color = (Color32) gradient.Evaluate(gradientValue);
 
 		_isLit = true;
 		_isExplored = true;

@@ -308,6 +308,43 @@ public class MapManager : MonoBehaviour {
 		}
 	}
 
+	public void FOV(Vector2 point, int visionRange)
+	{
+		for (int r = 0; r < mapWidth ; r++)
+		{
+			for (int c = 0; c < mapHeight ; c++)
+			{
+				Tile t = MapManager.map[r][c];
+				if (t.isLit)
+					t.isLit = false;
+				if (t.isExplored && t.isVisible){
+					t.markTileAsExplored();
+				}
+			}
+		}
+		for (int i=0; i<360; i+=4)
+		{
+			float x = Mathf.Cos((float)i*0.01745f);
+			float y = Mathf.Sin((float)i*0.01745f);
+			DoFOV(x,y, point, visionRange);
+		}
+	}
+	
+	public void DoFOV(float x, float y, Vector2 point, int visionRange)
+	{
+		float ox,oy;
+		ox = (float)point.x+0.5f;
+		oy = (float)point.y+0.5f;
+		for(int i=0;i<visionRange;i++)
+		{
+			MapManager.map[(int)ox][(int)oy].markTileAsLit((float)i/visionRange);
+			if(MapManager.map[(int)ox][(int)oy].blocksLight==true)
+				return;
+			ox+=x;
+			oy+=y;
+		}
+	}
+
 	private GameObject determinePrefabWall (int x, int y)
 	{
 		int score = 0;
