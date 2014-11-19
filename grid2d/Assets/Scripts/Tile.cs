@@ -8,7 +8,6 @@ public class Tile{
 
 	private Vector2 _position;
 	private bool _isBoundary;
-	private bool _isOccupied;
 	private bool _isVisible;
 	private bool _blocksLight;
 	private bool _isExplored;
@@ -21,6 +20,8 @@ public class Tile{
 	private Color32 COLOR_UNEXPLORED = new Color32(0, 0, 0, 255);
 
 	private Gradient gradient = new Gradient();
+
+	private List<Entity> entitiesInTile = new List<Entity>();
 
 	public Tile (Vector2 position, bool isBoundary, bool isVisible, bool blocksLight, bool isExplored, bool isLit)
 	{
@@ -51,12 +52,6 @@ public class Tile{
 	{
 		get { return _isBoundary; }
 		set { _isBoundary = value; }
-	}
-
-	public bool isOccupied
-	{
-		get { return _isOccupied; }
-		set { _isOccupied = value; }
 	}
 
 	public bool isVisible
@@ -91,6 +86,20 @@ public class Tile{
 	public List<Entity> getObjects ()
 	{
 		return _objects;
+	}
+
+	public bool isBlocked()
+	{
+		if (_isBoundary)
+			return true;
+
+		foreach(Entity e in entitiesInTile)
+		{
+			if (e.blocks)
+				return true;
+		}
+
+		return false;
 	}
 
 	public void markTileAsLit(float gradientValue)

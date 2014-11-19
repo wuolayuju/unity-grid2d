@@ -18,5 +18,14 @@ public class Entity : MonoBehaviour {
 	
 	}
 
+	public void move(Tile t)
+	{
+		if (!t.isBlocked)
+		{
+			transform.position = t.position;
+			gridPosition = t.position;
+		}
+	}
 
+	public virtual void takeTurn();
 }
