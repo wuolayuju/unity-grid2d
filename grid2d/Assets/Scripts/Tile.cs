@@ -17,7 +17,7 @@ public class Tile{
 	private List<Entity> _objects;
 
 	private Color32 COLOR_LIT = new Color32(215, 215, 215, 255);
-	private Color32 COLOR_EXPLORE = new Color32(80, 80, 80, 255);
+	private Color32 COLOR_EXPLORED = new Color32(80, 80, 80, 255);
 	private Color32 COLOR_UNEXPLORED = new Color32(0, 0, 0, 255);
 
 	private Gradient gradient = new Gradient();
@@ -34,7 +34,7 @@ public class Tile{
 
 		GradientColorKey[] gck = new GradientColorKey[2];
 		gck [0].color = COLOR_LIT; gck [0].time = 0.0f;
-		gck [1].color = new Color32(100, 100, 100, 255); gck [1].time = 1.0f;
+		gck [1].color = COLOR_EXPLORED; gck [1].time = 1.0f;
 		GradientAlphaKey[] gak = new GradientAlphaKey[2];
 		gak [0].alpha = 1.0f; gak [0].time = 0.0f;
 		gak [1].alpha = 1.0f; gak [1].time = 1.0f;
@@ -110,6 +110,6 @@ public class Tile{
 
 	public void markTileAsExplored()
 	{
-		gamePrefab.GetComponent<SpriteRenderer> ().color = COLOR_EXPLORE;
+		gamePrefab.GetComponent<SpriteRenderer> ().color = COLOR_EXPLORED;
 	}
 }

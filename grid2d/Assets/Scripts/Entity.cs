@@ -8,6 +8,16 @@ public class Entity : MonoBehaviour {
 	public string name;
 	public bool blocks;
 
+	public void moveTo(Vector2 dPos)
+	{
+		//if (isMovePossible
+	}
+	
+	public bool isMovePossible (GameController.DIRECTION dir)
+	{
+
+	}
+
 	// Use this for initialization
 	void Start () {
 	

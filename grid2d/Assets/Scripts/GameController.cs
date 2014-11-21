@@ -13,6 +13,8 @@ public class GameController : MonoBehaviour {
 	
 	private List<Player> players = new List<Player>();
 
+	public static List<Entity> objects = new List<Entity> ();
+
 	public static Vector2 playerStartPosition;
 
 	public enum DIRECTION { UP, DOWN, LEFT, RIGHT, NONE };
