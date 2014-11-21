@@ -534,7 +534,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mapManager: {fileID: 136067235}
   playerVisionRange: 5
-  userPlayerPrefab: {fileID: 100000, guid: f844edfeefa1dec4298973ccb94140f1, type: 2}
+  userPlayerPrefab: {fileID: 0}
   AIPlayerPrefab: {fileID: 100000, guid: 6bb6568d32b83794288b8ee6273a132f, type: 2}
 --- !u!4 &732359826
 Transform:
@@ -676,7 +676,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3138cd5ab40694a43be1280a0fc9e17c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spriteMaterial: {fileID: 10754, guid: 0000000000000000e000000000000000, type: 0}
+  spriteMaterial: {fileID: 10754, guid: 0000000000000000e000000000000000, type: 3}
   N_WALL: {fileID: 100000, guid: f4a073e417f8ee74388fb5c6230121e6, type: 2}
   NW_WALL: {fileID: 100000, guid: 14ca0f6da3b61ec408b092201674334f, type: 2}
   NE_WALL: {fileID: 100000, guid: 71b7a6ddb6ee34f40ba45d4c27e35679, type: 2}

@@ -1,12 +1,20 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Entity : MonoBehaviour {
+public abstract class Entity{
 
 	public Vector2 gridPosition;
 	public GameObject prefab;
 	public string name;
 	public bool blocks;
+
+	public Entity (Vector2 gridPosition, GameObject prefab, string name, bool blocks)
+	{
+		this.gridPosition = gridPosition;
+		this.prefab = prefab;
+		this.name = name;
+		this.blocks = blocks;
+	}
 
 	public void moveTo(Vector2 dPos)
 	{
@@ -15,27 +23,17 @@ public class Entity : MonoBehaviour {
 	
 	public bool isMovePossible (GameController.DIRECTION dir)
 	{
-
+		return true;
 	}
 
-	// Use this for initialization
-	void Start () {
-	
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	
-	}
-
-	public void move(Tile t)
+	public void move(Vector2 dest)
 	{
-		if (!t.isBlocked)
+		if (!MapManager.map[(int)dest.x][(int)dest.y].isBlocked())
 		{
-			transform.position = t.position;
-			gridPosition = t.position;
+			prefab.transform.position = dest;
+			gridPosition = dest;
 		}
 	}
 
-	public virtual void takeTurn();
+	public abstract void takeTurn();
 }
