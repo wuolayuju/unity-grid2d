@@ -19,6 +19,7 @@ public class GameController : MonoBehaviour {
 
 	public enum DIRECTION { UP, DOWN, LEFT, RIGHT, NONE };
 
+
 	// Use this for initialization
 	void Start ()
 	{
