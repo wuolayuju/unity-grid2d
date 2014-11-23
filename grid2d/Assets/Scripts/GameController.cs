@@ -21,6 +21,8 @@ public class GameController : MonoBehaviour {
 
 	public enum DIRECTION { UP, DOWN, LEFT, RIGHT, NONE };
 
+	public bool takingTurn = false;
+
 	//public static keyPressed = false;
 
 
@@ -49,25 +51,21 @@ public class GameController : MonoBehaviour {
 		h.name = "hero";
 		h.blocks = true;
 		objects.Add(h);
+		MapManager.map[(int)playerStartPosition.x][(int)playerStartPosition.y].addEntity(h);
 
-//		Vector2 pos = playerStartPosition;
-//
-//		UserPlayer humanPlayer;
-//		humanPlayer = GameObject.Find ("userPlayer").GetComponent<UserPlayer>();
-//		humanPlayer.transform.position = pos;
-//		humanPlayer.gridPosition = pos;
-//		players.Add (humanPlayer);
-//
-//		AIPlayer compPlayer;
-//		for (int nr = 0; nr < MapManager.rooms.Count ; nr++)
-//		{
-//			Rectangle room = MapManager.rooms[nr];
-//			pos = new Vector3 (UnityEngine.Random.Range (room.x1, room.x2),
-//			                   UnityEngine.Random.Range (room.y1, room.y2),
-//			                   -1f);
-//			compPlayer = ((GameObject) Instantiate (AIPlayerPrefab, pos, Quaternion.identity)).GetComponent<AIPlayer>();
-//			players.Add (compPlayer);
-//		}
+		Enemy compPlayer;
+		for (int nr = 0; nr < MapManager.rooms.Count ; nr++)
+		{
+			Rectangle room = MapManager.rooms[nr];
+			Vector2 pos = new Vector2 (UnityEngine.Random.Range (room.x1, room.x2),
+			                   UnityEngine.Random.Range (room.y1, room.y2));
+			compPlayer = ((GameObject) Instantiate (AIPlayerPrefab, pos, Quaternion.identity)).GetComponent<Enemy>();
+			compPlayer.gridPosition = pos;
+			compPlayer.name = "Troll #"+nr;
+			compPlayer.blocks = true;
+			objects.Add (compPlayer);
+			MapManager.map[(int)pos.x][(int)pos.y].addEntity(compPlayer);
+		}
 	}
 
 
@@ -78,21 +76,34 @@ public class GameController : MonoBehaviour {
 		{
 			if (Input.GetButtonDown("up")){
 				objects[0].move(Vector2.up);
+				takingTurn = true;
 			}
 			else if (Input.GetButtonDown("down"))
 			{
 				objects[0].move(-Vector2.up);
+				takingTurn = true;
 			}
 			else if(Input.GetButtonDown("left"))
 			{
 				objects[0].move(-Vector2.right);
+				takingTurn = true;
 			}
 			else if (Input.GetButtonDown("right"))
 			{
 				objects[0].move(Vector2.right);
+				takingTurn = true;
 			}
 
 			mapManager.FOV (objects[0].gridPosition, playerVisionRange);
+
+//			if (takingTurn)
+//			{
+//				for (int i = 1; i < objects.Count ; i++)
+//				{
+//					objects[i].takeTurn();
+//				}
+//				takingTurn = false;
+//			}
 		}
 
 	}
