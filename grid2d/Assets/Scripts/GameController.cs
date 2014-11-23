@@ -4,7 +4,9 @@ using System.Collections;
 using System.Collections.Generic;
 
 public class GameController : MonoBehaviour {
-	
+
+	public Camera cam;
+
 	public MapManager mapManager;
 
 	public int playerVisionRange = 4;
@@ -19,6 +21,8 @@ public class GameController : MonoBehaviour {
 
 	public enum DIRECTION { UP, DOWN, LEFT, RIGHT, NONE };
 
+	//public static keyPressed = false;
+
 
 	// Use this for initialization
 	void Start ()
@@ -26,7 +30,8 @@ public class GameController : MonoBehaviour {
 		mapManager.generateMap();
 		mapManager.renderMap();
 		generatePlayers();
-		mapManager.FOV (players[0].gridPosition, playerVisionRange);
+		mapManager.FOV (objects[0].gridPosition, playerVisionRange);
+		cam.GetComponent<CameraController>().LookAtPlayer();
 	}
 
 	void OnGUI ()
@@ -37,7 +42,13 @@ public class GameController : MonoBehaviour {
 	private void generatePlayers ()
 	{
 
-		objects.Add(
+		//Hero h = new Hero(playerStartPosition, userPlayerPrefab, "hero");
+		Hero h;
+		h = ((GameObject)Instantiate(userPlayerPrefab, playerStartPosition, Quaternion.identity)).GetComponent<Hero>();
+		h.gridPosition = playerStartPosition;
+		h.name = "hero";
+		h.blocks = true;
+		objects.Add(h);
 
 //		Vector2 pos = playerStartPosition;
 //
@@ -63,17 +74,25 @@ public class GameController : MonoBehaviour {
 	// Update is called once per frame
 	void Update ()
 	{
-		DIRECTION dir =  checkForInput();
-		if (dir != DIRECTION.NONE)
+		if (!objects[0].isMoving)
 		{
-			if (!players[0].isMovePossible(dir)){
-				//Debug.Log("**** NOT A POSSIBLE MOVE ****");
+			if (Input.GetButtonDown("up")){
+				objects[0].move(Vector2.up);
 			}
-			else {
-				//Debug.Log("**** POSSIBLE MOVE ****");
-				players[0].MoveToDestPosition();
-				mapManager.FOV (players[0].gridPosition, playerVisionRange);
+			else if (Input.GetButtonDown("down"))
+			{
+				objects[0].move(-Vector2.up);
 			}
+			else if(Input.GetButtonDown("left"))
+			{
+				objects[0].move(-Vector2.right);
+			}
+			else if (Input.GetButtonDown("right"))
+			{
+				objects[0].move(Vector2.right);
+			}
+
+			mapManager.FOV (objects[0].gridPosition, playerVisionRange);
 		}
 
 	}

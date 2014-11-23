@@ -322,7 +322,7 @@ public class MapManager : MonoBehaviour {
 				}
 			}
 		}
-		for (int i=0; i<360; i+=4)
+		for (int i=0; i<360; i+=2)
 		{
 			float x = Mathf.Cos((float)i*0.01745f);
 			float y = Mathf.Sin((float)i*0.01745f);

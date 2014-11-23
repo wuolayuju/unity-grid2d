@@ -15,7 +15,7 @@ public class Tile{
 
 	private List<Entity> _objects;
 
-	private Color32 COLOR_LIT = new Color32(215, 215, 215, 255);
+	private Color32 COLOR_LIT = new Color32(255, 255, 255, 255);
 	private Color32 COLOR_EXPLORED = new Color32(80, 80, 80, 255);
 	private Color32 COLOR_UNEXPLORED = new Color32(0, 0, 0, 255);
 

@@ -13,7 +13,14 @@ public class CameraController : MonoBehaviour {
 	{
 		offset = new Vector3(0f, 0f, z_offset);
 	}
-	
+
+	public void LookAtPlayer()
+	{
+		target = GameObject.FindWithTag("Player");
+		if (target == null)
+			Debug.Log("TARGET NULL");
+	}
+
 	// Update is called once per frame
 	void LateUpdate ()
 	{
