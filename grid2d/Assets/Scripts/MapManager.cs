@@ -335,7 +335,7 @@ public class MapManager : MonoBehaviour {
 		float ox,oy;
 		ox = (float)point.x+0.5f;
 		oy = (float)point.y+0.5f;
-		for(int i=0;i<visionRange;i++)
+		for(int i=1;i<visionRange;i++)
 		{
 			MapManager.map[(int)ox][(int)oy].markTileAsLit((float)i/visionRange);
 			if(MapManager.map[(int)ox][(int)oy].blocksLight==true)

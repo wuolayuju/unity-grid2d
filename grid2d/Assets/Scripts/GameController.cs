@@ -21,7 +21,7 @@ public class GameController : MonoBehaviour {
 
 	public enum DIRECTION { UP, DOWN, LEFT, RIGHT, NONE };
 
-	public bool takingTurn = false;
+	public bool turnTaken = false;
 
 	//public static keyPressed = false;
 
@@ -30,8 +30,8 @@ public class GameController : MonoBehaviour {
 	void Start ()
 	{
 		mapManager.generateMap();
-		mapManager.renderMap();
 		generatePlayers();
+		mapManager.renderMap();
 		mapManager.FOV (objects[0].gridPosition, playerVisionRange);
 		cam.GetComponent<CameraController>().LookAtPlayer();
 	}
@@ -51,10 +51,10 @@ public class GameController : MonoBehaviour {
 		h.name = "hero";
 		h.blocks = true;
 		objects.Add(h);
-		MapManager.map[(int)playerStartPosition.x][(int)playerStartPosition.y].addEntity(h);
+		//MapManager.map[(int)playerStartPosition.x][(int)playerStartPosition.y].addEntity(h);
 
 		Enemy compPlayer;
-		for (int nr = 0; nr < MapManager.rooms.Count ; nr++)
+		for (int nr = 0; nr < MapManager.rooms.Count ; nr+=2)
 		{
 			Rectangle room = MapManager.rooms[nr];
 			Vector2 pos = new Vector2 (UnityEngine.Random.Range (room.x1, room.x2),
@@ -75,23 +75,23 @@ public class GameController : MonoBehaviour {
 		if (!objects[0].isMoving)
 		{
 			if (Input.GetButtonDown("up")){
-				objects[0].move(Vector2.up);
-				takingTurn = true;
+				objects[0].takeTurn(Vector2.up);
+				turnTaken = false;
 			}
 			else if (Input.GetButtonDown("down"))
 			{
-				objects[0].move(-Vector2.up);
-				takingTurn = true;
+				objects[0].takeTurn(-Vector2.up);
+				turnTaken = false;
 			}
 			else if(Input.GetButtonDown("left"))
 			{
-				objects[0].move(-Vector2.right);
-				takingTurn = true;
+				objects[0].takeTurn(-Vector2.right);
+				turnTaken = false;
 			}
 			else if (Input.GetButtonDown("right"))
 			{
-				objects[0].move(Vector2.right);
-				takingTurn = true;
+				objects[0].takeTurn(Vector2.right);
+				turnTaken = false;
 			}
 
 			mapManager.FOV (objects[0].gridPosition, playerVisionRange);
@@ -104,6 +104,14 @@ public class GameController : MonoBehaviour {
 //				}
 //				takingTurn = false;
 //			}
+		}
+		else if (!turnTaken)
+		{
+			for (int i = 1; i < objects.Count ; i++)
+			{
+				objects[i].takeTurn(Vector2.zero);
+			}
+			turnTaken = true;
 		}
 
 	}

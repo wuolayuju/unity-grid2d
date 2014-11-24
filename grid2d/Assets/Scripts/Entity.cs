@@ -23,16 +23,6 @@ public class Entity : MonoBehaviour{
 		this.blocks = blocks;
 	}
 
-	public void moveTo(Vector2 dPos)
-	{
-		//if (isMovePossible
-	}
-	
-	public bool isMovePossible (GameController.DIRECTION dir)
-	{
-		return true;
-	}
-
 	void Update()
 	{
 		if (isMoving)
@@ -57,10 +47,6 @@ public class Entity : MonoBehaviour{
 
 		if (!MapManager.map[(int)destination.x][(int)destination.y].isBlocked())
 		{
-			if (delta.x > 0 && !facingLeft)
-				Flip();
-			else if (delta.x < 0 && facingLeft)
-				Flip ();
 			start = transform.position;
 			currentLerpTime = 0f;
 			isMoving = true;
@@ -77,8 +63,11 @@ public class Entity : MonoBehaviour{
 		transform.localScale = theScale;
 	}
 
-	public virtual void takeTurn()
+	public virtual void takeTurn(Vector2 delta)
 	{
-
+		if (delta.x > 0 && !facingLeft)
+			Flip();
+		else if (delta.x < 0 && facingLeft)
+			Flip ();
 	}
 }

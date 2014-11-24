@@ -19,7 +19,7 @@ public class Enemy : Entity {
 	
 	}
 
-	public override void takeTurn()
+	public override void takeTurn(Vector2 delta)
 	{
 		Debug.Log(name+" threatens you!");
 	}

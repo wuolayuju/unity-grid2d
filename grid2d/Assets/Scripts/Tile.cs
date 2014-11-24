@@ -83,6 +83,11 @@ public class Tile{
 		_objects.Add (e);
 	}
 
+	public bool removeEntity (Entity e)
+	{
+		return _objects.Remove (e);
+	}
+
 	public List<Entity> getObjects ()
 	{
 		return _objects;
@@ -104,7 +109,17 @@ public class Tile{
 
 	public void markTileAsLit(float gradientValue)
 	{
-		gamePrefab.GetComponent<SpriteRenderer> ().color = (Color32) gradient.Evaluate(gradientValue);
+		Color32 colorValue = (Color32) gradient.Evaluate(gradientValue);
+
+		gamePrefab.GetComponent<SpriteRenderer> ().color = colorValue;
+
+		SpriteRenderer sr;
+		foreach (Entity e in _objects)
+		{
+			sr = e.GetComponent<SpriteRenderer>();
+			sr.color = COLOR_LIT;
+			sr.enabled = true;
+		}
 
 		_isLit = true;
 		_isExplored = true;
@@ -113,6 +128,12 @@ public class Tile{
 	public void markTileAsUnexplored()
 	{
 		gamePrefab.GetComponent<SpriteRenderer> ().color = COLOR_UNEXPLORED;
+
+		foreach (Entity e in _objects)
+		{
+			e.GetComponent<SpriteRenderer>().enabled = false;
+		}
+
 		_isLit = false;
 		_isExplored = false;
 	}
@@ -120,5 +141,10 @@ public class Tile{
 	public void markTileAsExplored()
 	{
 		gamePrefab.GetComponent<SpriteRenderer> ().color = COLOR_EXPLORED;
+
+		foreach (Entity e in _objects)
+		{
+			e.GetComponent<SpriteRenderer>().enabled = false;
+		}
 	}
 }
