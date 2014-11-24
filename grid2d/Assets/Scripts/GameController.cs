@@ -100,15 +100,6 @@ public class GameController : MonoBehaviour {
 				Debug.Log(info);
 
 			mapManager.FOV (objects[0].gridPosition, playerVisionRange);
-
-//			if (takingTurn)
-//			{
-//				for (int i = 1; i < objects.Count ; i++)
-//				{
-//					objects[i].takeTurn();
-//				}
-//				takingTurn = false;
-//			}
 		}
 		else if (!turnTaken)
 		{

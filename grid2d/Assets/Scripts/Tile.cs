@@ -13,8 +13,6 @@ public class Tile{
 	private bool _isExplored;
 	private bool _isLit;
 
-	private List<Entity> _objects;
-
 	private Color32 COLOR_LIT = new Color32(255, 255, 255, 255);
 	private Color32 COLOR_EXPLORED = new Color32(80, 80, 80, 255);
 	private Color32 COLOR_UNEXPLORED = new Color32(0, 0, 0, 255);
@@ -31,7 +29,6 @@ public class Tile{
 		_blocksLight = blocksLight;
 		_isExplored = isExplored;
 		_isLit = isLit;
-		_objects = new List<Entity> ();
 
 		GradientColorKey[] gck = new GradientColorKey[2];
 		gck [0].color = COLOR_LIT; gck [0].time = 0.0f;
@@ -80,17 +77,17 @@ public class Tile{
 
 	public void addEntity (Entity e)
 	{
-		_objects.Add (e);
+		entitiesInTile.Add (e);
 	}
 
 	public bool removeEntity (Entity e)
 	{
-		return _objects.Remove (e);
+		return entitiesInTile.Remove (e);
 	}
 
 	public List<Entity> getObjects ()
 	{
-		return _objects;
+		return entitiesInTile;
 	}
 
 	public bool isBlocked()
@@ -114,7 +111,7 @@ public class Tile{
 		gamePrefab.GetComponent<SpriteRenderer> ().color = colorValue;
 
 		SpriteRenderer sr;
-		foreach (Entity e in _objects)
+		foreach (Entity e in entitiesInTile)
 		{
 			sr = e.GetComponent<SpriteRenderer>();
 			sr.color = COLOR_LIT;
@@ -129,7 +126,7 @@ public class Tile{
 	{
 		gamePrefab.GetComponent<SpriteRenderer> ().color = COLOR_UNEXPLORED;
 
-		foreach (Entity e in _objects)
+		foreach (Entity e in entitiesInTile)
 		{
 			e.GetComponent<SpriteRenderer>().enabled = false;
 		}
@@ -142,7 +139,7 @@ public class Tile{
 	{
 		gamePrefab.GetComponent<SpriteRenderer> ().color = COLOR_EXPLORED;
 
-		foreach (Entity e in _objects)
+		foreach (Entity e in entitiesInTile)
 		{
 			e.GetComponent<SpriteRenderer>().enabled = false;
 		}
