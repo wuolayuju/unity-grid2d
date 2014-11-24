@@ -12,8 +12,6 @@ public class GameController : MonoBehaviour {
 	public int playerVisionRange = 4;
 	public GameObject userPlayerPrefab;
 	public GameObject AIPlayerPrefab;
-	
-	private List<Player> players = new List<Player>();
 
 	public static List<Entity> objects = new List<Entity> ();
 
@@ -50,6 +48,7 @@ public class GameController : MonoBehaviour {
 		h.gridPosition = playerStartPosition;
 		h.name = "hero";
 		h.blocks = true;
+		h.fighterComponent = new Fighter (hp:30, defense:2, power:5);
 		objects.Add(h);
 		//MapManager.map[(int)playerStartPosition.x][(int)playerStartPosition.y].addEntity(h);
 
@@ -63,6 +62,8 @@ public class GameController : MonoBehaviour {
 			compPlayer.gridPosition = pos;
 			compPlayer.name = "Troll #"+nr;
 			compPlayer.blocks = true;
+			compPlayer.fighterComponent = new Fighter(hp:10, defense:0, power:3);
+			compPlayer.ai = new BasicEnemy();
 			objects.Add (compPlayer);
 			MapManager.map[(int)pos.x][(int)pos.y].addEntity(compPlayer);
 		}
@@ -74,25 +75,29 @@ public class GameController : MonoBehaviour {
 	{
 		if (!objects[0].isMoving)
 		{
+			string info = null;
 			if (Input.GetButtonDown("up")){
-				objects[0].takeTurn(Vector2.up);
+				info = ((Hero)objects[0]).moveOrAttack(Vector2.up);
 				turnTaken = false;
 			}
 			else if (Input.GetButtonDown("down"))
 			{
-				objects[0].takeTurn(-Vector2.up);
+				info = ((Hero)objects[0]).moveOrAttack(-Vector2.up);
 				turnTaken = false;
 			}
 			else if(Input.GetButtonDown("left"))
 			{
-				objects[0].takeTurn(-Vector2.right);
+				info = ((Hero)objects[0]).moveOrAttack(-Vector2.right);
 				turnTaken = false;
 			}
 			else if (Input.GetButtonDown("right"))
 			{
-				objects[0].takeTurn(Vector2.right);
+				info = ((Hero)objects[0]).moveOrAttack(Vector2.right);
 				turnTaken = false;
 			}
+
+			if (info != null)
+				Debug.Log(info);
 
 			mapManager.FOV (objects[0].gridPosition, playerVisionRange);
 
@@ -109,7 +114,9 @@ public class GameController : MonoBehaviour {
 		{
 			for (int i = 1; i < objects.Count ; i++)
 			{
-				objects[i].takeTurn(Vector2.zero);
+				string info = objects[i].ai.takeTurn(objects[i]);
+				if (info != null)
+					Debug.Log(info);
 			}
 			turnTaken = true;
 		}

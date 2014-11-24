@@ -7,20 +7,23 @@ public class Entity : MonoBehaviour{
 	public new string name;
 	public bool blocks;
 
+	public Fighter fighterComponent;
+	public BasicEnemy ai;
+
 	public float lerpTime = 1.0f;
-	public float currentLerpTime;
-
+	private float currentLerpTime;
 	public bool isMoving = false;
-	public Vector2 start; 
-	public Vector2 destination;
+	private Vector2 start; 
+	private Vector2 destination;
+	private bool facingLeft = true;
 
-	public bool facingLeft = true;
-
-	public Entity (Vector2 gridPosition, string name, bool blocks)
+	public Entity (Vector2 gridPosition, string name, bool blocks, Fighter fighter = null, BasicEnemy ai = null)
 	{
 		this.gridPosition = gridPosition;
 		this.name = name;
 		this.blocks = blocks;
+		this.fighterComponent = fighter;
+		this.ai = ai;
 	}
 
 	void Update()
@@ -43,6 +46,11 @@ public class Entity : MonoBehaviour{
 
 	public void move(Vector2 delta)
 	{
+		if (delta.x > 0 && !facingLeft)
+			Flip();
+		else if (delta.x < 0 && facingLeft)
+			Flip ();
+
 		destination = gridPosition + delta;
 
 		if (!MapManager.map[(int)destination.x][(int)destination.y].isBlocked())
@@ -63,11 +71,26 @@ public class Entity : MonoBehaviour{
 		transform.localScale = theScale;
 	}
 
-	public virtual void takeTurn(Vector2 delta)
+	public float distanceTo(Entity e)
 	{
-		if (delta.x > 0 && !facingLeft)
-			Flip();
-		else if (delta.x < 0 && facingLeft)
-			Flip ();
+		return Vector2.Distance(gridPosition, e.gridPosition);
 	}
+
+	public void moveTowards(Entity e)
+	{
+		float dist = distanceTo (e);
+
+		int dx = (int)(e.gridPosition.x - gridPosition.x);
+		int dy = (int)(e.gridPosition.y - gridPosition.y);
+
+		dx = (int)(Mathf.RoundToInt (dx / dist));
+		dy = (int)(Mathf.RoundToInt (dy / dist));
+
+		move (new Vector2 (dx, dy));
+	}
+
+//	public virtual void takeTurn(Vector2 delta)
+//	{
+//
+//	}
 }
