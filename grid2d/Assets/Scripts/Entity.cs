@@ -79,12 +79,12 @@ public class Entity : MonoBehaviour{
 
 	public void moveTowards(Entity e)
 	{
-		float dist = distanceTo (e);
-
-		Debug.Log("Distance from "+name+" = "+dist);
-
 		int dx = (int)(e.gridPosition.x - gridPosition.x);
 		int dy = (int)(e.gridPosition.y - gridPosition.y);
+
+		float dist = distanceTo (e);
+		//dist = Mathf.Sqrt(dx^2 + dy^2);
+		Debug.Log("Distance from "+name+" = "+dist);
 
 		dx = (int)(Mathf.RoundToInt (dx / dist));
 		dy = (int)(Mathf.RoundToInt (dy / dist));
