@@ -299,6 +299,7 @@ public class MapManager : MonoBehaviour {
 						t.gamePrefab = (GameObject)	Instantiate(whichPrefabFloor, t.position, Quaternion.identity);
 					}
 					t.markTileAsUnexplored();
+					toggleObjectsInTile(r, c, false);
 				}
 				//				else
 				//				{
@@ -316,9 +317,15 @@ public class MapManager : MonoBehaviour {
 			{
 				Tile t = MapManager.map[r][c];
 				if (t.isLit)
+				{
 					t.isLit = false;
-				if (t.isExplored && t.isVisible){
+					toggleObjectsInTile(r, c, false);
+
+				}
+				if (t.isExplored && t.isVisible)
+				{
 					t.markTileAsExplored();
+					toggleObjectsInTile(r, c, false);
 				}
 			}
 		}
@@ -338,10 +345,25 @@ public class MapManager : MonoBehaviour {
 		for(int i=1;i<visionRange;i++)
 		{
 			MapManager.map[(int)ox][(int)oy].markTileAsLit((float)i/visionRange);
+
+			toggleObjectsInTile((int)ox, (int)oy, true);
+
 			if(MapManager.map[(int)ox][(int)oy].blocksLight==true)
 				return;
 			ox+=x;
 			oy+=y;
+		}
+	}
+
+	private void toggleObjectsInTile(int x, int y, bool isEnabled)
+	{
+		for(int i=1; i < GameController.objects.Count; i++)
+		{
+			Entity e = GameController.objects[i];
+			if (e.gridPosition.x == x && e.gridPosition.y == y)
+			{
+				e.GetComponent<SpriteRenderer>().enabled = isEnabled;
+			}
 		}
 	}
 

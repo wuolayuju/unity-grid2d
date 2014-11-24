@@ -14,12 +14,11 @@ public class Tile{
 	private bool _isLit;
 
 	private Color32 COLOR_LIT = new Color32(255, 255, 255, 255);
-	private Color32 COLOR_EXPLORED = new Color32(80, 80, 80, 255);
+	private Color32 COLOR_EXPLORED = new Color32(50, 50, 50, 255);
 	private Color32 COLOR_UNEXPLORED = new Color32(0, 0, 0, 255);
 
 	private Gradient gradient = new Gradient();
 
-	private List<Entity> entitiesInTile = new List<Entity>();
 
 	public Tile (Vector2 position, bool isBoundary, bool isVisible, bool blocksLight, bool isExplored, bool isLit)
 	{
@@ -75,48 +74,11 @@ public class Tile{
 		set { _isLit = value; }
 	}
 
-	public void addEntity (Entity e)
-	{
-		entitiesInTile.Add (e);
-	}
-
-	public bool removeEntity (Entity e)
-	{
-		return entitiesInTile.Remove (e);
-	}
-
-	public List<Entity> getObjects ()
-	{
-		return entitiesInTile;
-	}
-
-	public bool isBlocked()
-	{
-		if (_isBoundary)
-			return true;
-
-		foreach(Entity e in entitiesInTile)
-		{
-			if (e.blocks)
-				return true;
-		}
-
-		return false;
-	}
-
 	public void markTileAsLit(float gradientValue)
 	{
 		Color32 colorValue = (Color32) gradient.Evaluate(gradientValue);
 
 		gamePrefab.GetComponent<SpriteRenderer> ().color = colorValue;
-
-		SpriteRenderer sr;
-		foreach (Entity e in entitiesInTile)
-		{
-			sr = e.GetComponent<SpriteRenderer>();
-			sr.color = COLOR_LIT;
-			sr.enabled = true;
-		}
 
 		_isLit = true;
 		_isExplored = true;
@@ -125,11 +87,7 @@ public class Tile{
 	public void markTileAsUnexplored()
 	{
 		gamePrefab.GetComponent<SpriteRenderer> ().color = COLOR_UNEXPLORED;
-
-		foreach (Entity e in entitiesInTile)
-		{
-			e.GetComponent<SpriteRenderer>().enabled = false;
-		}
+	
 
 		_isLit = false;
 		_isExplored = false;
@@ -138,10 +96,5 @@ public class Tile{
 	public void markTileAsExplored()
 	{
 		gamePrefab.GetComponent<SpriteRenderer> ().color = COLOR_EXPLORED;
-
-		foreach (Entity e in entitiesInTile)
-		{
-			e.GetComponent<SpriteRenderer>().enabled = false;
-		}
 	}
 }

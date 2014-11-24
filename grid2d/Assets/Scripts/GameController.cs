@@ -65,7 +65,6 @@ public class GameController : MonoBehaviour {
 			compPlayer.fighterComponent = new Fighter(hp:10, defense:0, power:3);
 			compPlayer.ai = new BasicEnemy();
 			objects.Add (compPlayer);
-			MapManager.map[(int)pos.x][(int)pos.y].addEntity(compPlayer);
 		}
 	}
 
@@ -76,40 +75,45 @@ public class GameController : MonoBehaviour {
 		if (!objects[0].isMoving)
 		{
 			string info = null;
+			turnTaken = true;
 			if (Input.GetButtonDown("up")){
-				info = ((Hero)objects[0]).moveOrAttack(Vector2.up);
-				turnTaken = false;
+				info = ((Hero)objects[0]).moveOrAttack(0, 1);
 			}
 			else if (Input.GetButtonDown("down"))
 			{
-				info = ((Hero)objects[0]).moveOrAttack(-Vector2.up);
-				turnTaken = false;
+				info = ((Hero)objects[0]).moveOrAttack(0, -1);
 			}
 			else if(Input.GetButtonDown("left"))
 			{
-				info = ((Hero)objects[0]).moveOrAttack(-Vector2.right);
-				turnTaken = false;
+				info = ((Hero)objects[0]).moveOrAttack(-1, 0);
 			}
 			else if (Input.GetButtonDown("right"))
 			{
-				info = ((Hero)objects[0]).moveOrAttack(Vector2.right);
+				info = ((Hero)objects[0]).moveOrAttack(1, 0);
+			}
+			else
+			{
 				turnTaken = false;
 			}
 
 			if (info != null)
 				Debug.Log(info);
 
-			mapManager.FOV (objects[0].gridPosition, playerVisionRange);
-		}
-		else if (!turnTaken)
-		{
-			for (int i = 1; i < objects.Count ; i++)
+			// the player has moved
+			if (turnTaken)
 			{
-				string info = objects[i].ai.takeTurn(objects[i]);
-				if (info != null)
-					Debug.Log(info);
+				for (int i = 1; i < objects.Count ; i++)
+				{
+					if (objects[i].GetComponent<SpriteRenderer>().enabled)
+					{
+						info = objects[i].ai.takeTurn(objects[i]);
+						if (info != null)
+							Debug.Log(info);
+					}
+				}
 			}
-			turnTaken = true;
+
+			mapManager.FOV (objects[0].gridPosition, playerVisionRange);
 		}
 
 	}

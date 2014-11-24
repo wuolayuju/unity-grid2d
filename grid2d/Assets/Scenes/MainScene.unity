@@ -438,7 +438,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cam: {fileID: 218858997}
   mapManager: {fileID: 136067235}
-  playerVisionRange: 5
+  playerVisionRange: 7
   userPlayerPrefab: {fileID: 100000, guid: 59193760f9f65af4283f1f89e829e9ec, type: 2}
   AIPlayerPrefab: {fileID: 100000, guid: 6bb6568d32b83794288b8ee6273a132f, type: 2}
   turnTaken: 0

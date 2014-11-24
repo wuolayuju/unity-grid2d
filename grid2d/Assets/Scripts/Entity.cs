@@ -30,7 +30,6 @@ public class Entity : MonoBehaviour{
 	{
 		if (isMoving)
 		{
-			Debug.Log(name+" is moving.");
 			currentLerpTime += Time.deltaTime;
 			if (currentLerpTime > lerpTime) {
 				currentLerpTime = lerpTime;
@@ -45,23 +44,21 @@ public class Entity : MonoBehaviour{
 		}
 	}
 
-	public void move(Vector2 delta)
+	public void move(int dx, int dy)
 	{
-		if (delta.x > 0 && !facingLeft)
+		if (dx > 0 && !facingLeft)
 			Flip();
-		else if (delta.x < 0 && facingLeft)
+		else if (dx < 0 && facingLeft)
 			Flip ();
 
-		destination = gridPosition + delta;
+		destination = new Vector2(gridPosition.x + dx, gridPosition.y + dy);
 
-		if (!MapManager.map[(int)destination.x][(int)destination.y].isBlocked())
+		if (!MapManager.map[(int)destination.x][(int)destination.y].isBoundary)
 		{
 			start = transform.position;
 			currentLerpTime = 0f;
 			//transform.position = Vector2.Lerp(transform.position, destination, Time.deltaTime * 1.0f);
-			MapManager.map[(int)gridPosition.x][(int)gridPosition.y].removeEntity(this);
 			gridPosition = destination;
-			MapManager.map[(int)gridPosition.x][(int)gridPosition.y].addEntity(this);
 			isMoving = true;
 
 		}
@@ -91,13 +88,15 @@ public class Entity : MonoBehaviour{
 
 		dx = (int)(Mathf.RoundToInt (dx / dist));
 		dy = (int)(Mathf.RoundToInt (dy / dist));
-
-
+		
 //		Vector2 dest = new Vector2(transform.position.x + dx, transform.position.y + dy);
-//		transform.position = dest;
-//		gridPosition = dest;
+//		if (!MapManager.map[(int)dest.x][(int)dest.y].isBoundary)
+//		{
+//			transform.position = dest;
+//			gridPosition = dest;
+//		}
 
-		move (new Vector2 (dx, dy));
+		move (dx, dy);
 	}
 
 //	public virtual void takeTurn(Vector2 delta)

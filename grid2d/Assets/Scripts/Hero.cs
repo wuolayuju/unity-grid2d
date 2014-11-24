@@ -9,14 +9,14 @@ public class Hero : Entity {
 
 	}
 
-	public string moveOrAttack(Vector2 delta)
+	public string moveOrAttack(int dx, int dy)
 	{
-		Vector2 dest = gridPosition + delta;
+		Vector2 dest = new Vector2(gridPosition.x + dx, gridPosition.y + dy);
 		
 		Entity target = null;
-		foreach (Entity e in MapManager.map[(int)dest.x][(int)dest.y].getObjects())
+		foreach (Entity e in GameController.objects)
 		{
-			if (e.blocks)
+			if (e.gridPosition.x == dest.x && e.gridPosition.y == dest.y && e.blocks)
 				target = e;
 		}
 		
@@ -27,7 +27,7 @@ public class Hero : Entity {
 		}
 		else
 		{
-			move (delta);
+			move (dx, dy);
 		}
 
 		return null;
