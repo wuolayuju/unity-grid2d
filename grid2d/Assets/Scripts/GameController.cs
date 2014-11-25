@@ -23,6 +23,8 @@ public class GameController : MonoBehaviour {
 
 	public GUIStyle labelStyle;
 
+	public static PathFinder.Pathfinder pathFinder;
+
 	//public static keyPressed = false;
 	string info = "";
 
@@ -32,6 +34,7 @@ public class GameController : MonoBehaviour {
 		mapManager.generateMap();
 		generatePlayers();
 		mapManager.renderMap();
+		pathFinder = new PathFinder.Pathfinder(mapManager.mapWidth, mapManager.mapHeight);
 		mapManager.FOV (objects[0].gridPosition, playerVisionRange);
 		cam.GetComponent<CameraController>().LookAtPlayer();
 	}
@@ -47,9 +50,9 @@ public class GameController : MonoBehaviour {
 		Hero h;
 		h = ((GameObject)Instantiate(userPlayerPrefab, playerStartPosition, Quaternion.identity)).GetComponent<Hero>();
 		h.gridPosition = playerStartPosition;
-		h.name = "hero";
+		h.name = "Hero";
 		h.blocks = true;
-		h.fighterComponent = new Fighter (hp:30, defense:2, power:5);
+		h.fighterComponent = new Fighter (30, 2, 5);
 		objects.Add(h);
 
 		Enemy compPlayer;
@@ -69,7 +72,7 @@ public class GameController : MonoBehaviour {
 			compPlayer.gridPosition = pos;
 			compPlayer.name = "Troll #"+nr;
 			compPlayer.blocks = true;
-			compPlayer.fighterComponent = new Fighter(hp:10, defense:0, power:3);
+			compPlayer.fighterComponent = new Fighter(10, 0, 3);
 			compPlayer.ai = new BasicEnemy();
 			objects.Add (compPlayer);
 		}
@@ -101,7 +104,7 @@ public class GameController : MonoBehaviour {
 				if (objects[i].GetComponent<SpriteRenderer>().enabled &&
 				    objects[i].ai != null)
 				{
-					info += objects[i].ai.takeTurn(objects[i]);
+					info += objects[i].ai.takeTurn(objects[i], pathFinder);
 				}
 			}
 		}

@@ -54,7 +54,7 @@ public class Fighter
 				//GameController.objects.Remove(self);
 				self.blocks = false;
 				self.ai = null;
-				return "<color=green>" +self.name + "</color> is dead now.\n";
+				return "<color=green>" +self.name + "</color> has been defeated.\n";
 			}
 		}
 		return "";

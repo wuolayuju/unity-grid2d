@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class Entity : MonoBehaviour{
 
@@ -17,7 +18,7 @@ public class Entity : MonoBehaviour{
 	public Vector2 destination;
 	public bool facingLeft = true;
 
-	public Entity (Vector2 gridPosition, string name, bool blocks, Fighter fighter = null, BasicEnemy ai = null)
+	public Entity (Vector2 gridPosition, string name, bool blocks, Fighter fighter, BasicEnemy ai)
 	{
 		this.gridPosition = gridPosition;
 		this.name = name;
@@ -74,20 +75,22 @@ public class Entity : MonoBehaviour{
 
 	public float distanceTo(Entity e)
 	{
-		return Vector2.Distance(gridPosition, e.gridPosition);
+		return Mathf.Abs(gridPosition.x - e.gridPosition.x) +
+			Mathf.Abs(gridPosition.y - e.gridPosition.y);
 	}
 
-	public void moveTowards(Entity e)
+	public void moveTowards(Entity e, PathFinder.Pathfinder pf)
 	{
-		int dx = (int)(e.gridPosition.x - gridPosition.x);
-		int dy = (int)(e.gridPosition.y - gridPosition.y);
-
-		float dist = distanceTo (e);
-		//dist = Mathf.Sqrt(dx^2 + dy^2);
-		Debug.Log("Distance from "+name+" = "+dist);
-
-		dx = (int)(Mathf.RoundToInt (dx / dist));
-		dy = (int)(Mathf.RoundToInt (dy / dist));
+//		int dx = (int)(e.gridPosition.x - gridPosition.x);
+//		int dy = (int)(e.gridPosition.y - gridPosition.y);
+//
+//		float dist = distanceTo (e);
+//		//dist = Mathf.Sqrt(dx^2 + dy^2);
+//		//dist = Mathf.Abs(gridPosition.x - e.gridPosition.x) + Mathf.Abs(gridPosition.y - e.gridPosition.y);
+//		Debug.Log("Distance from "+name+" = "+dist);
+//
+//		dx = (int)(Mathf.RoundToInt (dx / dist));
+//		dy = (int)(Mathf.RoundToInt (dy / dist));
 		
 //		Vector2 dest = new Vector2(transform.position.x + dx, transform.position.y + dy);
 //		if (!MapManager.map[(int)dest.x][(int)dest.y].isBoundary)
@@ -95,6 +98,11 @@ public class Entity : MonoBehaviour{
 //			transform.position = dest;
 //			gridPosition = dest;
 //		}
+
+		List<Vector2> pathToPlayer = pf.FindPath(gridPosition, GameController.objects[0].gridPosition);
+
+		int dx = (int)(pathToPlayer[0].x - gridPosition.x);
+		int dy = (int)(pathToPlayer[0].y - gridPosition.y);
 
 		move (dx, dy);
 	}
