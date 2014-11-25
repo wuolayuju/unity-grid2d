@@ -101,10 +101,15 @@ public class GameController : MonoBehaviour {
 		{
 			for (int i = 1; i < objects.Count ; i++)
 			{
-				if (objects[i].GetComponent<SpriteRenderer>().enabled &&
-				    objects[i].ai != null)
+				if (objects[i].ai != null)
 				{
-					info += objects[i].ai.takeTurn(objects[i], pathFinder);
+					bool patroling;
+					if (objects[i].GetComponent<SpriteRenderer>().enabled)
+						patroling = false;
+					else
+						patroling = true;
+
+					info += objects[i].ai.takeTurn(objects[i], pathFinder, patroling);
 				}
 			}
 		}
