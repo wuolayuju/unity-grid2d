@@ -56,8 +56,14 @@ public class GameController : MonoBehaviour {
 		for (int nr = 0; nr < MapManager.rooms.Count ; nr+=2)
 		{
 			Rectangle room = MapManager.rooms[nr];
-			Vector2 pos = new Vector2 (UnityEngine.Random.Range (room.x1, room.x2),
-			                   UnityEngine.Random.Range (room.y1, room.y2));
+			Vector2 pos;
+
+			do
+			{
+				pos = new Vector2 (UnityEngine.Random.Range (room.x1, room.x2),
+			    			               UnityEngine.Random.Range (room.y1, room.y2));
+			}while(pos.x == h.gridPosition.x && pos.y == h.gridPosition.y);
+
 			compPlayer = ((GameObject) Instantiate (AIPlayerPrefab, pos, Quaternion.identity)).GetComponent<Enemy>();
 			compPlayer.gridPosition = pos;
 			compPlayer.name = "Troll #"+nr;
@@ -72,9 +78,37 @@ public class GameController : MonoBehaviour {
 	// Update is called once per frame
 	void Update ()
 	{
-		if (!objects[0].isMoving)
+		string info = null;
+
+		// check if there are any player moving
+		bool turnFinished = true;
+		for (int i = 1; i < objects.Count ; i++)
 		{
-			string info = null;
+			if (objects[i].isMoving)
+			{
+				turnFinished = false;
+				break;
+			}
+		}
+
+		// the user player has taken his turn and has stopped moving
+		// now the rest of the players take their turns
+		if (!objects [0].isMoving && turnTaken)
+		{
+			for (int i = 1; i < objects.Count ; i++)
+			{
+				if (objects[i].GetComponent<SpriteRenderer>().enabled)
+				{
+					info = objects[i].ai.takeTurn(objects[i]);
+					if (info != null)
+						Debug.Log(info);
+				}
+			}
+		}
+
+		// if all the other player has taken their turns, the user player can move
+		if (turnFinished && !objects[0].isMoving)
+		{
 			turnTaken = true;
 			if (Input.GetButtonDown("up")){
 				info = ((Hero)objects[0]).moveOrAttack(0, 1);
@@ -99,19 +133,19 @@ public class GameController : MonoBehaviour {
 			if (info != null)
 				Debug.Log(info);
 
-			// the player has moved
-			if (turnTaken)
-			{
-				for (int i = 1; i < objects.Count ; i++)
-				{
-					if (objects[i].GetComponent<SpriteRenderer>().enabled)
-					{
-						info = objects[i].ai.takeTurn(objects[i]);
-						if (info != null)
-							Debug.Log(info);
-					}
-				}
-			}
+//			// the player has moved
+//			if (turnTaken)
+//			{
+//				for (int i = 1; i < objects.Count ; i++)
+//				{
+//					if (objects[i].GetComponent<SpriteRenderer>().enabled)
+//					{
+//						info = objects[i].ai.takeTurn(objects[i]);
+//						if (info != null)
+//							Debug.Log(info);
+//					}
+//				}
+//			}
 
 			mapManager.FOV (objects[0].gridPosition, playerVisionRange);
 		}

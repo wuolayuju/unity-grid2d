@@ -40,6 +40,13 @@ public class Fighter
 		if (damage > 0)
 		{
 			hp -= damage;
+			self.GetComponent<Animator>().SetTrigger("takeDamage");
+			if (hp <= 0)
+			{
+				self.GetComponent<Animator>().SetTrigger("die");
+				//self.GetComponent<SpriteRenderer>().enabled = false;
+				GameController.objects.Remove(self);
+			}
 		}
 	}
 }

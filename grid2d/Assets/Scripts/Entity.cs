@@ -64,7 +64,7 @@ public class Entity : MonoBehaviour{
 		}
 	}
 
-	private void Flip()
+	protected void Flip()
 	{
 		facingLeft = !facingLeft;
 		Vector3 theScale = transform.localScale;

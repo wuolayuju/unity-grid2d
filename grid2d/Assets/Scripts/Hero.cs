@@ -11,6 +11,11 @@ public class Hero : Entity {
 
 	public string moveOrAttack(int dx, int dy)
 	{
+		if (dx > 0 && !facingLeft)
+			Flip();
+		else if (dx < 0 && facingLeft)
+			Flip ();
+
 		Vector2 dest = new Vector2(gridPosition.x + dx, gridPosition.y + dy);
 		
 		Entity target = null;

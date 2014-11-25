@@ -59,7 +59,7 @@ MonoBehaviour:
   gridPosition: {x: 0, y: 0}
   name: 
   blocks: 0
-  lerpTime: .200000003
+  lerpTime: .150000006
   currentLerpTime: 0
   isMoving: 0
   start: {x: 0, y: 0}

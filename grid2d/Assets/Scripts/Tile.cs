@@ -31,7 +31,7 @@ public class Tile{
 
 		GradientColorKey[] gck = new GradientColorKey[2];
 		gck [0].color = COLOR_LIT; gck [0].time = 0.0f;
-		gck [1].color = COLOR_EXPLORED; gck [1].time = 1.0f;
+		gck [1].color = new Color32(100, 100, 100, 255); gck [1].time = 1.0f;
 		GradientAlphaKey[] gak = new GradientAlphaKey[2];
 		gak [0].alpha = 1.0f; gak [0].time = 0.0f;
 		gak [1].alpha = 1.0f; gak [1].time = 1.0f;

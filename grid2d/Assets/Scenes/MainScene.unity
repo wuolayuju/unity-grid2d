@@ -249,7 +249,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 9
+  orthographic size: 6
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -274,7 +274,7 @@ Transform:
   - {fileID: 44564540}
   - {fileID: 1693311346}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 1
 --- !u!114 &218858999
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -398,7 +398,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 2000000, guid: 368d0576c0fa0974db0a399ec63449d9, type: 2}
       propertyPath: orthographic size
-      value: 9
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 10800000, guid: 368d0576c0fa0974db0a399ec63449d9, type: 2}
       propertyPath: m_Enabled
@@ -442,7 +442,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cam: {fileID: 218858997}
   mapManager: {fileID: 136067235}
-  playerVisionRange: 7
+  playerVisionRange: 6
   userPlayerPrefab: {fileID: 100000, guid: 59193760f9f65af4283f1f89e829e9ec, type: 2}
   AIPlayerPrefab: {fileID: 100000, guid: 6bb6568d32b83794288b8ee6273a132f, type: 2}
   turnTaken: 0
@@ -457,7 +457,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 0
 --- !u!1001 &1148052155
 Prefab:
   m_ObjectHideFlags: 0
@@ -495,7 +495,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 794db9d64a960fb4197156b1ab31815a, type: 2}
       propertyPath: m_RootOrder
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 11400000, guid: 794db9d64a960fb4197156b1ab31815a, type: 2}
       propertyPath: spriteMaterial
