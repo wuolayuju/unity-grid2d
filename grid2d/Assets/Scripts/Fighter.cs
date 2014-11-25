@@ -24,12 +24,18 @@ public class Fighter
 		string info = "";
 		if (damage > 0)
 		{
-			info = self.name + " attacks " + target.name + " for " + damage + " hit points.\n";
+			info = 
+				"<color=green>" +self.name + "</color> attacks " + 
+					"<color=green>" +target.name + "</color> " + 
+				"for <color=red>" + damage + "</color> hit points.\n";
 			info += target.fighterComponent.takeDamage(target, damage);
 		}
 		else
 		{
-			info = self.name + " attacks " + target.name + " but it has no effect.\n";
+			info = 
+				"<color=green>" +self.name + "</color> attacks " + 
+					"<color=green>" +target.name + "</color>" + 
+				" but it has no effect.\n";
 		}
 
 		return info;
@@ -48,7 +54,7 @@ public class Fighter
 				//GameController.objects.Remove(self);
 				self.blocks = false;
 				self.ai = null;
-				return self.name + " is dead now.\n";
+				return "<color=green>" +self.name + "</color> is dead now.\n";
 			}
 		}
 		return "";

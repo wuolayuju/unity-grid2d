@@ -38,6 +38,7 @@ public class GameController : MonoBehaviour {
 
 	void OnGUI ()
 	{
+		GUI.backgroundColor = Color.yellow;
 		GUI.Label (new Rect (20, 20, 200, 40), info, labelStyle);
 	}
 	
