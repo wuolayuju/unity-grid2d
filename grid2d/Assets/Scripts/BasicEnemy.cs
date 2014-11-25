@@ -10,6 +10,6 @@ public class BasicEnemy
 		else
 			return self.fighterComponent.attack(self, GameController.objects[0]);
 
-		return null;
+		return "";
 	}
 }

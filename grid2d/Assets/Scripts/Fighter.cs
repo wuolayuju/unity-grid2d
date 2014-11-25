@@ -24,18 +24,18 @@ public class Fighter
 		string info = "";
 		if (damage > 0)
 		{
-			info = self.name + " attacks " + target.name + " for " + damage + " hit points.";
-			target.fighterComponent.takeDamage(target, damage);
+			info = self.name + " attacks " + target.name + " for " + damage + " hit points.\n";
+			info += target.fighterComponent.takeDamage(target, damage);
 		}
 		else
 		{
-			info = self.name + " attacks " + target.name + " but it has no effect.";
+			info = self.name + " attacks " + target.name + " but it has no effect.\n";
 		}
 
 		return info;
 	}
 
-	public void takeDamage(Entity self, int damage)
+	public string takeDamage(Entity self, int damage)
 	{
 		if (damage > 0)
 		{
@@ -45,8 +45,12 @@ public class Fighter
 			{
 				self.GetComponent<Animator>().SetTrigger("die");
 				//self.GetComponent<SpriteRenderer>().enabled = false;
-				GameController.objects.Remove(self);
+				//GameController.objects.Remove(self);
+				self.blocks = false;
+				self.ai = null;
+				return self.name + " is dead now.\n";
 			}
 		}
+		return "";
 	}
 }

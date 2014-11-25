@@ -7,8 +7,8 @@ public class Entity : MonoBehaviour{
 	public new string name;
 	public bool blocks;
 
-	public Fighter fighterComponent;
-	public BasicEnemy ai;
+	public Fighter fighterComponent = null;
+	public BasicEnemy ai = null;
 
 	public float lerpTime = 1.0f;
 	public float currentLerpTime;

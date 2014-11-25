@@ -21,8 +21,10 @@ public class GameController : MonoBehaviour {
 
 	public bool turnTaken = false;
 
-	//public static keyPressed = false;
+	public GUIStyle labelStyle;
 
+	//public static keyPressed = false;
+	string info = "";
 
 	// Use this for initialization
 	void Start ()
@@ -36,13 +38,11 @@ public class GameController : MonoBehaviour {
 
 	void OnGUI ()
 	{
-		GUI.Label (new Rect (20, 20, 200, 40), "Number of rooms : "+MapManager.rooms.Count);
+		GUI.Label (new Rect (20, 20, 200, 40), info, labelStyle);
 	}
 	
 	private void generatePlayers ()
 	{
-
-		//Hero h = new Hero(playerStartPosition, userPlayerPrefab, "hero");
 		Hero h;
 		h = ((GameObject)Instantiate(userPlayerPrefab, playerStartPosition, Quaternion.identity)).GetComponent<Hero>();
 		h.gridPosition = playerStartPosition;
@@ -50,7 +50,6 @@ public class GameController : MonoBehaviour {
 		h.blocks = true;
 		h.fighterComponent = new Fighter (hp:30, defense:2, power:5);
 		objects.Add(h);
-		//MapManager.map[(int)playerStartPosition.x][(int)playerStartPosition.y].addEntity(h);
 
 		Enemy compPlayer;
 		for (int nr = 0; nr < MapManager.rooms.Count ; nr+=2)
@@ -58,6 +57,7 @@ public class GameController : MonoBehaviour {
 			Rectangle room = MapManager.rooms[nr];
 			Vector2 pos;
 
+			// repeat the randomisation of initial position until it does not matches the ayer's
 			do
 			{
 				pos = new Vector2 (UnityEngine.Random.Range (room.x1, room.x2),
@@ -78,7 +78,7 @@ public class GameController : MonoBehaviour {
 	// Update is called once per frame
 	void Update ()
 	{
-		string info = null;
+		//info = "";
 
 		// check if there are any player moving
 		bool turnFinished = true;
@@ -97,11 +97,10 @@ public class GameController : MonoBehaviour {
 		{
 			for (int i = 1; i < objects.Count ; i++)
 			{
-				if (objects[i].GetComponent<SpriteRenderer>().enabled)
+				if (objects[i].GetComponent<SpriteRenderer>().enabled &&
+				    objects[i].ai != null)
 				{
-					info = objects[i].ai.takeTurn(objects[i]);
-					if (info != null)
-						Debug.Log(info);
+					info += objects[i].ai.takeTurn(objects[i]);
 				}
 			}
 		}
@@ -111,41 +110,24 @@ public class GameController : MonoBehaviour {
 		{
 			turnTaken = true;
 			if (Input.GetButtonDown("up")){
-				info = ((Hero)objects[0]).moveOrAttack(0, 1);
+				info += ((Hero)objects[0]).moveOrAttack(0, 1);
 			}
 			else if (Input.GetButtonDown("down"))
 			{
-				info = ((Hero)objects[0]).moveOrAttack(0, -1);
+				info += ((Hero)objects[0]).moveOrAttack(0, -1);
 			}
 			else if(Input.GetButtonDown("left"))
 			{
-				info = ((Hero)objects[0]).moveOrAttack(-1, 0);
+				info += ((Hero)objects[0]).moveOrAttack(-1, 0);
 			}
 			else if (Input.GetButtonDown("right"))
 			{
-				info = ((Hero)objects[0]).moveOrAttack(1, 0);
+				info += ((Hero)objects[0]).moveOrAttack(1, 0);
 			}
 			else
 			{
 				turnTaken = false;
 			}
-
-			if (info != null)
-				Debug.Log(info);
-
-//			// the player has moved
-//			if (turnTaken)
-//			{
-//				for (int i = 1; i < objects.Count ; i++)
-//				{
-//					if (objects[i].GetComponent<SpriteRenderer>().enabled)
-//					{
-//						info = objects[i].ai.takeTurn(objects[i]);
-//						if (info != null)
-//							Debug.Log(info);
-//					}
-//				}
-//			}
 
 			mapManager.FOV (objects[0].gridPosition, playerVisionRange);
 		}
