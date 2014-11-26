@@ -450,7 +450,7 @@ MonoBehaviour:
   userPlayerPrefab: {fileID: 100000, guid: 59193760f9f65af4283f1f89e829e9ec, type: 2}
   AIPlayerPrefab: {fileID: 100000, guid: 6bb6568d32b83794288b8ee6273a132f, type: 2}
   turnTaken: 0
-  labelStyle:
+  guiStyle:
     m_Name: 
     m_Normal:
       m_Background: {fileID: 0}

@@ -21,7 +21,7 @@ public class GameController : MonoBehaviour {
 
 	public bool turnTaken = false;
 
-	public GUIStyle labelStyle;
+	public GUIStyle guiStyle;
 
 	string info = "";
 
@@ -39,7 +39,7 @@ public class GameController : MonoBehaviour {
 	void OnGUI ()
 	{
 		// Put something inside the ScrollView
-		GUI.Label (new Rect (Screen.width/4, Screen.height/4*3, Screen.width/2, Screen.height/4), info, labelStyle);
+		GUI.Label (new Rect (Screen.width/4, Screen.height/4*3, Screen.width/2, Screen.height/4), info, guiStyle);
 
 		// End the ScrollView
 //		GUI.EndScrollView();

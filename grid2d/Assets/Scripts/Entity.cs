@@ -18,8 +18,6 @@ public class Entity : MonoBehaviour{
 	public Vector2 destination;
 	public bool facingLeft = true;
 
-	private Texture2D healthBarTexture;
-
 	public Entity (Vector2 gridPosition, string name, bool blocks, Fighter fighter, BasicEnemy ai)
 	{
 		this.gridPosition = gridPosition;
@@ -31,29 +29,10 @@ public class Entity : MonoBehaviour{
 
 	void Start()
 	{
-		healthBarTexture = new Texture2D (5,5);
-		for (int i = 0 ; i < healthBarTexture.height; i++)
-		{
-			for (int j = 0; j < healthBarTexture.width; j++)
-			{
-				healthBarTexture.SetPixel(i, j, Color.green);
-			}
-		}
-		healthBarTexture.Apply ();
-	}
-
-	void OnGUI ()
-	{
-//		if (ai != null && fighterComponent != null) 
-//		{
-//
-//			GUI.DrawTexture(new Rect(gridPosition.x, gridPosition.y, 5, 2), healthBarTexture);
-//		}
 	}
 
 	void Update()
 	{
-		GetComponent<SpriteRenderer>().
 		if (isMoving)
 		{
 			currentLerpTime += Time.deltaTime;
@@ -117,23 +96,6 @@ public class Entity : MonoBehaviour{
 
 	public void moveTowards(Entity e)
 	{
-//		int dx = (int)(e.gridPosition.x - gridPosition.x);
-//		int dy = (int)(e.gridPosition.y - gridPosition.y);
-//
-//		float dist = distanceTo (e);
-//		//dist = Mathf.Sqrt(dx^2 + dy^2);
-//		//dist = Mathf.Abs(gridPosition.x - e.gridPosition.x) + Mathf.Abs(gridPosition.y - e.gridPosition.y);
-//		Debug.Log("Distance from "+name+" = "+dist);
-//
-//		dx = (int)(Mathf.RoundToInt (dx / dist));
-//		dy = (int)(Mathf.RoundToInt (dy / dist));
-		
-//		Vector2 dest = new Vector2(transform.position.x + dx, transform.position.y + dy);
-//		if (!MapManager.map[(int)dest.x][(int)dest.y].isBoundary)
-//		{
-//			transform.position = dest;
-//			gridPosition = dest;
-//		}
 
 		List<Vector2> pathToPlayer = MapManager.pathfinder.FindPath(gridPosition, GameController.objects[0].gridPosition);
 
@@ -142,9 +104,4 @@ public class Entity : MonoBehaviour{
 
 		move (dx, dy);
 	}
-
-//	public virtual void takeTurn(Vector2 delta)
-//	{
-//
-//	}
 }
