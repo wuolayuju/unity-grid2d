@@ -18,6 +18,8 @@ public class MapManager : MonoBehaviour {
 
 	public static List<Rectangle> rooms = new List<Rectangle>();
 
+	public static Pathfinder pathfinder;
+
 	void Start()
 	{
 

@@ -167,11 +167,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   prefabsHolder: {fileID: 1304063874}
-  mapWidth: 60
-  mapHeight: 60
+  mapWidth: 40
+  mapHeight: 40
   ROOM_MAX_SIZE: 6
   ROOM_MIN_SIZE: 3
-  MAX_ROOMS: 40
+  MAX_ROOMS: 10
 --- !u!4 &136067236
 Transform:
   m_ObjectHideFlags: 0
@@ -338,10 +338,14 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 11400000, guid: 28dff2be493c7d141b09530645f3c4eb, type: 2}
       propertyPath: mapHeight
-      value: 60
+      value: 40
       objectReference: {fileID: 0}
     - target: {fileID: 11400000, guid: 28dff2be493c7d141b09530645f3c4eb, type: 2}
       propertyPath: MAX_ROOMS
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400000, guid: 28dff2be493c7d141b09530645f3c4eb, type: 2}
+      propertyPath: mapWidth
       value: 40
       objectReference: {fileID: 0}
     m_RemovedComponents: []

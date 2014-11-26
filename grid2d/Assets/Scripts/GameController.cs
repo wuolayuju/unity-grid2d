@@ -23,9 +23,6 @@ public class GameController : MonoBehaviour {
 
 	public GUIStyle labelStyle;
 
-	public static PathFinder.Pathfinder pathFinder;
-
-	//public static keyPressed = false;
 	string info = "";
 
 	// Use this for initialization
@@ -34,15 +31,20 @@ public class GameController : MonoBehaviour {
 		mapManager.generateMap();
 		generatePlayers();
 		mapManager.renderMap();
-		pathFinder = new PathFinder.Pathfinder(mapManager.mapWidth, mapManager.mapHeight);
+		MapManager.pathfinder = new Pathfinder(mapManager.mapWidth, mapManager.mapHeight);
 		mapManager.FOV (objects[0].gridPosition, playerVisionRange);
 		cam.GetComponent<CameraController>().LookAtPlayer();
 	}
 
 	void OnGUI ()
 	{
-		GUI.backgroundColor = Color.yellow;
-		GUI.Label (new Rect (20, 20, 200, 40), info, labelStyle);
+		// Put something inside the ScrollView
+		GUI.Label (new Rect (Screen.width/4, Screen.height/4*3, Screen.width/2, Screen.height/4), info, labelStyle);
+
+		// End the ScrollView
+//		GUI.EndScrollView();
+
+		//GUI.Label (new Rect (20, 20, 200, 40), info, labelStyle);
 	}
 	
 	private void generatePlayers ()
@@ -56,7 +58,7 @@ public class GameController : MonoBehaviour {
 		objects.Add(h);
 
 		Enemy compPlayer;
-		for (int nr = 0; nr < MapManager.rooms.Count ; nr+=2)
+		for (int nr = 0; nr < MapManager.rooms.Count ; nr+=1)
 		{
 			Rectangle room = MapManager.rooms[nr];
 			Vector2 pos;
@@ -82,8 +84,6 @@ public class GameController : MonoBehaviour {
 	// Update is called once per frame
 	void Update ()
 	{
-		//info = "";
-
 		// check if there are any player moving
 		bool turnFinished = true;
 		for (int i = 1; i < objects.Count ; i++)
@@ -109,7 +109,7 @@ public class GameController : MonoBehaviour {
 					else
 						patroling = true;
 
-					info += objects[i].ai.takeTurn(objects[i], pathFinder, patroling);
+					info += objects[i].ai.takeTurn(objects[i], patroling);
 				}
 			}
 		}
@@ -141,19 +141,5 @@ public class GameController : MonoBehaviour {
 			mapManager.FOV (objects[0].gridPosition, playerVisionRange);
 		}
 
-	}
-
-	DIRECTION checkForInput ()
-	{
-		if (Input.GetKeyDown(KeyCode.UpArrow))
-			return DIRECTION.UP;
-		else if (Input.GetKeyDown(KeyCode.DownArrow))
-			return DIRECTION.DOWN;
-		else if (Input.GetKeyDown(KeyCode.LeftArrow))
-			return DIRECTION.LEFT;
-		else if (Input.GetKeyDown(KeyCode.RightArrow))
-			return DIRECTION.RIGHT;
-		else
-			return DIRECTION.NONE;
 	}
 }

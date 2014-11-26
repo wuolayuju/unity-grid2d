@@ -18,6 +18,8 @@ public class Entity : MonoBehaviour{
 	public Vector2 destination;
 	public bool facingLeft = true;
 
+	private Texture2D healthBarTexture;
+
 	public Entity (Vector2 gridPosition, string name, bool blocks, Fighter fighter, BasicEnemy ai)
 	{
 		this.gridPosition = gridPosition;
@@ -27,8 +29,31 @@ public class Entity : MonoBehaviour{
 		this.ai = ai;
 	}
 
+	void Start()
+	{
+		healthBarTexture = new Texture2D (5,5);
+		for (int i = 0 ; i < healthBarTexture.height; i++)
+		{
+			for (int j = 0; j < healthBarTexture.width; j++)
+			{
+				healthBarTexture.SetPixel(i, j, Color.green);
+			}
+		}
+		healthBarTexture.Apply ();
+	}
+
+	void OnGUI ()
+	{
+//		if (ai != null && fighterComponent != null) 
+//		{
+//
+//			GUI.DrawTexture(new Rect(gridPosition.x, gridPosition.y, 5, 2), healthBarTexture);
+//		}
+	}
+
 	void Update()
 	{
+		GetComponent<SpriteRenderer>().
 		if (isMoving)
 		{
 			currentLerpTime += Time.deltaTime;
@@ -53,6 +78,17 @@ public class Entity : MonoBehaviour{
 			Flip ();
 
 		destination = new Vector2(gridPosition.x + dx, gridPosition.y + dy);
+
+		for (int i = 1; i < GameController.objects.Count; i++) 
+		{
+			// prevents collision with other enemies
+			Entity e = GameController.objects[i];
+			if (e.gridPosition.x == destination.x &&
+			    e.gridPosition.y == destination.y &&
+			    e.blocks == true)
+
+				return;
+		}
 
 		if (!MapManager.map[(int)destination.x][(int)destination.y].isBoundary)
 		{
@@ -79,7 +115,7 @@ public class Entity : MonoBehaviour{
 			Mathf.Abs(gridPosition.y - e.gridPosition.y);
 	}
 
-	public void moveTowards(Entity e, PathFinder.Pathfinder pf)
+	public void moveTowards(Entity e)
 	{
 //		int dx = (int)(e.gridPosition.x - gridPosition.x);
 //		int dy = (int)(e.gridPosition.y - gridPosition.y);
@@ -99,7 +135,7 @@ public class Entity : MonoBehaviour{
 //			gridPosition = dest;
 //		}
 
-		List<Vector2> pathToPlayer = pf.FindPath(gridPosition, GameController.objects[0].gridPosition);
+		List<Vector2> pathToPlayer = MapManager.pathfinder.FindPath(gridPosition, GameController.objects[0].gridPosition);
 
 		int dx = (int)(pathToPlayer[0].x - gridPosition.x);
 		int dy = (int)(pathToPlayer[0].y - gridPosition.y);

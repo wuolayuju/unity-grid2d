@@ -54,6 +54,7 @@ public class Fighter
 				//GameController.objects.Remove(self);
 				self.blocks = false;
 				self.ai = null;
+				self.GetComponent<SpriteRenderer>().sortingOrder -= 1;
 				return "<color=green>" +self.name + "</color> has been defeated.\n";
 			}
 		}
