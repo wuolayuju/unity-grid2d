@@ -47,11 +47,10 @@ public class Fighter
 		{
 			hp -= damage;
 			self.GetComponent<Animator>().SetTrigger("takeDamage");
+			self.gameObject.GetComponentInChildren<HealthBarScale>().setScalePercent((float)hp/(float)max_hp);
 			if (hp <= 0)
 			{
 				self.GetComponent<Animator>().SetTrigger("die");
-				//self.GetComponent<SpriteRenderer>().enabled = false;
-				//GameController.objects.Remove(self);
 				self.blocks = false;
 				self.ai = null;
 				self.GetComponent<SpriteRenderer>().sortingOrder -= 1;
