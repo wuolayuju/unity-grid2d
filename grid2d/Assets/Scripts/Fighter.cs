@@ -46,6 +46,7 @@ public class Fighter
 		if (damage > 0)
 		{
 			hp -= damage;
+			self.currentHpPercent = (float)hp / (float)max_hp;
 			self.GetComponent<Animator>().SetTrigger("takeDamage");
 			if (hp <= 0)
 			{

@@ -18,6 +18,8 @@ public class Entity : MonoBehaviour{
 	public Vector2 destination;
 	public bool facingLeft = true;
 
+	public float currentHpPercent;
+
 	public Entity (Vector2 gridPosition, string name, bool blocks, Fighter fighter, BasicEnemy ai)
 	{
 		this.gridPosition = gridPosition;
@@ -29,10 +31,17 @@ public class Entity : MonoBehaviour{
 
 	void Start()
 	{
+		currentHpPercent = 1f;
 	}
 
 	void Update()
 	{
+		if (fighterComponent != null && ai != null)
+		{
+			ScaleHealthBar sb =  GetComponentInChildren<ScaleHealthBar> ();
+			sb.ScalePercent(currentHpPercent);
+		}
+
 		if (isMoving)
 		{
 			currentLerpTime += Time.deltaTime;
@@ -104,4 +113,5 @@ public class Entity : MonoBehaviour{
 
 		move (dx, dy);
 	}
+
 }
