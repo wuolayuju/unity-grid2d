@@ -18,11 +18,13 @@ public class DamagePopupSpawner : MonoBehaviour {
 	
 	}
 
-	public void spawnDamagePopup(Transform transform, int damage)
+	public void spawnDamagePopup(int damage)
 	{
 		Debug.Log("POSITION ("+ transform.position.x+","+transform.position.y+")");
 
-		GameObject damageGameObject = (GameObject) Instantiate(popupPrefab, positionSpawn.position, transform.rotation);
+		GameObject damageGameObject = (GameObject) Instantiate(popupPrefab, 
+		                                                       positionSpawn.position, 
+		                                                       Quaternion.identity);
 
 		damageGameObject.GetComponentInChildren<Text>().text = damage.ToString();
 	}

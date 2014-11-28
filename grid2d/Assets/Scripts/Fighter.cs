@@ -48,8 +48,8 @@ public class Fighter
 			hp -= damage;
 			self.GetComponent<Animator>().SetTrigger("takeDamage");
 			self.gameObject.GetComponentInChildren<HealthBarScale>().setScalePercent((float)hp/(float)max_hp);
-			if (self.ai != null)
-				self.gameObject.GetComponentInChildren<DamagePopupSpawner>().spawnDamagePopup(self.transform, damage);
+			//if (self.ai != null)
+				self.gameObject.GetComponentInChildren<DamagePopupSpawner>().spawnDamagePopup(damage);
 			if (hp <= 0)
 			{
 				self.GetComponent<Animator>().SetTrigger("die");

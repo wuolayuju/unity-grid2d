@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -24,6 +25,10 @@ public class GameController : MonoBehaviour {
 	public GUIStyle guiStyle;
 
 	string info = "";
+
+	public bool isGameover = false;
+
+	public Text gameOverText;
 
 	// Use this for initialization
 	void Start ()
@@ -54,7 +59,7 @@ public class GameController : MonoBehaviour {
 		h.gridPosition = playerStartPosition;
 		h.name = "Hero";
 		h.blocks = true;
-		h.fighterComponent = new Fighter (30, 2, 5);
+		h.fighterComponent = new Fighter (2, 2, 5);
 		objects.Add(h);
 
 		Enemy compPlayer;
@@ -84,6 +89,16 @@ public class GameController : MonoBehaviour {
 	// Update is called once per frame
 	void Update ()
 	{
+		if (isGameover)
+			return;
+
+		if (objects[0].fighterComponent.hp <= 0)
+		{
+			gameOverText.enabled = true;
+			isGameover = true;
+			return;
+		}
+
 		// check if there are any player moving
 		bool turnFinished = true;
 		for (int i = 1; i < objects.Count ; i++)
