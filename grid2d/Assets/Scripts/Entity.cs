@@ -6,6 +6,7 @@ public class Entity : MonoBehaviour{
 
 	public Vector2 gridPosition;
 	public new string name;
+	public Sprite deadSprite;
 	public bool blocks;
 
 	public Fighter fighterComponent = null;
@@ -103,5 +104,15 @@ public class Entity : MonoBehaviour{
 		int dy = (int)(pathToPlayer[0].y - gridPosition.y);
 
 		move (dx, dy);
+	}
+
+	public void killEntity()
+	{
+
+		Destroy(GetComponent<Animator>());
+		transform.Find("HealthBarCanvas").gameObject.SetActive(false);
+		SpriteRenderer sr = GetComponent<SpriteRenderer>();
+		sr.sprite = deadSprite;
+		sr.color = Color.white;
 	}
 }

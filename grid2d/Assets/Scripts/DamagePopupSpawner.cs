@@ -20,8 +20,6 @@ public class DamagePopupSpawner : MonoBehaviour {
 
 	public void spawnDamagePopup(int damage)
 	{
-		Debug.Log("POSITION ("+ transform.position.x+","+transform.position.y+")");
-
 		GameObject damageGameObject = (GameObject) Instantiate(popupPrefab, 
 		                                                       positionSpawn.position, 
 		                                                       Quaternion.identity);

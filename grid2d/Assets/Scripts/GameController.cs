@@ -28,7 +28,8 @@ public class GameController : MonoBehaviour {
 
 	public bool isGameover = false;
 
-	public Text gameOverText;
+	public GameObject gameOverText;
+	public Text combatLog;
 
 	// Use this for initialization
 	void Start ()
@@ -43,8 +44,10 @@ public class GameController : MonoBehaviour {
 
 	void OnGUI ()
 	{
+		combatLog.text = info;
+
 		// Put something inside the ScrollView
-		GUI.Label (new Rect (Screen.width/4, Screen.height/4*3, Screen.width/2, Screen.height/4), info, guiStyle);
+		//GUI.Label (new Rect (Screen.width/4, Screen.height/4*3, Screen.width/2, Screen.height/4), info, guiStyle);
 
 		// End the ScrollView
 //		GUI.EndScrollView();
@@ -59,7 +62,7 @@ public class GameController : MonoBehaviour {
 		h.gridPosition = playerStartPosition;
 		h.name = "Hero";
 		h.blocks = true;
-		h.fighterComponent = new Fighter (2, 2, 5);
+		h.fighterComponent = new Fighter (10, 2, 5);
 		objects.Add(h);
 
 		Enemy compPlayer;
@@ -94,7 +97,7 @@ public class GameController : MonoBehaviour {
 
 		if (objects[0].fighterComponent.hp <= 0)
 		{
-			gameOverText.enabled = true;
+			gameOverText.gameObject.SetActive(true);
 			isGameover = true;
 			return;
 		}
@@ -124,7 +127,7 @@ public class GameController : MonoBehaviour {
 					else
 						patroling = true;
 
-					info += objects[i].ai.takeTurn(objects[i], patroling);
+					info = objects[i].ai.takeTurn(objects[i], patroling) + info;
 				}
 			}
 		}
@@ -134,19 +137,19 @@ public class GameController : MonoBehaviour {
 		{
 			turnTaken = true;
 			if (Input.GetButtonDown("up")){
-				info += ((Hero)objects[0]).moveOrAttack(0, 1);
+				info = ((Hero)objects[0]).moveOrAttack(0, 1) + info;
 			}
 			else if (Input.GetButtonDown("down"))
 			{
-				info += ((Hero)objects[0]).moveOrAttack(0, -1);
+				info = ((Hero)objects[0]).moveOrAttack(0, -1) + info;
 			}
 			else if(Input.GetButtonDown("left"))
 			{
-				info += ((Hero)objects[0]).moveOrAttack(-1, 0);
+				info = ((Hero)objects[0]).moveOrAttack(-1, 0) + info;
 			}
 			else if (Input.GetButtonDown("right"))
 			{
-				info += ((Hero)objects[0]).moveOrAttack(1, 0);
+				info = ((Hero)objects[0]).moveOrAttack(1, 0) + info;
 			}
 			else
 			{

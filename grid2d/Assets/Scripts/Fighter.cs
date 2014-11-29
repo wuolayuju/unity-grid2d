@@ -24,18 +24,12 @@ public class Fighter
 		string info = "";
 		if (damage > 0)
 		{
-			info = 
-				"<color=green>" +self.name + "</color> attacks " + 
-					"<color=green>" +target.name + "</color> " + 
-				"for <color=red>" + damage + "</color> hit points.\n";
-			info += target.fighterComponent.takeDamage(target, damage);
+			info = self.name + " attacks " + target.name + " for " + damage + " hit points.\n";
+			info = target.fighterComponent.takeDamage(target, damage) + info;
 		}
 		else
 		{
-			info = 
-				"<color=green>" +self.name + "</color> attacks " + 
-					"<color=green>" +target.name + "</color>" + 
-				" but it has no effect.\n";
+			info = self.name + " attacks " + target.name + " but it has no effect.\n";
 		}
 
 		return info;
@@ -56,7 +50,7 @@ public class Fighter
 				self.blocks = false;
 				self.ai = null;
 				self.GetComponent<SpriteRenderer>().sortingOrder -= 1;
-				return "<color=green>" +self.name + "</color> has been defeated.\n";
+				return "<color=lime>" +self.name + "</color> has been defeated.\n";
 			}
 		}
 		return "";
