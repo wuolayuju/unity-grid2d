@@ -184,7 +184,7 @@ TextureImporter:
     21300358: GUI0_206
     21300360: GUI0_208
     21300362: GUI0_209
-    21300364: GUI0_210
+    21300364: gui_inv_red
     21300366: GUI0_212
     21300368: GUI0_213
     21300370: GUI0_214
@@ -239,6 +239,7 @@ TextureImporter:
     21300468: GUI0_274
     21300470: GUI0_217
     21300472: GUI0_209
+    21300474: GUI0_210
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
@@ -757,8 +758,8 @@ TextureImporter:
         y: 240
         width: 16
         height: 16
-      alignment: 0
-      pivot: {x: .5, y: .5}
+      alignment: 7
+      pivot: {x: .5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: GUI0_48
       rect:
@@ -2380,5 +2381,15 @@ TextureImporter:
       alignment: 0
       pivot: {x: .5, y: .5}
       border: {x: 8, y: 8, z: 8, w: 8}
+    - name: gui_inv_red
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 176
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
   spritePackingTag: 
   userData: 

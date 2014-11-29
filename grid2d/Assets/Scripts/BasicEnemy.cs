@@ -4,13 +4,24 @@ using System.Collections;
 
 public class BasicEnemy
 {
+	public bool taunted = false;
+
 	public string takeTurn(Entity self, bool patrol)
 	{
 		// not patroling
 		if (!patrol)
 		{
+			if (self.ai.taunted == false)
+			{
+				self.gameObject.GetComponentInChildren<PopupSpriteSpawner>().spawnTauntPopup();
+				self.ai.taunted = true;
+				return "<color=red>"+self.name + " notices you!."+"</color>\n";
+			}
+
 			if (self.distanceTo(GameController.objects[0]) >= 2)
+			{
 				self.moveTowards(GameController.objects[0]);
+			}
 			else
 				return self.fighterComponent.attack(self, GameController.objects[0]);
 		}

@@ -11,6 +11,7 @@ public class Entity : MonoBehaviour{
 
 	public Fighter fighterComponent = null;
 	public BasicEnemy ai = null;
+	public Item item = null;
 
 	public float lerpTime = 1.0f;
 	public float currentLerpTime;
@@ -19,17 +20,23 @@ public class Entity : MonoBehaviour{
 	public Vector2 destination;
 	public bool facingLeft = true;
 
-	public Entity (Vector2 gridPosition, string name, bool blocks, Fighter fighter, BasicEnemy ai)
+	public GameObject infoPanelPrefab;
+
+	private GameObject entityInfoPanel; 
+
+	public Entity (Vector2 gridPosition, string name, bool blocks, Fighter fighter, BasicEnemy ai, Item item)
 	{
 		this.gridPosition = gridPosition;
 		this.name = name;
 		this.blocks = blocks;
 		this.fighterComponent = fighter;
 		this.ai = ai;
+		this.item = item;
 	}
 
 	void Start()
 	{
+		entityInfoPanel = null;
 	}
 
 	void Update()
@@ -48,6 +55,20 @@ public class Entity : MonoBehaviour{
 			if ((Vector2)transform.position == destination)
 				isMoving = false;
 		}
+	}
+
+	void OnMouseOver()
+	{
+		if (entityInfoPanel == null)
+			entityInfoPanel = (GameObject) Instantiate(infoPanelPrefab, 
+			                                           transform.position + new Vector3(0.0f, 0.5f, 0.0f), 
+			                                 Quaternion.identity);
+	}
+
+	void OnMouseExit()
+	{
+		if (entityInfoPanel != null)
+			Destroy(entityInfoPanel);
 	}
 
 	public void move(int dx, int dy)

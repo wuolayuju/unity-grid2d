@@ -149,6 +149,9 @@ MonoBehaviour:
   start: {x: 0, y: 0}
   destination: {x: 0, y: 0}
   facingLeft: 0
+  infoPanelPrefab: {fileID: 0}
+  inventory: []
+  MAX_ITEMS_INVENTORY: 20
 --- !u!114 &11400002
 MonoBehaviour:
   m_ObjectHideFlags: 1

@@ -13,6 +13,7 @@ public class GameController : MonoBehaviour {
 	public int playerVisionRange = 4;
 	public GameObject userPlayerPrefab;
 	public GameObject AIPlayerPrefab;
+	public GameObject healingPotionPrefab;
 
 	public static List<Entity> objects = new List<Entity> ();
 
@@ -22,16 +23,16 @@ public class GameController : MonoBehaviour {
 
 	public bool turnTaken = false;
 
-	public GUIStyle guiStyle;
-
 	string info = "";
 
 	public bool isGameover = false;
 
 	public GameObject UI_gameOverText;
+	public GameObject UI_inventoryPanel;
 	public Text UI_combatLog;
 	public Image UI_currentHpPlayerBar;
 	public Text UI_hpPlayerValues;
+	public Image UI_heroPortraitImage;
 
 	// Use this for initialization
 	void Start ()
@@ -42,6 +43,7 @@ public class GameController : MonoBehaviour {
 		MapManager.pathfinder = new Pathfinder(mapManager.mapWidth, mapManager.mapHeight);
 		mapManager.FOV (objects[0].gridPosition, playerVisionRange);
 		cam.GetComponent<CameraController>().LookAtPlayer();
+		UI_heroPortraitImage.sprite = userPlayerPrefab.GetComponent<SpriteRenderer>().sprite;
 	}
 
 	void OnGUI ()
@@ -87,6 +89,17 @@ public class GameController : MonoBehaviour {
 			compPlayer.fighterComponent = new Fighter(10, 0, 3);
 			compPlayer.ai = new BasicEnemy();
 			objects.Add (compPlayer);
+
+			//items
+			pos = new Vector2(room.x1, room.y1);
+			Entity it = ((GameObject) Instantiate (healingPotionPrefab,
+			                                       pos,
+			                                       Quaternion.identity)).GetComponent<Entity>();
+			it.gridPosition = pos;
+			it.name = "Healing potion";
+			it.blocks = false;
+			it.item = new Item("This is a healing potion");
+			objects.Add(it);
 		}
 	}
 
@@ -97,7 +110,7 @@ public class GameController : MonoBehaviour {
 		if (isGameover)
 			return;
 
-		updateHealthAndManaBars(); 
+		updateGUI(); 
 
 		if (objects[0].fighterComponent.hp <= 0)
 		{
@@ -133,7 +146,7 @@ public class GameController : MonoBehaviour {
 
 					info = objects[i].ai.takeTurn(objects[i], patroling) + info;
 
-					StartCoroutine(TurnDelay());
+					//StartCoroutine(TurnDelay());
 				}
 			}
 		}
@@ -161,6 +174,29 @@ public class GameController : MonoBehaviour {
 			{
 				info = "<color=yellow>Turn skipped.</color>\n" + info;
 			}
+			else if (Input.GetButtonDown("pickup"))
+			{
+				// check for items in the current tile
+				bool areObjectsInTile = false;
+				foreach(Entity e in objects)
+				{
+
+					// it has to be an item
+					if (e.item != null)
+					{
+						// same position as the player
+						if (e.gridPosition.x == objects[0].gridPosition.x && e.gridPosition.y == objects[0].gridPosition.y)
+						{
+							info = e.item.pickUp(e, (Hero)objects[0]) + info;
+							areObjectsInTile = true;
+						}
+					}
+				}
+				if (areObjectsInTile == false)
+				{
+					info = "<color=orange>Nothing to pick up.</color>\n" + info;
+				}
+			}
 			else
 			{
 				turnTaken = false;
@@ -176,8 +212,13 @@ public class GameController : MonoBehaviour {
 		yield return new WaitForSeconds(0.4f);
 	}
 
-	void updateHealthAndManaBars()
+	void updateGUI()
 	{
+		if (Input.GetButtonDown("toggleInventory"))
+	    {
+			UI_inventoryPanel.SetActive(!UI_inventoryPanel.activeSelf);
+		}
+
 		// Health Bar
 		int curHP = objects[0].fighterComponent.hp;
 		int maxHP = objects[0].fighterComponent.max_hp;
@@ -188,5 +229,7 @@ public class GameController : MonoBehaviour {
 		UI_currentHpPlayerBar.transform.localScale = scaleHpBar;
 		UI_hpPlayerValues.text = curHP + "/" + maxHP;	
 
+		// Portrait
+		UI_heroPortraitImage.sprite = objects[0].GetComponent<SpriteRenderer>().sprite;
 	}
 }
