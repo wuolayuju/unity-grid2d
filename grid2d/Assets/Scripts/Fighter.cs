@@ -50,7 +50,7 @@ public class Fighter
 				self.blocks = false;
 				self.ai = null;
 				self.GetComponent<SpriteRenderer>().sortingOrder -= 1;
-				return "<color=lime>" +self.name + "</color> has been defeated.\n";
+				return "<color=blue>" +self.name + "</color> has been defeated.\n";
 			}
 		}
 		return "";

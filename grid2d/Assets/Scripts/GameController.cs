@@ -28,8 +28,10 @@ public class GameController : MonoBehaviour {
 
 	public bool isGameover = false;
 
-	public GameObject gameOverText;
-	public Text combatLog;
+	public GameObject UI_gameOverText;
+	public Text UI_combatLog;
+	public Image UI_currentHpPlayerBar;
+	public Text UI_hpPlayerValues;
 
 	// Use this for initialization
 	void Start ()
@@ -44,7 +46,7 @@ public class GameController : MonoBehaviour {
 
 	void OnGUI ()
 	{
-		combatLog.text = info;
+		UI_combatLog.text = info;
 
 		// Put something inside the ScrollView
 		//GUI.Label (new Rect (Screen.width/4, Screen.height/4*3, Screen.width/2, Screen.height/4), info, guiStyle);
@@ -95,9 +97,11 @@ public class GameController : MonoBehaviour {
 		if (isGameover)
 			return;
 
+		updateHealthAndManaBars(); 
+
 		if (objects[0].fighterComponent.hp <= 0)
 		{
-			gameOverText.gameObject.SetActive(true);
+			UI_gameOverText.gameObject.SetActive(true);
 			isGameover = true;
 			return;
 		}
@@ -128,6 +132,8 @@ public class GameController : MonoBehaviour {
 						patroling = true;
 
 					info = objects[i].ai.takeTurn(objects[i], patroling) + info;
+
+					StartCoroutine(TurnDelay());
 				}
 			}
 		}
@@ -151,6 +157,10 @@ public class GameController : MonoBehaviour {
 			{
 				info = ((Hero)objects[0]).moveOrAttack(1, 0) + info;
 			}
+			else if (Input.GetKeyDown(KeyCode.Space))
+			{
+				info = "<color=yellow>Turn skipped.</color>\n" + info;
+			}
 			else
 			{
 				turnTaken = false;
@@ -158,6 +168,25 @@ public class GameController : MonoBehaviour {
 
 			mapManager.FOV (objects[0].gridPosition, playerVisionRange);
 		}
+
+	}
+
+	IEnumerator TurnDelay()
+	{
+		yield return new WaitForSeconds(0.4f);
+	}
+
+	void updateHealthAndManaBars()
+	{
+		// Health Bar
+		int curHP = objects[0].fighterComponent.hp;
+		int maxHP = objects[0].fighterComponent.max_hp;
+
+		float percentHpPlayer = (float) curHP / (float) maxHP;
+		Vector3 scaleHpBar = UI_currentHpPlayerBar.transform.localScale;
+		scaleHpBar.x = percentHpPlayer;
+		UI_currentHpPlayerBar.transform.localScale = scaleHpBar;
+		UI_hpPlayerValues.text = curHP + "/" + maxHP;	
 
 	}
 }

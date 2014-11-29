@@ -87,6 +87,7 @@ public class Entity : MonoBehaviour{
 		Vector3 theScale = transform.localScale;
 		theScale.x *= -1;
 		transform.localScale = theScale;
+		transform.Find("HealthBarCanvas").localScale = theScale;
 	}
 
 	public float distanceTo(Entity e)
