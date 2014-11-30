@@ -4,9 +4,11 @@ using System.Collections;
 public class Item{
 
 	public string description;
+	public bool isInInventory;
 
 	public Item (string description)
 	{
+		this.isInInventory= false;
 		this.description = description;
 	}
 
@@ -17,7 +19,8 @@ public class Item{
 			self.enabled = false;
 			self.GetComponent<SpriteRenderer>().enabled = false;
 			player.inventory.Add(self);
-			//GameController.objects.Remove(self);
+			isInInventory = true;
+			GameController.objects.Remove(self);
 			return "<color=lime>You picked up a " +self.name+".</color>\n";
 		}
 		else

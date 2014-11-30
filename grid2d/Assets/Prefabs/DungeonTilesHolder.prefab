@@ -23,7 +23,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100000}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -.371706963, z: 0}
+  m_LocalPosition: {x: 0, y: 2, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -39,7 +39,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3138cd5ab40694a43be1280a0fc9e17c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spriteMaterial: {fileID: 10754, guid: 0000000000000000e000000000000000, type: 0}
   N_WALL: {fileID: 100000, guid: f4a073e417f8ee74388fb5c6230121e6, type: 2}
   NW_WALL: {fileID: 100000, guid: 14ca0f6da3b61ec408b092201674334f, type: 2}
   NE_WALL: {fileID: 100000, guid: 71b7a6ddb6ee34f40ba45d4c27e35679, type: 2}
@@ -56,6 +55,8 @@ MonoBehaviour:
   EWS_WALL: {fileID: 100000, guid: e6b440c9bdb78b4409d9b6f297d37c90, type: 2}
   NESW_WALL: {fileID: 100000, guid: 84b7e9192cce12a4088e1e6b9df9c631, type: 2}
   COL_WALL: {fileID: 100000, guid: 2d0a915b0dbb64847b14278a499c5a8c, type: 2}
+  Door_Opened: {fileID: 100000, guid: 7734ce72e6824d648b4146afd7368c64, type: 2}
+  Door_Closed: {fileID: 100000, guid: b02be8b6f1069444a9c556a9b1be7c0b, type: 2}
   BLANK_FLOOR: {fileID: 100000, guid: abe5e91138c08d94cbfe1932834dac65, type: 2}
   N_FLOOR: {fileID: 100000, guid: 06e86d5e26a0f0943b1a09a74d1a1356, type: 2}
   NW_FLOOR: {fileID: 100000, guid: 26855b87c29990245bd19fccf461ed70, type: 2}

@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -59,10 +60,17 @@ public class Entity : MonoBehaviour{
 
 	void OnMouseOver()
 	{
-		if (entityInfoPanel == null)
-			entityInfoPanel = (GameObject) Instantiate(infoPanelPrefab, 
-			                                           transform.position + new Vector3(0.0f, 0.5f, 0.0f), 
+		if (item != null && entityInfoPanel == null)
+		{
+			if (GetComponent<SpriteRenderer>().enabled || item.isInInventory)
+			{
+				entityInfoPanel = (GameObject) Instantiate(infoPanelPrefab, 
+			                                           transform.position + new Vector3(0.0f, 0.0f, 0.0f), 
 			                                 Quaternion.identity);
+				entityInfoPanel.GetComponentInChildren<Text>().text = 
+					"<color=lime>"+name+"</color>\n"+item.description;
+			}
+		}
 	}
 
 	void OnMouseExit()

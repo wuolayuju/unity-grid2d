@@ -20,9 +20,9 @@ public class MapManager : MonoBehaviour {
 
 	public static Pathfinder pathfinder;
 
+
 	void Start()
 	{
-
 	}
 
 	private void createRoom (Rectangle room)
@@ -37,7 +37,10 @@ public class MapManager : MonoBehaviour {
 	
 	private void createHorizontalTunnel (int x1, int x2, int y)
 	{
-		for (int i = Math.Min(x1, x2); i < Math.Max(x1, x2); i++){
+		int start = Math.Min(x1, x2);
+		int end = Math.Max(x1, x2);
+
+		for (int i = start; i < end; i++){
 			map[i][y].isBoundary = false;
 			map[i][y].blocksLight = false;
 		}
@@ -45,7 +48,11 @@ public class MapManager : MonoBehaviour {
 	
 	private void createVerticalTunnel (int y1, int y2, int x)
 	{
-		for (int i = Math.Min(y1, y2); i < Math.Max(y1, y2); i++){
+		int start =  Math.Min(y1, y2);
+		int end = Math.Max(y1, y2);
+
+
+		for (int i = start; i < end; i++){
 			map[x][i].isBoundary = false;
 			map[x][i].blocksLight = false;
 		}
@@ -59,7 +66,7 @@ public class MapManager : MonoBehaviour {
 			for (int c = 0; c < mapHeight; c++)
 			{
 				Vector3 pos = new Vector3(r, c);
-				Tile t = new Tile (pos, true, false, true, false, false);
+				Tile t = new Tile (pos, true, false, true, false, false, false);
 				row.Add(t);
 			}
 			map.Add(row);
@@ -370,6 +377,14 @@ public class MapManager : MonoBehaviour {
 		}
 	}
 
+	public static void openDoor(int x, int y)
+	{
+		if (map[x][y].isDoor)
+		{
+			map[x][y].blocksLight = false;
+		}
+	}
+
 	private GameObject determinePrefabWall (int x, int y)
 	{
 		int score = 0;
@@ -451,6 +466,8 @@ public class MapManager : MonoBehaviour {
 	
 	private GameObject determinePrefabFloor (int x, int y)
 	{
+		if(map[x][y].isDoor) return prefabsHolder.Door_Closed;
+
 		int score = 0;
 		
 		try
@@ -484,12 +501,24 @@ public class MapManager : MonoBehaviour {
 		case 5:
 			return prefabsHolder.SW_FLOOR;
 		case 6:
+			if(!map[x-1][y+1].isBoundary || !map[x+1][y+1].isBoundary || !map[x+1][y-1].isBoundary || !map[x-1][y-1].isBoundary)
+			{
+				map[x][y].isDoor = true;
+				map[x][y].blocksLight = true;
+				return prefabsHolder.Door_Closed;
+			}
 			return prefabsHolder.WE_FLOOR;
 		case 7:
 			return prefabsHolder.EWS_FLOOR;
 		case 8:
 			return prefabsHolder.N_FLOOR;
 		case 9:
+			if(!map[x-1][y+1].isBoundary || !map[x+1][y+1].isBoundary || !map[x+1][y-1].isBoundary || !map[x-1][y-1].isBoundary)
+			{
+				map[x][y].isDoor = true;
+				map[x][y].blocksLight = true;
+				return prefabsHolder.Door_Closed;
+			}
 			return prefabsHolder.NS_FLOOR;
 		case 10:
 			return prefabsHolder.NE_FLOOR;

@@ -189,12 +189,59 @@ public class GameController : MonoBehaviour {
 						{
 							info = e.item.pickUp(e, (Hero)objects[0]) + info;
 							areObjectsInTile = true;
+							updateGUIInventory();
+							break;
 						}
 					}
 				}
 				if (areObjectsInTile == false)
 				{
 					info = "<color=orange>Nothing to pick up.</color>\n" + info;
+				}
+			}
+			else if (Input.GetButtonDown("useItem1"))
+			{
+				Hero h = (Hero)objects[0];
+				if (h.inventory[0] != null)
+				{
+					info = h.inventory[0].GetComponentInChildren<ItemEffect>().useItem(h.inventory[0]) + info;
+					updateGUIInventory();
+				}
+			}
+			else if (Input.GetButtonDown("useItem2"))
+			{
+				Hero h = (Hero)objects[0];
+				if (h.inventory[1] != null)
+				{
+					info = h.inventory[1].GetComponentInChildren<ItemEffect>().useItem(h.inventory[1]) + info;
+					updateGUIInventory();
+				}
+			}
+			else if (Input.GetButtonDown("useItem3"))
+			{
+				Hero h = (Hero)objects[0];
+				if (h.inventory[2] != null)
+				{
+					info = h.inventory[2].GetComponentInChildren<ItemEffect>().useItem(h.inventory[2]) + info;
+					updateGUIInventory();
+				}
+			}
+			else if (Input.GetButtonDown("useItem4"))
+			{
+				Hero h = (Hero)objects[0];
+				if (h.inventory[3] != null)
+				{
+					info = h.inventory[3].GetComponentInChildren<ItemEffect>().useItem(h.inventory[3]) + info;
+					updateGUIInventory();
+				}
+			}
+			else if (Input.GetButtonDown("useItem5"))
+			{
+				Hero h = (Hero)objects[0];
+				if (h.inventory[4] != null)
+				{
+					info = h.inventory[4].GetComponentInChildren<ItemEffect>().useItem(h.inventory[4]) + info;
+					updateGUIInventory();
 				}
 			}
 			else
@@ -214,11 +261,6 @@ public class GameController : MonoBehaviour {
 
 	void updateGUI()
 	{
-		if (Input.GetButtonDown("toggleInventory"))
-	    {
-			UI_inventoryPanel.SetActive(!UI_inventoryPanel.activeSelf);
-		}
-
 		// Health Bar
 		int curHP = objects[0].fighterComponent.hp;
 		int maxHP = objects[0].fighterComponent.max_hp;
@@ -229,7 +271,47 @@ public class GameController : MonoBehaviour {
 		UI_currentHpPlayerBar.transform.localScale = scaleHpBar;
 		UI_hpPlayerValues.text = curHP + "/" + maxHP;	
 
-		// Portrait
-		UI_heroPortraitImage.sprite = objects[0].GetComponent<SpriteRenderer>().sprite;
+		//Inventory
+//		Image item1Image = UI_inventoryPanel.transform.Find("Item1_Border/Item1_Image").GetComponent<Image>();
+//		if (((Hero)objects[0]).inventory.Count > 0)
+//		{
+//			Entity item = ((Hero)objects[0]).inventory[0];
+//			item.transform.position = item1Image.transform.position;
+//			item1Image.sprite = item.GetComponent<SpriteRenderer>().sprite;
+//			item1Image.color = Color.white;
+//		}
+	}
+
+	void updateGUIInventory()
+	{
+		Hero h = (Hero)objects[0];
+		for(int i = 0; i < h.MAX_ITEMS_INVENTORY ; i++)
+		{
+			Image itemImage = UI_inventoryPanel.transform.Find("Item"+(i+1)+"_Border/Item"+(i+1)+"_Image").GetComponent<Image>();
+
+			Entity item = null;
+
+			try 
+			{ 
+				item = h.inventory[i]; 
+			} 
+			catch 
+			{ 
+				item = null; 
+			}
+			finally
+			{
+				if (item == null)
+				{
+					itemImage.color = Color.clear;
+				}
+				else
+				{
+					item.transform.position = itemImage.transform.position;
+					itemImage.sprite = item.GetComponent<SpriteRenderer>().sprite;
+					itemImage.color = Color.white;
+				}
+			}
+		}
 	}
 }
