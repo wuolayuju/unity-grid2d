@@ -13,6 +13,7 @@ public class Tile{
 	private bool _blocksLight;
 	private bool _isExplored;
 	private bool _isLit;
+	private bool _isExit;
 
 	private Color32 COLOR_LIT = new Color32(255, 255, 255, 255);
 	private Color32 COLOR_EXPLORED = new Color32(50, 50, 50, 255);
@@ -21,7 +22,7 @@ public class Tile{
 	private Gradient gradient = new Gradient();
 
 
-	public Tile (Vector2 position, bool isBoundary, bool isVisible, bool blocksLight, bool isExplored, bool isLit, bool _isDoor)
+	public Tile (Vector2 position, bool isBoundary, bool isVisible, bool blocksLight, bool isExplored, bool isLit, bool isDoor, bool isExit)
 	{
 		_position = position;
 		_isBoundary = isBoundary;
@@ -30,6 +31,7 @@ public class Tile{
 		_isExplored = isExplored;
 		_isLit = isLit;
 		_isDoor = isDoor;
+		_isExit = isExit;
 
 		GradientColorKey[] gck = new GradientColorKey[2];
 		gck [0].color = COLOR_LIT; gck [0].time = 0.0f;
@@ -80,6 +82,12 @@ public class Tile{
 	{
 		get { return _isDoor; }
 		set { _isDoor = value; }
+	}
+
+	public bool isExit
+	{
+		get { return _isExit; }
+		set { _isExit = value; }
 	}
 
 	public void markTileAsLit(float gradientValue)

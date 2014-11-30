@@ -15,7 +15,7 @@ public class GameController : MonoBehaviour {
 	public GameObject AIPlayerPrefab;
 	public GameObject healingPotionPrefab;
 
-	public static List<Entity> objects = new List<Entity> ();
+	public static List<Entity> objects;
 
 	public static Vector2 playerStartPosition;
 
@@ -26,6 +26,7 @@ public class GameController : MonoBehaviour {
 	string info = "";
 
 	public bool isGameover = false;
+	public bool inMenu = false;
 
 	public GameObject UI_gameOverText;
 	public GameObject UI_inventoryPanel;
@@ -33,6 +34,12 @@ public class GameController : MonoBehaviour {
 	public Image UI_currentHpPlayerBar;
 	public Text UI_hpPlayerValues;
 	public Image UI_heroPortraitImage;
+	public GameObject UI_descendPanel;
+
+	void Awake()
+	{
+		objects = new List<Entity>();
+	}
 
 	// Use this for initialization
 	void Start ()
@@ -75,7 +82,7 @@ public class GameController : MonoBehaviour {
 			Rectangle room = MapManager.rooms[nr];
 			Vector2 pos;
 
-			// repeat the randomisation of initial position until it does not matches the ayer's
+			// repeat the randomisation of initial position until it does not matches the player's
 			do
 			{
 				pos = new Vector2 (UnityEngine.Random.Range (room.x1, room.x2),
@@ -84,22 +91,25 @@ public class GameController : MonoBehaviour {
 
 			compPlayer = ((GameObject) Instantiate (AIPlayerPrefab, pos, Quaternion.identity)).GetComponent<Enemy>();
 			compPlayer.gridPosition = pos;
-			compPlayer.name = "Troll #"+nr;
+			compPlayer.name = "Lizard";
 			compPlayer.blocks = true;
 			compPlayer.fighterComponent = new Fighter(10, 0, 3);
 			compPlayer.ai = new BasicEnemy();
 			objects.Add (compPlayer);
 
 			//items
-			pos = new Vector2(room.x1, room.y1);
-			Entity it = ((GameObject) Instantiate (healingPotionPrefab,
-			                                       pos,
-			                                       Quaternion.identity)).GetComponent<Entity>();
-			it.gridPosition = pos;
-			it.name = "Healing potion";
-			it.blocks = false;
-			it.item = new Item("This is a healing potion");
-			objects.Add(it);
+			if (UnityEngine.Random.Range(0,9) > 5)
+			{
+				pos = new Vector2(room.x1, room.y1);
+				Entity it = ((GameObject) Instantiate (healingPotionPrefab,
+				                                       pos,
+				                                       Quaternion.identity)).GetComponent<Entity>();
+				it.gridPosition = pos;
+				it.name = "Healing potion";
+				it.blocks = false;
+				it.item = new Item("This is a healing potion");
+				objects.Add(it);
+			}
 		}
 	}
 
@@ -108,6 +118,13 @@ public class GameController : MonoBehaviour {
 	void Update ()
 	{
 		if (isGameover)
+		{
+			if (Input.GetKeyDown(KeyCode.R))
+				Application.LoadLevel("MainScene");
+			return;
+		}
+
+		if (inMenu)
 			return;
 
 		updateGUI(); 
@@ -116,6 +133,13 @@ public class GameController : MonoBehaviour {
 		{
 			UI_gameOverText.gameObject.SetActive(true);
 			isGameover = true;
+			return;
+		}
+
+		if (((Hero)objects[0]).onExit && inMenu == false)
+		{
+			UI_descendPanel.gameObject.SetActive(true);
+			inMenu = true;
 			return;
 		}
 
@@ -313,5 +337,17 @@ public class GameController : MonoBehaviour {
 				}
 			}
 		}
+	}
+
+	public void descendToNextLevel()
+	{
+		Application.LoadLevel("MainScene");
+	}
+
+	public void getBackToPlay()
+	{
+		UI_descendPanel.SetActive(false);
+		inMenu = false;
+		((Hero)objects[0]).onExit = false;
 	}
 }

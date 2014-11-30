@@ -7,9 +7,12 @@ public class Hero : Entity {
 	public List<Entity> inventory = new List<Entity>();
 	public int MAX_ITEMS_INVENTORY = 5;
 
+	public bool onExit;
+
 	void Start()
 	{
 		inventory.Capacity = MAX_ITEMS_INVENTORY;
+		onExit = false;
 	}
 
 	public Hero (Vector2 gridPosition, string name)
@@ -53,6 +56,11 @@ public class Hero : Entity {
 		else
 		{
 			move (dx, dy);
+			if(MapManager.map[(int)dest.x][(int)dest.y].isExit)
+			{
+				onExit = true;
+				return "<color=lime>You have found the exit!</color>\n";
+			}
 			if (itemsInTile == true)
 				return "<color=orange>There is something here...</color>\n";
 		}

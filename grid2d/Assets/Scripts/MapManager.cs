@@ -7,7 +7,7 @@ public class MapManager : MonoBehaviour {
 
 	public TilePrefabsHolder prefabsHolder;
 
-	public static List<List<Tile>> map = new List<List<Tile>> ();
+	public static List<List<Tile>> map;
 
 	public  int mapWidth = 60;
 	public  int mapHeight = 60;
@@ -20,6 +20,12 @@ public class MapManager : MonoBehaviour {
 
 	public static Pathfinder pathfinder;
 
+
+	void Awake()
+	{
+		map = new List<List<Tile>> ();
+		rooms = new List<Rectangle>();
+	}
 
 	void Start()
 	{
@@ -66,7 +72,7 @@ public class MapManager : MonoBehaviour {
 			for (int c = 0; c < mapHeight; c++)
 			{
 				Vector3 pos = new Vector3(r, c);
-				Tile t = new Tile (pos, true, false, true, false, false, false);
+				Tile t = new Tile (pos, true, false, true, false, false, false, false);
 				row.Add(t);
 			}
 			map.Add(row);
@@ -157,6 +163,9 @@ public class MapManager : MonoBehaviour {
 				num_rooms ++;
 			}
 		}
+
+		Vector2 posExit = rooms[rooms.Count-1].getCenter();
+		map[(int)posExit.x][(int)posExit.y].isExit = true;
 	}
 
 	public void generateMap2 ()
@@ -467,6 +476,8 @@ public class MapManager : MonoBehaviour {
 	private GameObject determinePrefabFloor (int x, int y)
 	{
 		if(map[x][y].isDoor) return prefabsHolder.Door_Closed;
+
+		if(map[x][y].isExit) return prefabsHolder.Stairs_Down;
 
 		int score = 0;
 		

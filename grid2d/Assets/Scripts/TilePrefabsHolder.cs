@@ -43,6 +43,9 @@ public class TilePrefabsHolder : MonoBehaviour {
 
 	public  GameObject DEFAULT_TILE;
 
+	public GameObject Stairs_Up;
+	public GameObject Stairs_Down;
+
 	// Use this for initialization
 	void Start () 
 	{
