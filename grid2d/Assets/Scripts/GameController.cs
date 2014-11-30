@@ -30,6 +30,7 @@ public class GameController : MonoBehaviour {
 
 	public GameObject UI_gameOverText;
 	public GameObject UI_inventoryPanel;
+	public GameObject UI_playerStatsPanel;
 	public Text UI_combatLog;
 	public Image UI_currentHpPlayerBar;
 	public Text UI_hpPlayerValues;
@@ -73,7 +74,7 @@ public class GameController : MonoBehaviour {
 		h.gridPosition = playerStartPosition;
 		h.name = "Hero";
 		h.blocks = true;
-		h.fighterComponent = new Fighter (10, 2, 5);
+		h.fighterComponent = new Fighter (15, 2, 6);
 		objects.Add(h);
 
 		Enemy compPlayer;
@@ -93,12 +94,12 @@ public class GameController : MonoBehaviour {
 			compPlayer.gridPosition = pos;
 			compPlayer.name = "Lizard";
 			compPlayer.blocks = true;
-			compPlayer.fighterComponent = new Fighter(10, 0, 3);
+			compPlayer.fighterComponent = new Fighter(10, 2, 3);
 			compPlayer.ai = new BasicEnemy();
 			objects.Add (compPlayer);
 
 			//items
-			if (UnityEngine.Random.Range(0,9) > 5)
+			if (UnityEngine.Random.Range(0,9) > 3)
 			{
 				pos = new Vector2(room.x1, room.y1);
 				Entity it = ((GameObject) Instantiate (healingPotionPrefab,
@@ -107,7 +108,7 @@ public class GameController : MonoBehaviour {
 				it.gridPosition = pos;
 				it.name = "Healing potion";
 				it.blocks = false;
-				it.item = new Item("This is a healing potion");
+				it.item = new Item("Heals up to 10 health points");
 				objects.Add(it);
 			}
 		}
@@ -295,15 +296,9 @@ public class GameController : MonoBehaviour {
 		UI_currentHpPlayerBar.transform.localScale = scaleHpBar;
 		UI_hpPlayerValues.text = curHP + "/" + maxHP;	
 
-		//Inventory
-//		Image item1Image = UI_inventoryPanel.transform.Find("Item1_Border/Item1_Image").GetComponent<Image>();
-//		if (((Hero)objects[0]).inventory.Count > 0)
-//		{
-//			Entity item = ((Hero)objects[0]).inventory[0];
-//			item.transform.position = item1Image.transform.position;
-//			item1Image.sprite = item.GetComponent<SpriteRenderer>().sprite;
-//			item1Image.color = Color.white;
-//		}
+		// stats
+		UI_playerStatsPanel.transform.Find("StatsExpPanel/AttackText").GetComponent<Text>().text = objects[0].fighterComponent.power.ToString();
+		UI_playerStatsPanel.transform.Find("StatsExpPanel/DefenceText").GetComponent<Text>().text = objects[0].fighterComponent.defense.ToString();
 	}
 
 	void updateGUIInventory()

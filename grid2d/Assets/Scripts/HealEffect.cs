@@ -30,6 +30,7 @@ public class HealEffect : ItemEffect {
 		hpHealed = h.fighterComponent.hp - hpHealed;
 
 		h.gameObject.GetComponentInChildren<DamagePopupSpawner>().spawnDamagePopup(hpHealed.ToString(), "lime");
+		h.gameObject.GetComponentInChildren<HealthBarScale>().setScalePercent(Mathf.Clamp((float)h.fighterComponent.hp/(float)h.fighterComponent.max_hp, 0f, 1f));
 
 		h.inventory.Remove(self);
 

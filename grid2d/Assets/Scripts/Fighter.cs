@@ -19,19 +19,24 @@ public class Fighter
 	public string attack(Entity self, Entity target)
 	{
 		// Hit if rnd()*ATK > rnd()*DEF
-		bool isHit = 
+		float isHit = 
 			self.fighterComponent.power * UnityEngine.Random.Range(0f,1f) 
-			>
+			-
 			target.fighterComponent.defense * UnityEngine.Random.Range(0f,1f) ;
 
-		if (!isHit)
+		Debug.Log(self.name+"->"+target.name+" = "+isHit);
+
+		if (isHit < 0.0f)
 		{
 			target.gameObject.GetComponentInChildren<DamagePopupSpawner>().spawnDamagePopup("miss", "red");
 			return self.name + " attacks " + target.name + " but it misses.\n";
 		}
 
 		//a simple formula for attack damage
-		int damage = self.fighterComponent.power - target.fighterComponent.defense;
+		int damage = UnityEngine.Random.Range(self.fighterComponent.power - target.fighterComponent.defense,
+		                                      self.fighterComponent.power - target.fighterComponent.defense + Mathf.RoundToInt(isHit));
+
+		//int damage = self.fighterComponent.power - target.fighterComponent.defense + Mathf.RoundToInt(isHit);
 			
 		string info = "";
 		if (damage > 0)
@@ -53,7 +58,7 @@ public class Fighter
 		{
 			hp -= damage;
 			self.GetComponent<Animator>().SetTrigger("takeDamage");
-			self.gameObject.GetComponentInChildren<HealthBarScale>().setScalePercent((float)hp/(float)max_hp);
+			self.gameObject.GetComponentInChildren<HealthBarScale>().setScalePercent(Mathf.Clamp((float)hp/(float)max_hp, 0f, 1f));
 			//if (self.ai != null)
 				self.gameObject.GetComponentInChildren<DamagePopupSpawner>().spawnDamagePopup(damage.ToString(), "red");
 			if (hp <= 0)
