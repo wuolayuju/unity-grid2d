@@ -18,13 +18,13 @@ public class DamagePopupSpawner : MonoBehaviour {
 	
 	}
 
-	public void spawnDamagePopup(int damage, string color)
+	public void spawnDamagePopup(string damage, string color)
 	{
 		GameObject damageGameObject = (GameObject) Instantiate(popupPrefab, 
 		                                                       positionSpawn.position, 
 		                                                       Quaternion.identity);
 		
 		damageGameObject.GetComponentInChildren<Text>().text = 
-			"<color="+color+">"+damage.ToString()+"</color>";
+			"<color="+color+">"+damage+"</color>";
 	}
 }

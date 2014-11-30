@@ -18,6 +18,18 @@ public class Fighter
 
 	public string attack(Entity self, Entity target)
 	{
+		// Hit if rnd()*ATK > rnd()*DEF
+		bool isHit = 
+			self.fighterComponent.power * UnityEngine.Random.Range(0f,1f) 
+			>
+			target.fighterComponent.defense * UnityEngine.Random.Range(0f,1f) ;
+
+		if (!isHit)
+		{
+			target.gameObject.GetComponentInChildren<DamagePopupSpawner>().spawnDamagePopup("miss", "red");
+			return self.name + " attacks " + target.name + " but it misses.\n";
+		}
+
 		//a simple formula for attack damage
 		int damage = self.fighterComponent.power - target.fighterComponent.defense;
 			
@@ -43,7 +55,7 @@ public class Fighter
 			self.GetComponent<Animator>().SetTrigger("takeDamage");
 			self.gameObject.GetComponentInChildren<HealthBarScale>().setScalePercent((float)hp/(float)max_hp);
 			//if (self.ai != null)
-				self.gameObject.GetComponentInChildren<DamagePopupSpawner>().spawnDamagePopup(damage, "red");
+				self.gameObject.GetComponentInChildren<DamagePopupSpawner>().spawnDamagePopup(damage.ToString(), "red");
 			if (hp <= 0)
 			{
 				self.GetComponent<Animator>().SetTrigger("die");
