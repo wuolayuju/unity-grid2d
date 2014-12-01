@@ -394,11 +394,11 @@ public class MapManager : MonoBehaviour {
 		}
 	}
 
-	public static void openDoor(int x, int y)
+	public static void toggleDoor(int x, int y)
 	{
 		if (map[x][y].isDoor)
 		{
-			map[x][y].blocksLight = false;
+			map[x][y].blocksLight = !map[x][y].blocksLight;
 		}
 	}
 
