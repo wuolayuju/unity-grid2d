@@ -5,7 +5,9 @@ using System.Collections.Generic;
 
 public class MapManager : MonoBehaviour {
 
-	public TilePrefabsHolder prefabsHolder;
+	public List<TilePrefabsHolder> listPrefabsHolders;
+
+	private TilePrefabsHolder prefabsHolder;
 
 	public static List<List<Tile>> map;
 
@@ -23,6 +25,9 @@ public class MapManager : MonoBehaviour {
 
 	void Awake()
 	{
+		int prefabsHolderIndex = UnityEngine.Random.Range (0, listPrefabsHolders.Count);
+		prefabsHolder = listPrefabsHolders [prefabsHolderIndex];
+
 		map = new List<List<Tile>> ();
 		rooms = new List<Rectangle>();
 	}

@@ -74,7 +74,7 @@ public class GameController : MonoBehaviour {
 		h.gridPosition = playerStartPosition;
 		h.name = "Hero";
 		h.blocks = true;
-		h.fighterComponent = new Fighter (15, 2, 6);
+		h.fighterComponent = new Fighter (15, 3, 6);
 		objects.Add(h);
 
 		Enemy compPlayer;
@@ -94,7 +94,7 @@ public class GameController : MonoBehaviour {
 			compPlayer.gridPosition = pos;
 			compPlayer.name = "Lizard";
 			compPlayer.blocks = true;
-			compPlayer.fighterComponent = new Fighter(10, 2, 3);
+			compPlayer.fighterComponent = new Fighter(10, 2, 5);
 			compPlayer.ai = new BasicEnemy();
 			objects.Add (compPlayer);
 

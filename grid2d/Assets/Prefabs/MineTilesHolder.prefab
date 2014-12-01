@@ -1,0 +1,90 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &100000
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 400000}
+  - 114: {fileID: 11400000}
+  m_Layer: 0
+  m_Name: MineTilesHolder
+  m_TagString: Untagged
+  m_Icon: {fileID: -2065832391, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &400000
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100000}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: -1.16999996, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100000}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3138cd5ab40694a43be1280a0fc9e17c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  N_WALL: {fileID: 100000, guid: 3556f47b15602b344a2f18c67db6a1bc, type: 2}
+  NW_WALL: {fileID: 100000, guid: 49fba626397d286428daeefceeb74c03, type: 2}
+  NE_WALL: {fileID: 100000, guid: 58f5fed2b645abb4481ecfdf56a696c4, type: 2}
+  NS_WALL: {fileID: 100000, guid: a1cd2c118cb6ee84da5c9d507014b3ef, type: 2}
+  W_WALL: {fileID: 100000, guid: 24c8b70ffbb30e545b53d7e458b07789, type: 2}
+  WE_WALL: {fileID: 100000, guid: 06e3c1e76225fc84da7cd2603399446f, type: 2}
+  SW_WALL: {fileID: 100000, guid: 01c783798e2493e4288c52bf78db9d94, type: 2}
+  E_WALL: {fileID: 100000, guid: 9f1800a6b153ee547b30b88f73c60493, type: 2}
+  SE_WALL: {fileID: 100000, guid: ac1b3f9eab78a0a4cb7e7b4bdb956050, type: 2}
+  S_WALL: {fileID: 100000, guid: 4eec5c812c6f11e4980fbac7988c06fb, type: 2}
+  NEW_WALL: {fileID: 100000, guid: 2e899f3293d35414c9b1a97b2a6e1510, type: 2}
+  NWS_WALL: {fileID: 100000, guid: 9930820238c1a1241ae52dcad579219d, type: 2}
+  NES_WALL: {fileID: 100000, guid: 714c862b11d3f8148ac5cd568a5a637f, type: 2}
+  EWS_WALL: {fileID: 100000, guid: 53b0429787b8a974bbee63ab41be4454, type: 2}
+  NESW_WALL: {fileID: 100000, guid: 2be3ed0148add154498df24cd61cbff1, type: 2}
+  COL_WALL: {fileID: 100000, guid: 3556f47b15602b344a2f18c67db6a1bc, type: 2}
+  Door_Opened: {fileID: 100000, guid: b02be8b6f1069444a9c556a9b1be7c0b, type: 2}
+  Door_Closed: {fileID: 100000, guid: b02be8b6f1069444a9c556a9b1be7c0b, type: 2}
+  BLANK_FLOOR: {fileID: 100000, guid: a93161f732eea2e49b9b42e2d3aa6be5, type: 2}
+  N_FLOOR: {fileID: 100000, guid: fb26c008319160b47b964180617924ab, type: 2}
+  NW_FLOOR: {fileID: 100000, guid: 5ba30cb5e77489e4984ceb45580ada61, type: 2}
+  NE_FLOOR: {fileID: 100000, guid: 9a49d70d4b433204e9280d8eaa1a9113, type: 2}
+  NS_FLOOR: {fileID: 100000, guid: 03f76a07db88c59478531ed4cfbc81a3, type: 2}
+  W_FLOOR: {fileID: 100000, guid: f1a690eb898339f47ab713516f080983, type: 2}
+  WE_FLOOR: {fileID: 100000, guid: 8d2ce7bc21cc0fd4c97a8c80b59775db, type: 2}
+  SW_FLOOR: {fileID: 100000, guid: 2c6913895128d3f4e9b76fbf655f0285, type: 2}
+  E_FLOOR: {fileID: 100000, guid: edc916b4c8206954caa7e401af967839, type: 2}
+  SE_FLOOR: {fileID: 100000, guid: 1bd9363d61a138544b87cb311bcfcd2a, type: 2}
+  S_FLOOR: {fileID: 100000, guid: 077b37efddf3a124fa42f3fbf917bafb, type: 2}
+  NEW_FLOOR: {fileID: 100000, guid: e9039b120f6f72c49ac0391f547663a3, type: 2}
+  NWS_FLOOR: {fileID: 100000, guid: 2f213e102373df448a3d0c2f2a9c8682, type: 2}
+  NES_FLOOR: {fileID: 100000, guid: 35ba07b1e40b9fd44af8d3bca2314539, type: 2}
+  EWS_FLOOR: {fileID: 100000, guid: a96f89fec74307c4ba6774b56c8d46ae, type: 2}
+  NESW_FLOOR: {fileID: 100000, guid: 0d6c02858a90ea147b4d019085a1ce1f, type: 2}
+  DEFAULT_TILE: {fileID: 0}
+  Stairs_Up: {fileID: 0}
+  Stairs_Down: {fileID: 100000, guid: 87c15014f394e8c47a4ee6b2156589ac, type: 2}
+--- !u!1001 &100100000
+Prefab:
+  m_ObjectHideFlags: 1
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications: []
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 0}
+  m_RootGameObject: {fileID: 100000}
+  m_IsPrefabParent: 1
+  m_IsExploded: 1

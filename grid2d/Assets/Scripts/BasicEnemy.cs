@@ -18,12 +18,23 @@ public class BasicEnemy
 				return "<color=red>"+self.name + " notices you!."+"</color>\n";
 			}
 
+			// probability to stall for a turn
+			if (UnityEngine.Random.Range(0f, 1f) < 0.2f)
+				return "";
+
 			if (self.distanceTo(GameController.objects[0]) >= 2)
 			{
 				self.moveTowards(GameController.objects[0]);
 			}
 			else
+			{
+				if (GameController.objects[0].gridPosition.x > self.gridPosition.x && !self.facingLeft)
+					self.Flip();
+				if (GameController.objects[0].gridPosition.x < self.gridPosition.x && self.facingLeft)
+					self.Flip();
+
 				return self.fighterComponent.attack(self, GameController.objects[0]);
+			}
 		}
 		else
 		{

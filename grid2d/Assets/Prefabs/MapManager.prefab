@@ -39,12 +39,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9719ece373b9d654a8c6a22c34af4451, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  prefabsHolder: {fileID: 0}
-  mapWidth: 60
-  mapHeight: 60
-  ROOM_MAX_SIZE: 7
+  listPrefabsHolders:
+  - {fileID: 11400000, guid: 794db9d64a960fb4197156b1ab31815a, type: 2}
+  - {fileID: 11400000, guid: 0af13df824adda14683e100b7c3f5d00, type: 2}
+  - {fileID: 11400000, guid: d55ac839bc3e333499bb04ab722177c4, type: 2}
+  mapWidth: 30
+  mapHeight: 30
+  ROOM_MAX_SIZE: 5
   ROOM_MIN_SIZE: 3
-  MAX_ROOMS: 20
+  MAX_ROOMS: 10
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

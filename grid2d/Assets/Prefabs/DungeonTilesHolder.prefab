@@ -74,6 +74,8 @@ MonoBehaviour:
   EWS_FLOOR: {fileID: 100000, guid: df0e008752e2b9a458c288bba417c803, type: 2}
   NESW_FLOOR: {fileID: 100000, guid: 98b827245f7251f40993e6cb80a1a53f, type: 2}
   DEFAULT_TILE: {fileID: 100000, guid: 718da32f5006b9541b0b55a0c86777c4, type: 2}
+  Stairs_Up: {fileID: 0}
+  Stairs_Down: {fileID: 100000, guid: 87c15014f394e8c47a4ee6b2156589ac, type: 2}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

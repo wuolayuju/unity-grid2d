@@ -168,11 +168,11 @@ TextureImporter:
     21300326: Wall_163
     21300328: Wall_164
     21300330: Wall_165
-    21300332: Wall_166
-    21300334: Wall_167
-    21300336: Wall_168
-    21300338: Wall_169
-    21300340: Wall_170
+    21300332: mine_SE_wall
+    21300334: mine_WE_wall
+    21300336: mine_SW_wall
+    21300338: mine_WE_wall
+    21300340: mine_EWS_wall
     21300342: Wall_171
     21300344: Wall_172
     21300346: Wall_173
@@ -187,12 +187,12 @@ TextureImporter:
     21300364: Wall_182
     21300366: Wall_183
     21300368: Wall_184
-    21300370: Wall_185
-    21300372: Wall_186
+    21300370: mine_NS_wall
+    21300372: mine_N_wall
     21300374: Wall_187
-    21300376: Wall_188
-    21300378: Wall_189
-    21300380: Wall_190
+    21300376: mine_NES_wall
+    21300378: mine_NESW_wall
+    21300380: mine_NWS_wall
     21300382: Wall_191
     21300384: Wall_192
     21300386: Wall_193
@@ -207,11 +207,11 @@ TextureImporter:
     21300404: Wall_202
     21300406: Wall_203
     21300408: Wall_204
-    21300410: Wall_205
+    21300410: mine_NE_wall
     21300412: Wall_206
-    21300414: Wall_207
+    21300414: mine_NW_wall
     21300416: Wall_208
-    21300418: Wall_209
+    21300418: mine_NEW_wall
     21300420: Wall_210
     21300422: Wall_211
     21300424: Wall_212
@@ -339,11 +339,11 @@ TextureImporter:
     21300668: Wall_334
     21300670: Wall_335
     21300672: Wall_336
-    21300674: Wall_337
-    21300676: Wall_338
-    21300678: Wall_339
-    21300680: Wall_340
-    21300682: Wall_341
+    21300674: SE_wall_inf
+    21300676: WE_wall_inf
+    21300678: SW_wall_inf
+    21300680: BLANK_wall_inf
+    21300682: EWS_wall_inf
     21300684: Wall_342
     21300686: Wall_343
     21300688: Wall_344
@@ -358,12 +358,12 @@ TextureImporter:
     21300706: Wall_353
     21300708: Wall_354
     21300710: Wall_355
-    21300712: Wall_356
-    21300714: Wall_357
+    21300712: NS_wall_inf
+    21300714: N_wall_inf
     21300716: Wall_358
-    21300718: Wall_359
-    21300720: Wall_360
-    21300722: Wall_361
+    21300718: NES_wall_inf
+    21300720: NESW_wall_inf
+    21300722: NWS_wall_inf
     21300724: Wall_362
     21300726: Wall_363
     21300728: Wall_364
@@ -378,11 +378,11 @@ TextureImporter:
     21300746: Wall_373
     21300748: Wall_374
     21300750: Wall_375
-    21300752: Wall_376
+    21300752: NE_wall_inf
     21300754: Wall_377
-    21300756: Wall_378
+    21300756: NW_wall_inf
     21300758: Wall_379
-    21300760: Wall_380
+    21300760: NEW_wall_inf
     21300762: Wall_381
     21300764: Wall_382
     21300766: Wall_383
@@ -2165,7 +2165,7 @@ TextureImporter:
       alignment: 0
       pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Wall_166
+    - name: mine_SE_wall
       rect:
         serializedVersion: 2
         x: 224
@@ -2175,7 +2175,7 @@ TextureImporter:
       alignment: 0
       pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Wall_167
+    - name: mine_WE_wall
       rect:
         serializedVersion: 2
         x: 240
@@ -2185,7 +2185,7 @@ TextureImporter:
       alignment: 0
       pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Wall_168
+    - name: mine_SW_wall
       rect:
         serializedVersion: 2
         x: 256
@@ -2195,7 +2195,7 @@ TextureImporter:
       alignment: 0
       pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Wall_169
+    - name: mine_WE_wall
       rect:
         serializedVersion: 2
         x: 272
@@ -2205,7 +2205,7 @@ TextureImporter:
       alignment: 0
       pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Wall_170
+    - name: mine_EWS_wall
       rect:
         serializedVersion: 2
         x: 288
@@ -2315,7 +2315,7 @@ TextureImporter:
       alignment: 0
       pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Wall_185
+    - name: mine_NS_wall
       rect:
         serializedVersion: 2
         x: 224
@@ -2325,7 +2325,7 @@ TextureImporter:
       alignment: 0
       pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Wall_186
+    - name: mine_N_wall
       rect:
         serializedVersion: 2
         x: 240
@@ -2335,7 +2335,7 @@ TextureImporter:
       alignment: 0
       pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Wall_188
+    - name: mine_NES_wall
       rect:
         serializedVersion: 2
         x: 272
@@ -2345,7 +2345,7 @@ TextureImporter:
       alignment: 0
       pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Wall_189
+    - name: mine_NESW_wall
       rect:
         serializedVersion: 2
         x: 288
@@ -2355,7 +2355,7 @@ TextureImporter:
       alignment: 0
       pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Wall_190
+    - name: mine_NWS_wall
       rect:
         serializedVersion: 2
         x: 304
@@ -2425,7 +2425,7 @@ TextureImporter:
       alignment: 0
       pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Wall_205
+    - name: mine_NE_wall
       rect:
         serializedVersion: 2
         x: 224
@@ -2435,7 +2435,7 @@ TextureImporter:
       alignment: 0
       pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Wall_207
+    - name: mine_NW_wall
       rect:
         serializedVersion: 2
         x: 256
@@ -2445,7 +2445,7 @@ TextureImporter:
       alignment: 0
       pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Wall_209
+    - name: mine_NEW_wall
       rect:
         serializedVersion: 2
         x: 288
@@ -3335,7 +3335,7 @@ TextureImporter:
       alignment: 0
       pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Wall_337
+    - name: SE_wall_inf
       rect:
         serializedVersion: 2
         x: 224
@@ -3345,7 +3345,7 @@ TextureImporter:
       alignment: 0
       pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Wall_338
+    - name: WE_wall_inf
       rect:
         serializedVersion: 2
         x: 240
@@ -3355,7 +3355,7 @@ TextureImporter:
       alignment: 0
       pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Wall_339
+    - name: SW_wall_inf
       rect:
         serializedVersion: 2
         x: 256
@@ -3365,7 +3365,7 @@ TextureImporter:
       alignment: 0
       pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Wall_340
+    - name: BLANK_wall_inf
       rect:
         serializedVersion: 2
         x: 272
@@ -3375,7 +3375,7 @@ TextureImporter:
       alignment: 0
       pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Wall_341
+    - name: EWS_wall_inf
       rect:
         serializedVersion: 2
         x: 288
@@ -3485,7 +3485,7 @@ TextureImporter:
       alignment: 0
       pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Wall_356
+    - name: NS_wall_inf
       rect:
         serializedVersion: 2
         x: 224
@@ -3495,7 +3495,7 @@ TextureImporter:
       alignment: 0
       pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Wall_357
+    - name: N_wall_inf
       rect:
         serializedVersion: 2
         x: 240
@@ -3505,7 +3505,7 @@ TextureImporter:
       alignment: 0
       pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Wall_359
+    - name: NES_wall_inf
       rect:
         serializedVersion: 2
         x: 272
@@ -3515,7 +3515,7 @@ TextureImporter:
       alignment: 0
       pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Wall_360
+    - name: NESW_wall_inf
       rect:
         serializedVersion: 2
         x: 288
@@ -3525,7 +3525,7 @@ TextureImporter:
       alignment: 0
       pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Wall_361
+    - name: NWS_wall_inf
       rect:
         serializedVersion: 2
         x: 304
@@ -3595,7 +3595,7 @@ TextureImporter:
       alignment: 0
       pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Wall_376
+    - name: NE_wall_inf
       rect:
         serializedVersion: 2
         x: 224
@@ -3605,7 +3605,7 @@ TextureImporter:
       alignment: 0
       pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Wall_378
+    - name: NW_wall_inf
       rect:
         serializedVersion: 2
         x: 256
@@ -3615,7 +3615,7 @@ TextureImporter:
       alignment: 0
       pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Wall_380
+    - name: NEW_wall_inf
       rect:
         serializedVersion: 2
         x: 288
