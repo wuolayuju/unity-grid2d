@@ -24,7 +24,7 @@ public class Fighter
 			-
 			target.fighterComponent.defense * UnityEngine.Random.Range(0f,1f) ;
 
-		Debug.Log(self.name+"->"+target.name+" = "+isHit);
+		//Debug.Log(self.name+"->"+target.name+" = "+isHit);
 
 		if (isHit < 0.0f)
 		{

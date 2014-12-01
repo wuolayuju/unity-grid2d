@@ -51,7 +51,9 @@ public class MapManager : MonoBehaviour {
 		int start = Math.Min(x1, x2);
 		int end = Math.Max(x1, x2);
 
-		for (int i = start; i < end; i++){
+		//Debug.Log ("HORIZONTAL FROM " + start + " TO " + end + " AT Y = " + y);
+
+		for (int i = start; i <= end; i++){
 			map[i][y].isBoundary = false;
 			map[i][y].blocksLight = false;
 		}
@@ -62,8 +64,9 @@ public class MapManager : MonoBehaviour {
 		int start =  Math.Min(y1, y2);
 		int end = Math.Max(y1, y2);
 
+		//Debug.Log ("VERTICAL FROM " + start + " TO " + end + " AT X = " + x);
 
-		for (int i = start; i < end; i++){
+		for (int i = start; i <= end; i++){
 			map[x][i].isBoundary = false;
 			map[x][i].blocksLight = false;
 		}
@@ -416,7 +419,7 @@ public class MapManager : MonoBehaviour {
 		}
 		catch (ArgumentOutOfRangeException e)
 		{
-			Debug.LogError("Tile ("+x+","+y+")");
+			Debug.LogError("Tile ("+x+","+y+") -> EXCEPTION"+e.ToString());
 		}
 		
 		switch(score)
@@ -499,7 +502,7 @@ public class MapManager : MonoBehaviour {
 		}
 		catch (ArgumentOutOfRangeException e)
 		{
-			Debug.LogError("Tile ("+x+","+y+")");
+			Debug.LogError("Tile ("+x+","+y+") -> "+e.ToString());
 		}
 		
 		switch(score)

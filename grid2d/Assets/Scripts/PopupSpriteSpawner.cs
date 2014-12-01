@@ -19,8 +19,6 @@ public class PopupSpriteSpawner : MonoBehaviour {
 	
 	public void spawnTauntPopup()
 	{
-		GameObject damageGameObject = (GameObject) Instantiate(popupPrefab, 
-		                                                       positionSpawn.position, 
-		                                                       Quaternion.identity);
+		Instantiate(popupPrefab, positionSpawn.position, Quaternion.identity);
 	}
 }
