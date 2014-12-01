@@ -73,7 +73,7 @@ TextureImporter:
     21300136: Player1_92
     21300138: Player1_99
     21300140: Player1_100
-    21300142: Player1_101
+    21300142: lizard_boss_1
     21300144: Player1_102
     21300146: Player1_103
     21300148: Player1_104
@@ -830,15 +830,15 @@ TextureImporter:
       alignment: 0
       pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Player1_101
+    - name: lizard_boss_1
       rect:
         serializedVersion: 2
         x: 32
         y: 0
         width: 16
         height: 16
-      alignment: 0
-      pivot: {x: .5, y: .5}
+      alignment: 9
+      pivot: {x: .5, y: .200000003}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Player1_102
       rect:
