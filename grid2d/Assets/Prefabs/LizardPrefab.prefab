@@ -184,7 +184,7 @@ MonoBehaviour:
   name: 
   deadSprite: {fileID: 21300186, guid: 5b876db800b12d44bafc21067e8d703e, type: 3}
   blocks: 0
-  lerpTime: .150000006
+  lerpTime: .100000001
   currentLerpTime: 0
   isMoving: 0
   start: {x: 0, y: 0}

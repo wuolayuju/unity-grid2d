@@ -143,7 +143,7 @@ MonoBehaviour:
   name: 
   deadSprite: {fileID: 21300184, guid: 5b876db800b12d44bafc21067e8d703e, type: 3}
   blocks: 0
-  lerpTime: .150000006
+  lerpTime: .100000001
   currentLerpTime: 0
   isMoving: 0
   start: {x: 0, y: 0}
@@ -152,6 +152,7 @@ MonoBehaviour:
   infoPanelPrefab: {fileID: 0}
   inventory: []
   MAX_ITEMS_INVENTORY: 5
+  onExit: 0
 --- !u!114 &11400002
 MonoBehaviour:
   m_ObjectHideFlags: 1

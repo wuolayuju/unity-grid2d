@@ -36,6 +36,7 @@ public class GameController : MonoBehaviour {
 	public Text UI_hpPlayerValues;
 	public Image UI_heroPortraitImage;
 	public GameObject UI_descendPanel;
+	public GameObject UI_gamePausedPanel;
 
 	void Awake()
 	{
@@ -118,6 +119,7 @@ public class GameController : MonoBehaviour {
 	// Update is called once per frame
 	void Update ()
 	{
+		// RESTART GAME
 		if (isGameover)
 		{
 			if (Input.GetKeyDown(KeyCode.R))
@@ -125,11 +127,15 @@ public class GameController : MonoBehaviour {
 			return;
 		}
 
+		// PAUSE THE GAME IF IN MENU
 		if (inMenu)
+		{
 			return;
+		}
 
 		updateGUI(); 
 
+		// PLAYER DEATH
 		if (objects[0].fighterComponent.hp <= 0)
 		{
 			UI_gameOverText.gameObject.SetActive(true);
@@ -137,6 +143,15 @@ public class GameController : MonoBehaviour {
 			return;
 		}
 
+		// PAUSE MENU
+		if (Input.GetKey (KeyCode.Escape))
+		{
+			UI_gamePausedPanel.gameObject.SetActive(true);
+			inMenu = true;
+			return;
+		}
+
+		// DESCEND TO NEXT LEVEL
 		if (((Hero)objects[0]).onExit && inMenu == false)
 		{
 			UI_descendPanel.gameObject.SetActive(true);
@@ -342,7 +357,13 @@ public class GameController : MonoBehaviour {
 	public void getBackToPlay()
 	{
 		UI_descendPanel.SetActive(false);
+		UI_gamePausedPanel.SetActive (false);
 		inMenu = false;
 		((Hero)objects[0]).onExit = false;
+	}
+
+	public void exitGame()
+	{
+		Application.Quit();
 	}
 }
