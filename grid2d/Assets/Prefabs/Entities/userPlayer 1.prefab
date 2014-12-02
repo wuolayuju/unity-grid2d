@@ -94,7 +94,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100000}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -.805888176, y: -.815964997, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 22400002}
@@ -108,7 +108,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100006}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: .699999988, z: 0}
+  m_LocalPosition: {x: 0, y: .400000006, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 400000}
@@ -234,8 +234,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 422554aebabd3f046bd5a328b7e2f123, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  popupPrefab: {fileID: 100004, guid: 40c51091c155ead4f9d8bd41802ea31c, type: 2}
+  popupPrefab: {fileID: 100002, guid: 40c51091c155ead4f9d8bd41802ea31c, type: 2}
+  canvas: {fileID: 0}
   positionSpawn: {fileID: 400002}
+  cam: {fileID: 0}
 --- !u!114 &11400012
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -341,7 +343,7 @@ RectTransform:
   m_RootOrder: 0
   m_AnchorMin: {x: .5, y: .5}
   m_AnchorMax: {x: .5, y: .5}
-  m_AnchoredPosition: {x: 0, y: -.150000006}
+  m_AnchoredPosition: {x: 0, y: -.449999988}
   m_SizeDelta: {x: .899999976, y: .100000001}
   m_Pivot: {x: .5, y: .5}
 --- !u!224 &22400004

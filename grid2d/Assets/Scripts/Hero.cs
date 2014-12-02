@@ -33,9 +33,9 @@ public class Hero : Entity {
 		// if we are about to enter or exit a door tile, toggle its blocks light property
 		// AUTO CLOSED DOORS
 		if (MapManager.map[(int)dest.x][(int)dest.y].isDoor)
-			MapManager.toggleDoor((int)dest.x, (int)dest.y);
-		else if (MapManager.map[(int)gridPosition.x][(int)gridPosition.y].isDoor)
-			MapManager.toggleDoor((int)gridPosition.x, (int)gridPosition.y);
+			MapManager.openDoor((int)dest.x, (int)dest.y);
+//		else if (MapManager.map[(int)gridPosition.x][(int)gridPosition.y].isDoor)
+//			MapManager.toggleDoor((int)gridPosition.x, (int)gridPosition.y);
 
 		Entity target = null;
 		bool itemsInTile = false;

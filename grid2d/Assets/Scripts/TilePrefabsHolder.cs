@@ -24,6 +24,8 @@ public class TilePrefabsHolder : MonoBehaviour {
 	public GameObject Door_Opened;
 	public GameObject Door_Closed;
 
+	public GameObject DOOR;
+
 	public  GameObject BLANK_FLOOR;
 	public  GameObject N_FLOOR;
 	public  GameObject NW_FLOOR;

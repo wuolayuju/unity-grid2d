@@ -22,7 +22,6 @@ public class MapManager : MonoBehaviour {
 
 	public static Pathfinder pathfinder;
 
-
 	void Awake()
 	{
 		int prefabsHolderIndex = UnityEngine.Random.Range (0, listPrefabsHolders.Count);
@@ -323,6 +322,15 @@ public class MapManager : MonoBehaviour {
 					{
 						GameObject whichPrefabFloor = determinePrefabFloor(r, c);
 						t.gamePrefab = (GameObject)	Instantiate(whichPrefabFloor, t.position, Quaternion.identity);
+						if (t.isDoor)
+						{
+							GameObject doorGO = (GameObject)Instantiate(prefabsHolder.DOOR, t.position, Quaternion.identity);
+							doorGO.name = "Door";
+							doorGO.transform.parent = t.gamePrefab.transform;
+							doorGO.transform.localPosition = Vector3.zero;
+							doorGO.GetComponent<SpriteRenderer>().sortingLayerName = "Player";
+							doorGO.GetComponent<SpriteRenderer>().sortingOrder = 3;
+						}
 					}
 					t.markTileAsUnexplored();
 					toggleObjectsInTile(r, c, false);
@@ -394,11 +402,12 @@ public class MapManager : MonoBehaviour {
 		}
 	}
 
-	public static void toggleDoor(int x, int y)
+	public static void openDoor(int x, int y)
 	{
 		if (map[x][y].isDoor)
 		{
-			map[x][y].blocksLight = !map[x][y].blocksLight;
+			map[x][y].blocksLight = false;
+			map[x][y].gamePrefab.transform.Find("Door/Closed").GetComponent<SpriteRenderer>().enabled = false;
 		}
 	}
 
@@ -483,7 +492,7 @@ public class MapManager : MonoBehaviour {
 	
 	private GameObject determinePrefabFloor (int x, int y)
 	{
-		if(map[x][y].isDoor) return prefabsHolder.Door_Closed;
+		//if(map[x][y].isDoor) return prefabsHolder.Door_Closed;
 
 		if(map[x][y].isExit) return prefabsHolder.Stairs_Down;
 
@@ -524,7 +533,7 @@ public class MapManager : MonoBehaviour {
 			{
 				map[x][y].isDoor = true;
 				map[x][y].blocksLight = true;
-				return prefabsHolder.Door_Closed;
+//				return prefabsHolder.Door_Closed;
 			}
 			return prefabsHolder.WE_FLOOR;
 		case 7:
@@ -536,7 +545,7 @@ public class MapManager : MonoBehaviour {
 			{
 				map[x][y].isDoor = true;
 				map[x][y].blocksLight = true;
-				return prefabsHolder.Door_Closed;
+//				return prefabsHolder.Door_Closed;
 			}
 			return prefabsHolder.NS_FLOOR;
 		case 10:

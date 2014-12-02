@@ -94,7 +94,12 @@ public class Tile{
 	{
 		Color32 colorValue = (Color32) gradient.Evaluate(gradientValue);
 
-		gamePrefab.GetComponent<SpriteRenderer> ().color = colorValue;
+		//gamePrefab.GetComponent<SpriteRenderer> ().color = colorValue;
+		//SpriteRenderer[] srs = gamePrefab.GetComponentsInChildren <SpriteRenderer>();
+		foreach(SpriteRenderer sr in gamePrefab.GetComponentsInChildren <SpriteRenderer>())
+		{
+			sr.color = colorValue;
+		}
 
 		_isLit = true;
 		_isExplored = true;
@@ -102,8 +107,11 @@ public class Tile{
 
 	public void markTileAsUnexplored()
 	{
-		gamePrefab.GetComponent<SpriteRenderer> ().color = COLOR_UNEXPLORED;
-	
+		//gamePrefab.GetComponent<SpriteRenderer> ().color = COLOR_UNEXPLORED;
+		foreach(SpriteRenderer sr in gamePrefab.GetComponentsInChildren <SpriteRenderer>())
+		{
+			sr.color = COLOR_UNEXPLORED;
+		}
 
 		_isLit = false;
 		_isExplored = false;
@@ -111,6 +119,10 @@ public class Tile{
 
 	public void markTileAsExplored()
 	{
-		gamePrefab.GetComponent<SpriteRenderer> ().color = COLOR_EXPLORED;
+		//gamePrefab.GetComponent<SpriteRenderer> ().color = COLOR_EXPLORED;
+		foreach(SpriteRenderer sr in gamePrefab.GetComponentsInChildren <SpriteRenderer>())
+		{
+			sr.color = COLOR_EXPLORED;
+		}
 	}
 }

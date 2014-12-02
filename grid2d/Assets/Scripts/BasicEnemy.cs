@@ -40,19 +40,30 @@ public class BasicEnemy
 		{
 			// patroling = random direction
 			int randDir = UnityEngine.Random.Range(1, 5);
+			int dx = 0, dy = 0;
 			switch(randDir)
 			{
 			case 1:
-				self.move(0, 1); break; // up
+				dx = 0; dy = 1;
+				self.move(0, 1);
+				break; // up
 			case 2:
-				self.move(1, 0); break;// right
+				dx = 1; dy = 0;
+				break;// right
 			case 3:
-				self.move(0, -1); break;// down
+				dx = 0; dy = -1;
+				break;// down
 			case 4:
-				self.move(-1, 0); break;//left
+				dx = -1; dy = 0;
+				break;//left
 			default:
 				break;
 			}
+			// an enemy cannot open doors
+			if(MapManager.map[(int)self.gridPosition.x+dx][(int)self.gridPosition.y+dy].isDoor)
+				return "";
+			else
+				self.move(dx, dy);
 		}
 
 		return "";

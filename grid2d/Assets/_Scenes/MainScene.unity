@@ -3574,6 +3574,16 @@ Prefab:
       propertyPath: m_RootOrder
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 11400000, guid: 28dff2be493c7d141b09530645f3c4eb, type: 2}
+      propertyPath: openDoorSprite
+      value: 
+      objectReference: {fileID: 21300012, guid: c9afcb17537a5714b80928a199ced189,
+        type: 3}
+    - target: {fileID: 11400000, guid: 28dff2be493c7d141b09530645f3c4eb, type: 2}
+      propertyPath: openDoorSpriteStatic
+      value: 
+      objectReference: {fileID: 21300012, guid: c9afcb17537a5714b80928a199ced189,
+        type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 28dff2be493c7d141b09530645f3c4eb, type: 2}
   m_RootGameObject: {fileID: 136067234}

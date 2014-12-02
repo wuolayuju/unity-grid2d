@@ -57,6 +57,7 @@ MonoBehaviour:
   COL_WALL: {fileID: 100000, guid: 3d1542f17cd457c4487fedd101764393, type: 2}
   Door_Opened: {fileID: 100000, guid: 7734ce72e6824d648b4146afd7368c64, type: 2}
   Door_Closed: {fileID: 100000, guid: b02be8b6f1069444a9c556a9b1be7c0b, type: 2}
+  DOOR: {fileID: 100002, guid: f87e2c9400898c24a884e1e5a84ff6fc, type: 2}
   BLANK_FLOOR: {fileID: 100000, guid: 9b2e2d8e3311dbf41a176c1e5137cae1, type: 2}
   N_FLOOR: {fileID: 100000, guid: e14ea5818ccf1d140a80c89ef2986813, type: 2}
   NW_FLOOR: {fileID: 100000, guid: c93df811bd3039f46be73891f45f57f8, type: 2}
