@@ -57,16 +57,16 @@ public class Fighter
 		if (damage > 0)
 		{
 			hp -= damage;
-			self.GetComponent<Animator>().SetTrigger("takeDamage");
+			self.GetComponentInChildren<Animator>().SetTrigger("takeDamage");
 			self.gameObject.GetComponentInChildren<HealthBarScale>().setScalePercent(Mathf.Clamp((float)hp/(float)max_hp, 0f, 1f));
 			//if (self.ai != null)
 				self.gameObject.GetComponentInChildren<DamagePopupSpawner>().spawnDamagePopup(damage.ToString(), "red");
 			if (hp <= 0)
 			{
-				self.GetComponent<Animator>().SetTrigger("die");
+				self.GetComponentInChildren<Animator>().SetTrigger("die");
 				self.blocks = false;
 				self.ai = null;
-				self.GetComponent<SpriteRenderer>().sortingOrder -= 1;
+				self.GetComponentInChildren<SpriteRenderer>().sortingOrder -= 1;
 				return self.name + " has been defeated.\n";
 			}
 		}

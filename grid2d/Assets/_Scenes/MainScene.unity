@@ -2377,8 +2377,8 @@ MonoBehaviour:
   cam: {fileID: 218858997}
   mapManager: {fileID: 136067235}
   playerVisionRange: 6
-  userPlayerPrefab: {fileID: 100000, guid: 59193760f9f65af4283f1f89e829e9ec, type: 2}
-  AIPlayerPrefab: {fileID: 100000, guid: 6bb6568d32b83794288b8ee6273a132f, type: 2}
+  userPlayerPrefab: {fileID: 100000, guid: b5d4f889eebffcc47afe3a5bf9f8c84b, type: 2}
+  AIPlayerPrefab: {fileID: 100000, guid: ffdbd6f9d9968e44788a64788f87f310, type: 2}
   healingPotionPrefab: {fileID: 100000, guid: c27a2ac01bee6fa489ada84213f6dd18, type: 2}
   turnTaken: 0
   isGameover: 0

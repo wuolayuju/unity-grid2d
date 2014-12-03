@@ -101,12 +101,12 @@ public class Entity : MonoBehaviour{
 
 		if (!MapManager.map[(int)destination.x][(int)destination.y].isBoundary)
 		{
+			GetComponentInChildren<Animator>().SetTrigger("move");
 			start = transform.position;
 			currentLerpTime = 0f;
 			//transform.position = Vector2.Lerp(transform.position, destination, Time.deltaTime * 1.0f);
 			gridPosition = destination;
 			isMoving = true;
-
 		}
 	}
 
@@ -139,9 +139,9 @@ public class Entity : MonoBehaviour{
 	public void killEntity()
 	{
 
-		Destroy(GetComponent<Animator>());
+		Destroy(GetComponentInChildren<Animator>());
 		transform.Find("HealthBarCanvas").gameObject.SetActive(false);
-		SpriteRenderer sr = GetComponent<SpriteRenderer>();
+		SpriteRenderer sr = GetComponentInChildren<SpriteRenderer>();
 		sr.sprite = deadSprite;
 		sr.color = Color.white;
 	}

@@ -52,7 +52,7 @@ public class GameController : MonoBehaviour {
 		MapManager.pathfinder = new Pathfinder(mapManager.mapWidth, mapManager.mapHeight);
 		mapManager.FOV (objects[0].gridPosition, playerVisionRange);
 		cam.GetComponent<CameraController>().LookAtPlayer();
-		UI_heroPortraitImage.sprite = userPlayerPrefab.GetComponent<SpriteRenderer>().sprite;
+//		UI_heroPortraitImage.sprite = userPlayerPrefab.GetComponentInChildren<SpriteRenderer>().sprite;
 	}
 
 	void OnGUI ()
@@ -179,7 +179,7 @@ public class GameController : MonoBehaviour {
 				if (objects[i].ai != null)
 				{
 					bool patroling;
-					if (objects[i].GetComponent<SpriteRenderer>().enabled)
+					if (objects[i].GetComponentInChildren<SpriteRenderer>().enabled)
 						patroling = false;
 					else
 						patroling = true;

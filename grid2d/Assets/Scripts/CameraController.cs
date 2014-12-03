@@ -3,7 +3,7 @@ using System.Collections;
 
 public class CameraController : MonoBehaviour {
 
-	public GameObject target;
+	public Transform target;
 	public float z_offset = -10;
 
 	private Vector3 offset;
@@ -16,7 +16,7 @@ public class CameraController : MonoBehaviour {
 
 	public void LookAtPlayer()
 	{
-		target = GameObject.FindWithTag("Player");
+		target = GameObject.FindWithTag("PlayerTransform").transform;
 		if (target == null)
 			Debug.Log("TARGET NULL");
 	}

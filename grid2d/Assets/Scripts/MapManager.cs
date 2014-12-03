@@ -398,7 +398,7 @@ public class MapManager : MonoBehaviour {
 			if (e.gridPosition.x == x && e.gridPosition.y == y)
 			{
 				try { e.GetComponentInChildren<Canvas>().enabled = isEnabled; }catch{}
-				e.GetComponent<SpriteRenderer>().enabled = isEnabled;
+				e.GetComponentInChildren<SpriteRenderer>().enabled = isEnabled;
 			}
 		}
 	}
