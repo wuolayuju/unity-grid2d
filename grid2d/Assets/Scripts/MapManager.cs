@@ -332,6 +332,7 @@ public class MapManager : MonoBehaviour {
 							doorGO.GetComponent<SpriteRenderer>().sortingOrder = 3;
 						}
 					}
+					t.gamePrefab.transform.parent = this.transform;
 					t.markTileAsUnexplored();
 					toggleObjectsInTile(r, c, false);
 				}

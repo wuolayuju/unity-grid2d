@@ -241,48 +241,29 @@ public class GameController : MonoBehaviour {
 			}
 			else if (Input.GetButtonDown("useItem1"))
 			{
-				Hero h = (Hero)objects[0];
-				if (h.inventory[0] != null)
-				{
-					info = h.inventory[0].GetComponentInChildren<ItemEffect>().useItem(h.inventory[0]) + info;
-					updateGUIInventory();
-				}
+				info = useItemInSlot(0) + info;
+				updateGUIInventory();
 			}
 			else if (Input.GetButtonDown("useItem2"))
 			{
-				Hero h = (Hero)objects[0];
-				if (h.inventory[1] != null)
-				{
-					info = h.inventory[1].GetComponentInChildren<ItemEffect>().useItem(h.inventory[1]) + info;
-					updateGUIInventory();
-				}
+				info = useItemInSlot(1) + info;
+				updateGUIInventory();
 			}
 			else if (Input.GetButtonDown("useItem3"))
 			{
-				Hero h = (Hero)objects[0];
-				if (h.inventory[2] != null)
-				{
-					info = h.inventory[2].GetComponentInChildren<ItemEffect>().useItem(h.inventory[2]) + info;
-					updateGUIInventory();
-				}
+				info = useItemInSlot(2) + info;
+				updateGUIInventory();
 			}
 			else if (Input.GetButtonDown("useItem4"))
 			{
-				Hero h = (Hero)objects[0];
-				if (h.inventory[3] != null)
-				{
-					info = h.inventory[3].GetComponentInChildren<ItemEffect>().useItem(h.inventory[3]) + info;
-					updateGUIInventory();
-				}
+				info = useItemInSlot(3) + info;
+				updateGUIInventory();
 			}
 			else if (Input.GetButtonDown("useItem5"))
 			{
-				Hero h = (Hero)objects[0];
-				if (h.inventory[4] != null)
-				{
-					info = h.inventory[4].GetComponentInChildren<ItemEffect>().useItem(h.inventory[4]) + info;
-					updateGUIInventory();
-				}
+				info = useItemInSlot(4) + info;
+				updateGUIInventory();
+
 			}
 			else
 			{
@@ -297,6 +278,24 @@ public class GameController : MonoBehaviour {
 	IEnumerator TurnDelay()
 	{
 		yield return new WaitForSeconds(0.4f);
+	}
+
+	string useItemInSlot(int slot)
+	{
+		try
+		{
+			Hero h = (Hero)objects[0];
+			if (h.inventory[slot] != null)
+			{
+				return h.inventory[slot].GetComponentInChildren<ItemEffect>().useItem(h.inventory[slot]);
+			}
+		}
+		catch
+		{
+			return "<color=orange>No item in that slot.</color>\n";
+		}
+
+		return "";
 	}
 
 	void updateGUI()
