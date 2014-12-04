@@ -53,8 +53,8 @@ public class Entity : MonoBehaviour{
 			float perc = currentLerpTime / lerpTime;
 			transform.position = Vector2.Lerp(start, destination, perc);
 
-			if ((Vector2)transform.position == destination)
-				isMoving = false;
+//			if ((Vector2)transform.position == destination)
+//				isMoving = false;
 		}
 	}
 
@@ -144,5 +144,10 @@ public class Entity : MonoBehaviour{
 		SpriteRenderer sr = GetComponentInChildren<SpriteRenderer>();
 		sr.sprite = deadSprite;
 		sr.color = Color.white;
+	}
+
+	public void finishedMoving()
+	{
+		isMoving = false;
 	}
 }

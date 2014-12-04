@@ -41,8 +41,8 @@ public class Fighter
 		string info = "";
 		if (damage > 0)
 		{
-			info = self.name + " attacks " + target.name + " for " + damage + " hit points.\n";
 			info = target.fighterComponent.takeDamage(target, damage) + info;
+			info = self.name + " attacks " + target.name + " for " + damage + " hit points.\n";
 		}
 		else
 		{
@@ -57,7 +57,7 @@ public class Fighter
 		if (damage > 0)
 		{
 			hp -= damage;
-			self.GetComponentInChildren<Animator>().SetTrigger("takeDamage");
+			self.GetComponentInChildren<Animator>().Play("takeDamage");
 			self.gameObject.GetComponentInChildren<HealthBarScale>().setScalePercent(Mathf.Clamp((float)hp/(float)max_hp, 0f, 1f));
 			//if (self.ai != null)
 				self.gameObject.GetComponentInChildren<DamagePopupSpawner>().spawnDamagePopup(damage.ToString(), "red");

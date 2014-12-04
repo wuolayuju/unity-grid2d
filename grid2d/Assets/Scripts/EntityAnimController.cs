@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class KillEntity : MonoBehaviour {
+public class EntityAnimController : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
@@ -16,5 +16,10 @@ public class KillEntity : MonoBehaviour {
 	void killEntity()
 	{
 		transform.parent.GetComponent<Entity> ().killEntity ();
+	}
+
+	void finishedMoving()
+	{
+		transform.parent.GetComponent<Entity> ().finishedMoving ();
 	}
 }

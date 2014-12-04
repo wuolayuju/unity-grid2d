@@ -95,7 +95,7 @@ public class GameController : MonoBehaviour {
 			compPlayer.gridPosition = pos;
 			compPlayer.name = "Lizard";
 			compPlayer.blocks = true;
-			compPlayer.fighterComponent = new Fighter(10, 2, 5);
+			compPlayer.fighterComponent = new Fighter(3, 2, 5);
 			compPlayer.ai = new BasicEnemy();
 			objects.Add (compPlayer);
 
@@ -114,7 +114,6 @@ public class GameController : MonoBehaviour {
 			}
 		}
 	}
-
 
 	// Update is called once per frame
 	void Update ()
@@ -194,6 +193,7 @@ public class GameController : MonoBehaviour {
 		// if all the other player has taken their turns, the user player can move
 		if (turnFinished && !objects[0].isMoving)
 		{
+
 			turnTaken = true;
 			if (Input.GetButtonDown("up")){
 				info = ((Hero)objects[0]).moveOrAttack(0, 1) + info;

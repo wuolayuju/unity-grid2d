@@ -168,6 +168,18 @@ public class Pathfinder {
 		}
 	}
 
+	public void UpdateSearchNodes()
+	{
+		for(int entIndex = 1; entIndex < GameController.objects.Count ; entIndex++)
+		{
+			Entity e = GameController.objects[entIndex];
+			if (e.ai != null)
+			{
+				searchNodes[(int)e.gridPosition.x, (int)e.gridPosition.y].Walkable = false;
+			}
+		}
+	}
+
 	/// <summary>
 	/// Resets the state of the search nodes.
 	/// </summary>
