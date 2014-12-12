@@ -32,6 +32,8 @@ public class Fighter
 			return self.name + " attacks " + target.name + " but it misses.\n";
 		}
 
+		self.GetComponentInChildren<Animator>().Play("attackSide");
+
 		//a simple formula for attack damage
 		int damage = UnityEngine.Random.Range(self.fighterComponent.power - target.fighterComponent.defense,
 		                                      self.fighterComponent.power - target.fighterComponent.defense + Mathf.RoundToInt(isHit));

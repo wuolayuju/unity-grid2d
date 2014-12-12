@@ -14,6 +14,7 @@ public class GameController : MonoBehaviour {
 	public GameObject userPlayerPrefab;
 	public GameObject AIPlayerPrefab;
 	public GameObject healingPotionPrefab;
+	public GameObject lightningScrollPrefab;
 
 	public static List<Entity> objects;
 
@@ -100,10 +101,11 @@ public class GameController : MonoBehaviour {
 			objects.Add (compPlayer);
 
 			//items
+			Entity it;
 			if (UnityEngine.Random.Range(0,9) > 3)
 			{
 				pos = new Vector2(room.x1, room.y1);
-				Entity it = ((GameObject) Instantiate (healingPotionPrefab,
+				it = ((GameObject) Instantiate (healingPotionPrefab,
 				                                       pos,
 				                                       Quaternion.identity)).GetComponent<Entity>();
 				it.gridPosition = pos;
@@ -112,6 +114,17 @@ public class GameController : MonoBehaviour {
 				it.item = new Item("Heals up to 10 health points");
 				objects.Add(it);
 			}
+
+			pos = new Vector2(room.x2-1, room.y2-1);
+			it = ((GameObject) Instantiate (lightningScrollPrefab,
+			                                       pos,
+			                                       Quaternion.identity)).GetComponent<Entity>();
+			it.gridPosition = pos;
+			it.name = "Lightning Scroll";
+			it.blocks = false;
+			it.item = new Item("Strikes closest enemy for "+/*lightningScrollPrefab.GetComponentInChildren<LightningEffect>().LIGHTNING_DAMAGE*/10+" HP");
+			objects.Add(it);
+
 		}
 	}
 
@@ -282,18 +295,18 @@ public class GameController : MonoBehaviour {
 
 	string useItemInSlot(int slot)
 	{
-		try
-		{
+//		try
+//		{
 			Hero h = (Hero)objects[0];
 			if (h.inventory[slot] != null)
 			{
 				return h.inventory[slot].GetComponentInChildren<ItemEffect>().useItem(h.inventory[slot]);
 			}
-		}
-		catch
-		{
-			return "<color=orange>No item in that slot.</color>\n";
-		}
+//		}
+//		catch
+//		{
+//			return "<color=orange>No item in that slot.</color>\n";
+//		}
 
 		return "";
 	}

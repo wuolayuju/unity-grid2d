@@ -409,7 +409,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 3
 --- !u!1 &151082006
 GameObject:
   m_ObjectHideFlags: 0
@@ -657,7 +657,7 @@ Transform:
   - {fileID: 44564540}
   - {fileID: 1693311346}
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 2
 --- !u!114 &218858999
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2113,7 +2113,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 400002, guid: 368d0576c0fa0974db0a399ec63449d9, type: 2}
       propertyPath: m_RootOrder
-      value: 1
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 11400000, guid: 368d0576c0fa0974db0a399ec63449d9, type: 2}
       propertyPath: target
@@ -2380,6 +2380,8 @@ MonoBehaviour:
   userPlayerPrefab: {fileID: 100000, guid: b5d4f889eebffcc47afe3a5bf9f8c84b, type: 2}
   AIPlayerPrefab: {fileID: 100000, guid: ffdbd6f9d9968e44788a64788f87f310, type: 2}
   healingPotionPrefab: {fileID: 100000, guid: c27a2ac01bee6fa489ada84213f6dd18, type: 2}
+  lightningScrollPrefab: {fileID: 100000, guid: 55e38fca362a0394998376bb70d78db3,
+    type: 2}
   turnTaken: 0
   isGameover: 0
   inMenu: 0
@@ -2403,7 +2405,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 1
 --- !u!1 &755316872
 GameObject:
   m_ObjectHideFlags: 0
@@ -3572,7 +3574,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 28dff2be493c7d141b09530645f3c4eb, type: 2}
       propertyPath: m_RootOrder
-      value: 2
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 11400000, guid: 28dff2be493c7d141b09530645f3c4eb, type: 2}
       propertyPath: openDoorSprite

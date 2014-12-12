@@ -125,6 +125,27 @@ public class Entity : MonoBehaviour{
 			Mathf.Abs(gridPosition.y - e.gridPosition.y);
 	}
 
+	public Entity closestEntity ()
+	{
+		Entity target = null;
+		float closestDist = 10;
+
+		for (int i = 1; i < GameController.objects.Count ; i++)
+		{
+			Entity e = GameController.objects[i];
+			if (e.GetComponentInChildren<SpriteRenderer>().enabled && e.ai != null)
+			{
+				float dist = distanceTo(e);
+				if (dist < closestDist)
+				{
+					target = e;
+					closestDist = dist;
+				}
+			}
+		}
+		return target;
+	}
+
 	public void moveTowards(Entity e)
 	{
 

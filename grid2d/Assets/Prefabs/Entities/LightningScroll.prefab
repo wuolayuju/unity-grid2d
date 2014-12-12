@@ -8,12 +8,12 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 400000}
-  - 114: {fileID: 11400000}
   - 114: {fileID: 11400002}
+  - 114: {fileID: 11400000}
   - 212: {fileID: 21200000}
   - 61: {fileID: 6100000}
   m_Layer: 8
-  m_Name: HealingPotion
+  m_Name: LightningScroll
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -50,6 +50,18 @@ MonoBehaviour:
   m_GameObject: {fileID: 100000}
   m_Enabled: 1
   m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 36f9991f9a2b0a54fb2127df4a183ab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  LIGHTNING_DAMAGE: 10
+--- !u!114 &11400002
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100000}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3a8d354d88307834782047e2cc8c8317, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
@@ -64,18 +76,6 @@ MonoBehaviour:
   destination: {x: 0, y: 0}
   facingLeft: 0
   infoPanelPrefab: {fileID: 100002, guid: 3023b813f2760f846ab6221e8d6cda80, type: 2}
---- !u!114 &11400002
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100000}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 64584071b7a2bf0478e16dd5a42de893, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  hpToHeal: 10
 --- !u!212 &21200000
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -96,7 +96,7 @@ SpriteRenderer:
   m_ScaleInLightmap: 1
   m_SortingLayerID: 1870419847
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: f78ce7869a2222b4c94c2f514534062f, type: 3}
+  m_Sprite: {fileID: 21300032, guid: 86f58ce8fec0f26458f1ee9aa6a904d9, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
 --- !u!1001 &100100000
 Prefab:
