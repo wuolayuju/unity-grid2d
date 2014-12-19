@@ -128,7 +128,7 @@ public class Entity : MonoBehaviour{
 	public Entity closestEntity ()
 	{
 		Entity target = null;
-		float closestDist = 10;
+		float closestDist = 1000;
 
 		for (int i = 1; i < GameController.objects.Count ; i++)
 		{

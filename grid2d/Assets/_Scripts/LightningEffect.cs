@@ -3,7 +3,9 @@ using System.Collections;
 
 public class LightningEffect : ItemEffect {
 
+	public GameObject visualEffect;
 	public int LIGHTNING_DAMAGE = 10;
+
 
 	// Use this for initialization
 	void Start () {
@@ -19,11 +21,13 @@ public class LightningEffect : ItemEffect {
 	{
 		Hero h = (Hero)GameController.objects[0];
 
-		Entity target = self.closestEntity();
+		Entity target = h.closestEntity();
 		if (target == null)
 		{
 			return "<color=red>No enemy is close enoguh to strike!</color>\n";
 		}
+
+		Instantiate (visualEffect, target.gridPosition, Quaternion.identity);
 
 		Debug.Log("ENEMY LIGHTINING: "+target.name);
 
