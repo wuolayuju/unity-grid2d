@@ -29,8 +29,6 @@ public class LightningEffect : ItemEffect {
 
 		Instantiate (visualEffect, target.gridPosition, Quaternion.identity);
 
-		Debug.Log("ENEMY LIGHTINING: "+target.name);
-
 		target.fighterComponent.takeDamage(target, LIGHTNING_DAMAGE);
 
 		h.inventory.Remove(self);
