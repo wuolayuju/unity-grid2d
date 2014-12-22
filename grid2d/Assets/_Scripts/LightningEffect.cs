@@ -31,8 +31,20 @@ public class LightningEffect : ItemEffect {
 
 		target.fighterComponent.takeDamage(target, LIGHTNING_DAMAGE);
 
+		//StartCoroutine(delay(target));
+
 		h.inventory.Remove(self);
 
 		return "<color=cyan>A lightning bolt strikes "+target.name+" for "+LIGHTNING_DAMAGE+" hit points!.</color>\n";
+	}
+
+	private IEnumerator delay(Entity target)
+	{
+		BasicEnemy ai = target.ai;
+		target.ai = null;
+		yield return new WaitForSeconds(0.5f);
+
+		target.fighterComponent.takeDamage(target, LIGHTNING_DAMAGE);
+		target.ai = ai;
 	}
 }

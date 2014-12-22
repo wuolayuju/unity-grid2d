@@ -10,6 +10,8 @@ public class Entity : MonoBehaviour{
 	public Sprite deadSprite;
 	public bool blocks;
 
+	public GameObject slashEffect;
+
 	public Fighter fighterComponent = null;
 	public BasicEnemy ai = null;
 	public Item item = null;
@@ -170,5 +172,10 @@ public class Entity : MonoBehaviour{
 	public void finishedMoving()
 	{
 		isMoving = false;
+	}
+
+	public void instantiateSlash(Vector3 pos)
+	{
+		Instantiate(slashEffect, pos, Quaternion.identity);
 	}
 }

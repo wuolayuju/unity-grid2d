@@ -43,6 +43,7 @@ public class Fighter
 		string info = "";
 		if (damage > 0)
 		{
+			self.instantiateSlash(target.transform.position);
 			info = target.fighterComponent.takeDamage(target, damage) + info;
 			info = self.name + " attacks " + target.name + " for " + damage + " hit points.\n";
 		}

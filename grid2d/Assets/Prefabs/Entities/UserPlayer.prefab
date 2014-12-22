@@ -172,6 +172,7 @@ MonoBehaviour:
   name: Hero
   deadSprite: {fileID: 21300184, guid: 5b876db800b12d44bafc21067e8d703e, type: 3}
   blocks: 0
+  slashEffect: {fileID: 100000, guid: 02d56308007f9f44a87c6440ab0702a2, type: 2}
   lerpTime: .100000001
   currentLerpTime: 0
   isMoving: 0
