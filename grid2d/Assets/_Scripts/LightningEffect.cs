@@ -29,13 +29,13 @@ public class LightningEffect : ItemEffect {
 
 		Instantiate (visualEffect, target.gridPosition, Quaternion.identity);
 
-		target.fighterComponent.takeDamage(target, LIGHTNING_DAMAGE);
+		string info = target.fighterComponent.takeDamage(target, LIGHTNING_DAMAGE);
 
 		//StartCoroutine(delay(target));
 
 		h.inventory.Remove(self);
 
-		return "<color=cyan>A lightning bolt strikes "+target.name+" for "+LIGHTNING_DAMAGE+" hit points!.</color>\n";
+		return info + "<color=cyan>A lightning bolt strikes "+target.name+" for "+LIGHTNING_DAMAGE+" hit points!.</color>\n";
 	}
 
 	private IEnumerator delay(Entity target)

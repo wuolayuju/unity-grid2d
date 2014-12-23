@@ -5,16 +5,9 @@ using System.Collections.Generic;
 
 public class Entity : MonoBehaviour{
 
-	public Vector2 gridPosition;
 	public new string name;
-	public Sprite deadSprite;
 	public bool blocks;
-
-	public GameObject slashEffect;
-
-	public Fighter fighterComponent = null;
-	public BasicEnemy ai = null;
-	public Item item = null;
+	public Vector2 gridPosition;
 
 	public float lerpTime = 1.0f;
 	public float currentLerpTime;
@@ -22,6 +15,12 @@ public class Entity : MonoBehaviour{
 	public Vector2 start; 
 	public Vector2 destination;
 	public bool facingLeft = true;
+
+	public Sprite deadSprite;
+
+	public Fighter fighterComponent = null;
+	public BasicEnemy ai = null;
+	public Item item = null;
 
 	public GameObject infoPanelPrefab;
 
@@ -174,8 +173,4 @@ public class Entity : MonoBehaviour{
 		isMoving = false;
 	}
 
-	public void instantiateSlash(Vector3 pos)
-	{
-		Instantiate(slashEffect, pos, Quaternion.identity);
-	}
 }

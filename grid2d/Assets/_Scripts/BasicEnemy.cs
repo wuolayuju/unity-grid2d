@@ -2,8 +2,10 @@
 using System.Collections;
 
 
-public class BasicEnemy
+public class BasicEnemy : MonoBehaviour
 {
+	public int xp;
+
 	public bool taunted = false;
 
 	public string takeTurn(Entity self, bool patrol)

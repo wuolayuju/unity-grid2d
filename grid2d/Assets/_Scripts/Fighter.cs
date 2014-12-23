@@ -1,12 +1,14 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Fighter
+public class Fighter : MonoBehaviour
 {
 	public int max_hp;
 	public int hp;
 	public int defense;
 	public int power;
+	
+	public GameObject slashEffect;
 
 	public Fighter (int hp, int defense, int power)
 	{
@@ -43,15 +45,14 @@ public class Fighter
 		string info = "";
 		if (damage > 0)
 		{
-			self.instantiateSlash(target.transform.position);
+			Instantiate(slashEffect, target.transform.position, Quaternion.identity);
 			info = target.fighterComponent.takeDamage(target, damage) + info;
-			info = self.name + " attacks " + target.name + " for " + damage + " hit points.\n";
+			info += self.name + " attacks " + target.name + " for " + damage + " hit points.\n";
 		}
 		else
 		{
 			info = self.name + " attacks " + target.name + " but it has no effect.\n";
 		}
-
 		return info;
 	}
 
@@ -68,9 +69,18 @@ public class Fighter
 			{
 				self.GetComponentInChildren<Animator>().SetTrigger("die");
 				self.blocks = false;
-				self.ai = null;
+				string info = "";
+				if (!(self is Hero))
+				{
+					Hero h = (Hero) GameController.objects[0];
+					h.experience_points += self.ai.xp;
+					info += h.checkLevelUp();
+				}
+
 				self.GetComponentInChildren<SpriteRenderer>().sortingOrder -= 1;
-				return self.name + " has been defeated.\n";
+				info += self.name + " has been defeated. You gain "+self.ai.xp+" experience points.\n";
+				self.ai = null;
+				return info;
 			}
 		}
 		return "";

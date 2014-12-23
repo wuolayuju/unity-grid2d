@@ -9,6 +9,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 400000}
   - 114: {fileID: 11400000}
+  - 114: {fileID: 11419444}
   m_Layer: 0
   m_Name: UserPlayer
   m_TagString: PlayerTransform
@@ -168,20 +169,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f53522b3a1381964faf49398599d8fbf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gridPosition: {x: 0, y: 0}
   name: Hero
-  deadSprite: {fileID: 21300184, guid: 5b876db800b12d44bafc21067e8d703e, type: 3}
   blocks: 0
-  slashEffect: {fileID: 100000, guid: 02d56308007f9f44a87c6440ab0702a2, type: 2}
+  gridPosition: {x: 0, y: 0}
   lerpTime: .100000001
   currentLerpTime: 0
   isMoving: 0
   start: {x: 0, y: 0}
   destination: {x: 0, y: 0}
   facingLeft: 0
+  deadSprite: {fileID: 21300184, guid: 5b876db800b12d44bafc21067e8d703e, type: 3}
+  fighterComponent: {fileID: 11419444}
+  ai: {fileID: 0}
   infoPanelPrefab: {fileID: 0}
   inventory: []
   MAX_ITEMS_INVENTORY: 5
+  level: 1
+  experience_points: 0
+  LEVEL_UP_BASE: 200
+  LEVEL_UP_FACTOR: 150
   onExit: 0
 --- !u!114 &11400002
 MonoBehaviour:
@@ -251,7 +257,6 @@ MonoBehaviour:
   m_Script: {fileID: 1301386320, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Priority: 3
   ignoreReversedGraphics: 1
   blockingObjects: 0
   m_BlockingMask:
@@ -300,6 +305,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 98af36cf37026984eb4533cd43450307, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &11419444
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100000}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e605f37fffc39d5458646b4b55b03fd7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  max_hp: 15
+  hp: 15
+  defense: 3
+  power: 6
+  slashEffect: {fileID: 100000, guid: 02d56308007f9f44a87c6440ab0702a2, type: 2}
 --- !u!212 &21200000
 SpriteRenderer:
   m_ObjectHideFlags: 1

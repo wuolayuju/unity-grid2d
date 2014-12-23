@@ -7,6 +7,12 @@ public class Hero : Entity {
 	public List<Entity> inventory = new List<Entity>();
 	public int MAX_ITEMS_INVENTORY = 5;
 
+	public int level;
+	public int experience_points;
+
+	public int LEVEL_UP_BASE;
+	public int LEVEL_UP_FACTOR;
+
 	public bool onExit;
 
 	void Start()
@@ -68,5 +74,19 @@ public class Hero : Entity {
 		}
 
 		return null;
+	}
+
+	public string checkLevelUp()
+	{
+		int level_up_xp = LEVEL_UP_BASE + level * LEVEL_UP_FACTOR;
+		if (experience_points >= level_up_xp)
+		{
+			level += 1;
+			experience_points -= level_up_xp;
+
+			Debug.Log("Your battle skills grow stronger! You reached level " + level + "!");
+			return "Your battle skills grow stronger! You reached level " + level + "!\n";
+		}
+		return "";
 	}
 }

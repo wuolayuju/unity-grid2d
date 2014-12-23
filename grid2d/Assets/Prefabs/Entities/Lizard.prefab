@@ -9,6 +9,8 @@ GameObject:
   m_Component:
   - 4: {fileID: 400000}
   - 114: {fileID: 11400000}
+  - 114: {fileID: 11421988}
+  - 114: {fileID: 11485456}
   m_Layer: 0
   m_Name: Lizard
   m_TagString: Untagged
@@ -127,7 +129,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100000}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.21530879, y: -.0426923484, z: 0}
+  m_LocalPosition: {x: 7.40238905, y: 6.24315691, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 400006}
@@ -209,17 +211,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 68f74ad24abbcc845a9bb4dddc34ecf3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gridPosition: {x: 0, y: 0}
   name: Lizard
-  deadSprite: {fileID: 21300186, guid: 5b876db800b12d44bafc21067e8d703e, type: 3}
   blocks: 0
-  slashEffect: {fileID: 100000, guid: 02d56308007f9f44a87c6440ab0702a2, type: 2}
+  gridPosition: {x: 0, y: 0}
   lerpTime: .100000001
   currentLerpTime: 0
   isMoving: 0
   start: {x: 0, y: 0}
   destination: {x: 0, y: 0}
   facingLeft: 0
+  deadSprite: {fileID: 21300186, guid: 5b876db800b12d44bafc21067e8d703e, type: 3}
+  fighterComponent: {fileID: 11421988}
+  ai: {fileID: 11485456}
   infoPanelPrefab: {fileID: 0}
 --- !u!114 &11400002
 MonoBehaviour:
@@ -313,7 +316,6 @@ MonoBehaviour:
   m_Script: {fileID: 1301386320, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Priority: 3
   ignoreReversedGraphics: 1
   blockingObjects: 0
   m_BlockingMask:
@@ -351,6 +353,35 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 98af36cf37026984eb4533cd43450307, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &11421988
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100000}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e605f37fffc39d5458646b4b55b03fd7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  max_hp: 3
+  hp: 3
+  defense: 2
+  power: 5
+  slashEffect: {fileID: 100000, guid: 02d56308007f9f44a87c6440ab0702a2, type: 2}
+--- !u!114 &11485456
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100000}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 33ebd0509f070664fba79dccd6cd6f83, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  xp: 100
+  taunted: 0
 --- !u!212 &21200000
 SpriteRenderer:
   m_ObjectHideFlags: 1
