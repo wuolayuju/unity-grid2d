@@ -7,15 +7,18 @@ public class DamagePopupSpawner : MonoBehaviour {
 	public GameObject popupPrefab;
 	public GameObject canvas;
 	public Transform positionSpawn;
-	public Camera cam;
+
+	void Awake ()
+	{
+		canvas = GameObject.Find("BasicUI");
+	}
 
 	// Use this for initialization
 	void Start ()
 	{
 		canvas = GameObject.Find("BasicUI");
 		//popupPrefab.transform.parent = canvas.transform;
-
-		cam = GameObject.Find("Camera&Light").GetComponent<Camera>();
+		
 //		popupPrefab.transform.Find("DamagePopupPrefab/DamagePopupCanvas").GetComponent<Canvas>().worldCamera = cam;
 	}
 	
@@ -26,6 +29,7 @@ public class DamagePopupSpawner : MonoBehaviour {
 
 	public void spawnDamagePopup(string damage, string color)
 	{
+		canvas = GameObject.Find("BasicUI");
 
 		GameObject damageGameObject = (GameObject) Instantiate(popupPrefab, 
 		                                                       positionSpawn.position, 

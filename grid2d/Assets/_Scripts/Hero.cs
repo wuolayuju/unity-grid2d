@@ -15,10 +15,15 @@ public class Hero : Entity {
 
 	public bool onExit;
 
+	public bool hasLeveledUp;
+
+	public AudioClip stepSound;
+
 	void Start()
 	{
 		inventory.Capacity = MAX_ITEMS_INVENTORY;
 		onExit = false;
+		hasLeveledUp = false;
 	}
 
 	public Hero (Vector2 gridPosition, string name)
@@ -37,7 +42,6 @@ public class Hero : Entity {
 		Vector2 dest = new Vector2(gridPosition.x + dx, gridPosition.y + dy);
 
 		// if we are about to enter or exit a door tile, toggle its blocks light property
-		// AUTO CLOSED DOORS
 		if (MapManager.map[(int)dest.x][(int)dest.y].isDoor)
 			MapManager.openDoor((int)dest.x, (int)dest.y);
 //		else if (MapManager.map[(int)gridPosition.x][(int)gridPosition.y].isDoor)
@@ -63,6 +67,7 @@ public class Hero : Entity {
 		}
 		else
 		{
+			AudioSource.PlayClipAtPoint(stepSound, this.transform.position);
 			move (dx, dy);
 			if(MapManager.map[(int)dest.x][(int)dest.y].isExit)
 			{
@@ -85,6 +90,7 @@ public class Hero : Entity {
 			experience_points -= level_up_xp;
 
 			Debug.Log("Your battle skills grow stronger! You reached level " + level + "!");
+			hasLeveledUp = true;
 			return "Your battle skills grow stronger! You reached level " + level + "!\n";
 		}
 		return "";

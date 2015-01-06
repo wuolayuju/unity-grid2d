@@ -3,6 +3,8 @@ using System.Collections;
 
 public class ItemEffect : MonoBehaviour {
 
+	public AudioClip effectSound;
+
 	// Use this for initialization
 	void Start () {
 	

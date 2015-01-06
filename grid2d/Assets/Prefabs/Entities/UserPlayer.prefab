@@ -111,7 +111,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100000}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 9.62878323, y: 7.90048409, z: 0}
+  m_LocalPosition: {x: 9.92737579, y: 11.0126047, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 400004}
@@ -189,6 +189,8 @@ MonoBehaviour:
   LEVEL_UP_BASE: 200
   LEVEL_UP_FACTOR: 150
   onExit: 0
+  hasLeveledUp: 0
+  stepSound: {fileID: 8300000, guid: a81e9ad75f499fc4f8cc1e1f9bcdfcd7, type: 3}
 --- !u!114 &11400002
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -224,7 +226,6 @@ MonoBehaviour:
   popupPrefab: {fileID: 100002, guid: 40c51091c155ead4f9d8bd41802ea31c, type: 2}
   canvas: {fileID: 0}
   positionSpawn: {fileID: 400002}
-  cam: {fileID: 0}
 --- !u!114 &11400006
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -321,6 +322,8 @@ MonoBehaviour:
   defense: 3
   power: 6
   slashEffect: {fileID: 100000, guid: 02d56308007f9f44a87c6440ab0702a2, type: 2}
+  slashSound: {fileID: 8300000, guid: edd3b6c73dd4aba40ae245b8d2cb0805, type: 3}
+  parrySound: {fileID: 8300000, guid: a4fb54f33b5ad984a9784d9e63231777, type: 3}
 --- !u!212 &21200000
 SpriteRenderer:
   m_ObjectHideFlags: 1

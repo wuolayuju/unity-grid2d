@@ -26,6 +26,8 @@ public class GameController : MonoBehaviour {
 
 	string info = "";
 
+	public AudioClip pickupSound;
+
 	public bool isGameover = false;
 	public bool inMenu = false;
 
@@ -38,6 +40,7 @@ public class GameController : MonoBehaviour {
 	public Image UI_heroPortraitImage;
 	public GameObject UI_descendPanel;
 	public GameObject UI_gamePausedPanel;
+	public GameObject UI_levelUpPanel;
 
 	void Awake()
 	{
@@ -53,32 +56,43 @@ public class GameController : MonoBehaviour {
 		MapManager.pathfinder = new Pathfinder(mapManager.mapWidth, mapManager.mapHeight);
 		mapManager.FOV (objects[0].gridPosition, playerVisionRange);
 		cam.GetComponent<CameraController>().LookAtPlayer();
+		updateGUIInventory();
 //		UI_heroPortraitImage.sprite = userPlayerPrefab.GetComponentInChildren<SpriteRenderer>().sprite;
 	}
 
 	void OnGUI ()
 	{
 		UI_combatLog.text = info;
-
-		// Put something inside the ScrollView
-		//GUI.Label (new Rect (Screen.width/4, Screen.height/4*3, Screen.width/2, Screen.height/4), info, guiStyle);
-
-		// End the ScrollView
-//		GUI.EndScrollView();
-
-		//GUI.Label (new Rect (20, 20, 200, 40), info, labelStyle);
 	}
 	
 	private void generatePlayers ()
 	{
 		Hero h;
-		h = ((GameObject)Instantiate(userPlayerPrefab, playerStartPosition, Quaternion.identity)).GetComponent<Hero>();
+
+		// Try if the user player already exists
+		try
+		{
+			h = GameObject.FindWithTag("PlayerTransform").GetComponent<Hero>();
+		}
+		catch(NullReferenceException ex)
+		{
+			h = null;
+		}
+
+		// If it doesn't, create a new user player with level 1
+		if (h == null)
+			h = ((GameObject)Instantiate(userPlayerPrefab, playerStartPosition, Quaternion.identity)).GetComponent<Hero>();
+
+		DontDestroyOnLoad(h);
+
 		h.gridPosition = playerStartPosition;
-		h.name = "Hero";
+		h.transform.position = playerStartPosition;
 		h.blocks = true;
-		//h.fighterComponent = new Fighter (15, 3, 6);
 		objects.Add(h);
 
+		/*
+		 * NPC Players
+		 */
 		Enemy compPlayer;
 		for (int nr = 0; nr < MapManager.rooms.Count ; nr+=1)
 		{
@@ -94,13 +108,12 @@ public class GameController : MonoBehaviour {
 
 			compPlayer = ((GameObject) Instantiate (AIPlayerPrefab, pos, Quaternion.identity)).GetComponent<Enemy>();
 			compPlayer.gridPosition = pos;
-			compPlayer.name = "Lizard";
 			compPlayer.blocks = true;
-			//compPlayer.fighterComponent = new Fighter(3, 2, 5);
-			//compPlayer.ai = new BasicEnemy();
 			objects.Add (compPlayer);
 
-			//items
+			/*
+			 * ITEMS
+			 */ 
 			Entity it;
 			if (UnityEngine.Random.Range(0,9) > 3)
 			{
@@ -109,7 +122,6 @@ public class GameController : MonoBehaviour {
 				                                       pos,
 				                                       Quaternion.identity)).GetComponent<Entity>();
 				it.gridPosition = pos;
-				it.name = "Healing potion";
 				it.blocks = false;
 				it.item = new Item("Heals up to 10 health points");
 				objects.Add(it);
@@ -120,9 +132,9 @@ public class GameController : MonoBehaviour {
 			                                       pos,
 			                                       Quaternion.identity)).GetComponent<Entity>();
 			it.gridPosition = pos;
-			it.name = "Lightning Scroll";
 			it.blocks = false;
-			it.item = new Item("Strikes closest enemy for "+/*lightningScrollPrefab.GetComponentInChildren<LightningEffect>().LIGHTNING_DAMAGE*/10+" HP");
+			int damageLightning = lightningScrollPrefab.GetComponent<LightningEffect>().LIGHTNING_DAMAGE;
+			it.item = new Item("Strikes closest enemy for "+/*10*/ damageLightning+" HP");
 			objects.Add(it);
 
 		}
@@ -135,7 +147,10 @@ public class GameController : MonoBehaviour {
 		if (isGameover)
 		{
 			if (Input.GetKeyDown(KeyCode.R))
+			{
+				Destroy(objects[0]);
 				Application.LoadLevel("MainScene");
+			}
 			return;
 		}
 
@@ -163,6 +178,13 @@ public class GameController : MonoBehaviour {
 			return;
 		}
 
+		if (((Hero)objects[0]).hasLeveledUp)
+		{
+			UI_levelUpPanel.gameObject.SetActive(true);
+			inMenu = true;
+			return;
+		}
+
 		// DESCEND TO NEXT LEVEL
 		if (((Hero)objects[0]).onExit && inMenu == false)
 		{
@@ -184,7 +206,7 @@ public class GameController : MonoBehaviour {
 
 		// the user player has taken his turn and has stopped moving
 		// now the rest of the players take their turns
-		if (!objects [0].isMoving && turnTaken)
+		if (!objects [0].isMoving && turnTaken && turnFinished)
 		{
 			for (int i = 1; i < objects.Count ; i++)
 			{
@@ -241,6 +263,8 @@ public class GameController : MonoBehaviour {
 						if (e.gridPosition.x == objects[0].gridPosition.x && e.gridPosition.y == objects[0].gridPosition.y)
 						{
 							info = e.item.pickUp(e, (Hero)objects[0]) + info;
+							AudioSource.PlayClipAtPoint(pickupSound, e.gridPosition);
+							DontDestroyOnLoad(e);
 							areObjectsInTile = true;
 							updateGUIInventory();
 							break;
@@ -300,7 +324,10 @@ public class GameController : MonoBehaviour {
 			Hero h = (Hero)objects[0];
 			if (h.inventory[slot] != null)
 			{
-				return h.inventory[slot].GetComponentInChildren<ItemEffect>().useItem(h.inventory[slot]);
+				ItemEffect ie = h.inventory[slot].GetComponentInChildren<ItemEffect>();
+				string info = ie.useItem(h.inventory[slot]);
+				return info;
+				//return h.inventory[slot].GetComponentInChildren<ItemEffect>().useItem(h.inventory[slot]);
 			}
 //		}
 //		catch
@@ -326,6 +353,12 @@ public class GameController : MonoBehaviour {
 		// stats
 		UI_playerStatsPanel.transform.Find("StatsExpPanel/AttackText").GetComponent<Text>().text = objects[0].fighterComponent.power.ToString();
 		UI_playerStatsPanel.transform.Find("StatsExpPanel/DefenceText").GetComponent<Text>().text = objects[0].fighterComponent.defense.ToString();
+		Hero h = (Hero) objects[0];
+		UI_playerStatsPanel.transform.Find("StatsExpPanel/ExpPanel/ExpText").GetComponent<Text>().text =
+			"EXP\n"+
+			h.experience_points.ToString() + "/" +
+			(h.LEVEL_UP_BASE + h.level * h.LEVEL_UP_FACTOR).ToString() +
+			"\nXP";
 	}
 
 	void updateGUIInventory()
@@ -363,6 +396,15 @@ public class GameController : MonoBehaviour {
 
 	public void descendToNextLevel()
 	{
+		Hero h = (Hero)objects[0];
+		// Heal the player for half the max hp
+		h.fighterComponent.hp = Mathf.Clamp(h.fighterComponent.hp + (h.fighterComponent.max_hp / 2), 
+		                                     0, 
+		                                     h.fighterComponent.max_hp);
+		h.gameObject.GetComponentInChildren<HealthBarScale>().setScalePercent(Mathf.Clamp((float)h.fighterComponent.hp/(float)h.fighterComponent.max_hp, 0f, 1f));
+		//h.inventory.Clear();
+
+		h.onExit = false;
 		Application.LoadLevel("MainScene");
 	}
 
@@ -370,8 +412,10 @@ public class GameController : MonoBehaviour {
 	{
 		UI_descendPanel.SetActive(false);
 		UI_gamePausedPanel.SetActive (false);
+		UI_levelUpPanel.SetActive (false);
 		inMenu = false;
 		((Hero)objects[0]).onExit = false;
+		((Hero)objects[0]).hasLeveledUp = false;
 	}
 
 	public void exitGame()

@@ -27,6 +27,8 @@ public class LightningEffect : ItemEffect {
 			return "<color=red>No enemy is close enoguh to strike!</color>\n";
 		}
 
+		AudioSource.PlayClipAtPoint(effectSound, target.transform.position);
+
 		Instantiate (visualEffect, target.gridPosition, Quaternion.identity);
 
 		string info = target.fighterComponent.takeDamage(target, LIGHTNING_DAMAGE);

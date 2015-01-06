@@ -272,7 +272,6 @@ MonoBehaviour:
   popupPrefab: {fileID: 100002, guid: 40c51091c155ead4f9d8bd41802ea31c, type: 2}
   canvas: {fileID: 0}
   positionSpawn: {fileID: 400004}
-  cam: {fileID: 0}
 --- !u!114 &11400008
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -369,6 +368,8 @@ MonoBehaviour:
   defense: 2
   power: 5
   slashEffect: {fileID: 100000, guid: 02d56308007f9f44a87c6440ab0702a2, type: 2}
+  slashSound: {fileID: 8300000, guid: edd3b6c73dd4aba40ae245b8d2cb0805, type: 3}
+  parrySound: {fileID: 8300000, guid: a4fb54f33b5ad984a9784d9e63231777, type: 3}
 --- !u!114 &11485456
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -380,7 +381,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 33ebd0509f070664fba79dccd6cd6f83, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  xp: 100
+  xp: 75
   taunted: 0
 --- !u!212 &21200000
 SpriteRenderer:

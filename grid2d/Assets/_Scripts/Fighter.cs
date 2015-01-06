@@ -9,6 +9,8 @@ public class Fighter : MonoBehaviour
 	public int power;
 	
 	public GameObject slashEffect;
+	public AudioClip slashSound;
+	public AudioClip parrySound;
 
 	public Fighter (int hp, int defense, int power)
 	{
@@ -27,14 +29,14 @@ public class Fighter : MonoBehaviour
 			target.fighterComponent.defense * UnityEngine.Random.Range(0f,1f) ;
 
 		//Debug.Log(self.name+"->"+target.name+" = "+isHit);
-
+		
+		self.GetComponentInChildren<Animator>().Play("attackSide");
 		if (isHit < 0.0f)
 		{
+			AudioSource.PlayClipAtPoint(parrySound, target.transform.position);
 			target.gameObject.GetComponentInChildren<DamagePopupSpawner>().spawnDamagePopup("miss", "red");
 			return self.name + " attacks " + target.name + " but it misses.\n";
 		}
-
-		self.GetComponentInChildren<Animator>().Play("attackSide");
 
 		//a simple formula for attack damage
 		int damage = UnityEngine.Random.Range(self.fighterComponent.power - target.fighterComponent.defense,
@@ -46,6 +48,7 @@ public class Fighter : MonoBehaviour
 		if (damage > 0)
 		{
 			Instantiate(slashEffect, target.transform.position, Quaternion.identity);
+			AudioSource.PlayClipAtPoint(slashSound, target.transform.position);
 			info = target.fighterComponent.takeDamage(target, damage) + info;
 			info += self.name + " attacks " + target.name + " for " + damage + " hit points.\n";
 		}

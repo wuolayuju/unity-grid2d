@@ -53,6 +53,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 36f9991f9a2b0a54fb2127df4a183ab1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  effectSound: {fileID: 8300000, guid: 6d2ae06fe7ea41a479ebfcc4c0f89fa9, type: 3}
   visualEffect: {fileID: 100000, guid: 916c838ec1125d944b5d1abda9640134, type: 2}
   LIGHTNING_DAMAGE: 10
 --- !u!114 &11400002
@@ -66,17 +67,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3a8d354d88307834782047e2cc8c8317, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gridPosition: {x: 0, y: 0}
-  name: 
-  deadSprite: {fileID: 0}
+  name: Lightning Scroll
   blocks: 0
-  slashEffect: {fileID: 0}
+  gridPosition: {x: 0, y: 0}
   lerpTime: 0
   currentLerpTime: 0
   isMoving: 0
   start: {x: 0, y: 0}
   destination: {x: 0, y: 0}
   facingLeft: 0
+  deadSprite: {fileID: 0}
+  fighterComponent: {fileID: 0}
+  ai: {fileID: 0}
   infoPanelPrefab: {fileID: 100002, guid: 3023b813f2760f846ab6221e8d6cda80, type: 2}
 --- !u!212 &21200000
 SpriteRenderer:
