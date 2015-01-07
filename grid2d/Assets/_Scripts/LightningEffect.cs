@@ -24,7 +24,7 @@ public class LightningEffect : ItemEffect {
 		Entity target = h.closestEntity();
 		if (target == null)
 		{
-			return "<color=red>No enemy is close enoguh to strike!</color>\n";
+			return "<color=red>No enemy is close enough to strike!</color>\n";
 		}
 
 		AudioSource.PlayClipAtPoint(effectSound, target.transform.position);
@@ -36,6 +36,8 @@ public class LightningEffect : ItemEffect {
 		//StartCoroutine(delay(target));
 
 		h.inventory.Remove(self);
+
+		Destroy(self.gameObject);
 
 		return info + "<color=cyan>A lightning bolt strikes "+target.name+" for "+LIGHTNING_DAMAGE+" hit points!.</color>\n";
 	}

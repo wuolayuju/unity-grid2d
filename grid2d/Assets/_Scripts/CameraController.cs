@@ -24,6 +24,10 @@ public class CameraController : MonoBehaviour {
 	// Update is called once per frame
 	void LateUpdate ()
 	{
+		if (target == null)
+		{
+			target = GameObject.FindWithTag("PlayerTransform").transform;
+		}
 		transform.position = target.transform.position + offset;
 	}
 }

@@ -89,7 +89,6 @@ public class Hero : Entity {
 			level += 1;
 			experience_points -= level_up_xp;
 
-			Debug.Log("Your battle skills grow stronger! You reached level " + level + "!");
 			hasLeveledUp = true;
 			return "Your battle skills grow stronger! You reached level " + level + "!\n";
 		}

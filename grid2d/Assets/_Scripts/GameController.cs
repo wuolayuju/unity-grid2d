@@ -15,6 +15,9 @@ public class GameController : MonoBehaviour {
 	public GameObject AIPlayerPrefab;
 	public GameObject healingPotionPrefab;
 	public GameObject lightningScrollPrefab;
+	public GameObject fireballScrollPrefab;
+
+	public List<GameObject> prefabsToSpawn;
 
 	public static List<Entity> objects;
 
@@ -23,6 +26,8 @@ public class GameController : MonoBehaviour {
 	public enum DIRECTION { UP, DOWN, LEFT, RIGHT, NONE };
 
 	public bool turnTaken = false;
+	public static bool targeting = false;
+	public static string infoActionText = "";
 
 	string info = "";
 
@@ -41,6 +46,7 @@ public class GameController : MonoBehaviour {
 	public GameObject UI_descendPanel;
 	public GameObject UI_gamePausedPanel;
 	public GameObject UI_levelUpPanel;
+	public GameObject UI_infoActionPanel;
 
 	void Awake()
 	{
@@ -63,6 +69,7 @@ public class GameController : MonoBehaviour {
 	void OnGUI ()
 	{
 		UI_combatLog.text = info;
+		updateGUIInventory();
 	}
 	
 	private void generatePlayers ()
@@ -99,14 +106,16 @@ public class GameController : MonoBehaviour {
 			Rectangle room = MapManager.rooms[nr];
 			Vector2 pos;
 
-			// repeat the randomisation of initial position until it does not matches the player's
+			// repeat the randomisation of initial position until it does not match the player's
 			do
 			{
 				pos = new Vector2 (UnityEngine.Random.Range (room.x1, room.x2),
 			    			               UnityEngine.Random.Range (room.y1, room.y2));
 			}while(pos.x == h.gridPosition.x && pos.y == h.gridPosition.y);
 
-			compPlayer = ((GameObject) Instantiate (AIPlayerPrefab, pos, Quaternion.identity)).GetComponent<Enemy>();
+			GameObject chosenPrefab = prefabsToSpawn[UnityEngine.Random.Range(0, prefabsToSpawn.Count)];
+
+			compPlayer = ((GameObject) Instantiate (chosenPrefab, pos, Quaternion.identity)).GetComponent<Enemy>();
 			compPlayer.gridPosition = pos;
 			compPlayer.blocks = true;
 			objects.Add (compPlayer);
@@ -127,14 +136,26 @@ public class GameController : MonoBehaviour {
 				objects.Add(it);
 			}
 
+			// LIGHTNING STRIKE SCROLL
 			pos = new Vector2(room.x2-1, room.y2-1);
 			it = ((GameObject) Instantiate (lightningScrollPrefab,
 			                                       pos,
 			                                       Quaternion.identity)).GetComponent<Entity>();
 			it.gridPosition = pos;
 			it.blocks = false;
-			int damageLightning = lightningScrollPrefab.GetComponent<LightningEffect>().LIGHTNING_DAMAGE;
-			it.item = new Item("Strikes closest enemy for "+/*10*/ damageLightning+" HP");
+			int damage = lightningScrollPrefab.GetComponent<LightningEffect>().LIGHTNING_DAMAGE;
+			it.item = new Item("Strikes closest enemy for "+/*10*/ damage+" HP");
+			objects.Add(it);
+
+			// FIRE BALL SCROLL
+			pos = new Vector2(room.x1, room.y2-1);
+			it = ((GameObject) Instantiate (fireballScrollPrefab,
+			                                pos,
+			                                Quaternion.identity)).GetComponent<Entity>();
+			it.gridPosition = pos;
+			it.blocks = false;
+			damage = fireballScrollPrefab.GetComponent<FireballEffect>().FIREBALL_DAMAGE;
+			it.item = new Item("Hurls a ball of fire to an enemy for "+/*10*/ damage+" HP");
 			objects.Add(it);
 
 		}
@@ -193,6 +214,24 @@ public class GameController : MonoBehaviour {
 			return;
 		}
 
+		if (targeting)
+		{
+			if (UI_infoActionPanel.activeSelf == false)
+			{
+				UI_infoActionPanel.transform.Find("InfoActionText").GetComponent<Text>().text = infoActionText;
+				//UI_infoActionPanel.GetComponentInChildren<Text>().text = infoActionText;
+				UI_infoActionPanel.gameObject.SetActive(true);
+			}
+			return;
+		}
+		else
+		{
+			if (UI_infoActionPanel.activeSelf == true)
+			{
+				UI_infoActionPanel.gameObject.SetActive(false);
+			}
+		}
+
 		// check if there are any player moving
 		bool turnFinished = true;
 		for (int i = 1; i < objects.Count ; i++)
@@ -206,7 +245,7 @@ public class GameController : MonoBehaviour {
 
 		// the user player has taken his turn and has stopped moving
 		// now the rest of the players take their turns
-		if (!objects [0].isMoving && turnTaken && turnFinished)
+		if (!objects [0].isMoving && turnTaken && turnFinished && !targeting)
 		{
 			for (int i = 1; i < objects.Count ; i++)
 			{
@@ -226,24 +265,28 @@ public class GameController : MonoBehaviour {
 		}
 
 		// if all the other player has taken their turns, the user player can move
-		if (turnFinished && !objects[0].isMoving)
+		if (turnFinished && !objects[0].isMoving && !targeting)
 		{
 
 			turnTaken = true;
-			if (Input.GetButtonDown("up")){
+			if (Input.GetButton("up")){
 				info = ((Hero)objects[0]).moveOrAttack(0, 1) + info;
+				Input.ResetInputAxes();
 			}
-			else if (Input.GetButtonDown("down"))
+			else if (Input.GetButton("down"))
 			{
 				info = ((Hero)objects[0]).moveOrAttack(0, -1) + info;
+				Input.ResetInputAxes();
 			}
-			else if(Input.GetButtonDown("left"))
+			else if(Input.GetButton("left"))
 			{
 				info = ((Hero)objects[0]).moveOrAttack(-1, 0) + info;
+				Input.ResetInputAxes();
 			}
-			else if (Input.GetButtonDown("right"))
+			else if (Input.GetButton("right"))
 			{
 				info = ((Hero)objects[0]).moveOrAttack(1, 0) + info;
+				Input.ResetInputAxes();
 			}
 			else if (Input.GetKeyDown(KeyCode.Space))
 			{
@@ -355,10 +398,9 @@ public class GameController : MonoBehaviour {
 		UI_playerStatsPanel.transform.Find("StatsExpPanel/DefenceText").GetComponent<Text>().text = objects[0].fighterComponent.defense.ToString();
 		Hero h = (Hero) objects[0];
 		UI_playerStatsPanel.transform.Find("StatsExpPanel/ExpPanel/ExpText").GetComponent<Text>().text =
-			"EXP\n"+
+			"Level "+h.level+"\nEXP\n"+
 			h.experience_points.ToString() + "/" +
-			(h.LEVEL_UP_BASE + h.level * h.LEVEL_UP_FACTOR).ToString() +
-			"\nXP";
+			(h.LEVEL_UP_BASE + h.level * h.LEVEL_UP_FACTOR).ToString();
 	}
 
 	void updateGUIInventory()

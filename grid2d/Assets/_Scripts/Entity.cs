@@ -9,6 +9,8 @@ public class Entity : MonoBehaviour{
 	public bool blocks;
 	public Vector2 gridPosition;
 
+	public float probSpawn;
+
 	public float lerpTime = 1.0f;
 	public float currentLerpTime;
 	public bool isMoving = false;
